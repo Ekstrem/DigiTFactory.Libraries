@@ -1,0 +1,1460 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hive.SeedWorks</name>
+    </assembly>
+    <members>
+        <member name="T:Hive.SeedWorks.BoundedContexts.ICvsPartnerBoundedContext">
+            <summary>
+            Интерфейс для ограниченного контекста СОК.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.BoundedContexts.IPartnerSharedKernel">
+            <summary>
+            Интерфейс для указания принадлежности агрегатов
+            предметной области Контрагентов.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.BoundedContexts.IPaydoxBoundedContext">
+            <summary>
+            Интерфейс для указания принадлежности агрегатов
+            предметной области ЕПД.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.BoundedContexts.IUsersBoundedContext">
+            <summary>
+            Ограниченный контекст пользователей.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasKey`1">
+            <summary>
+            Объект имеет идентификационное поле.
+            </summary>
+            <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasKey`1.Id">
+            <summary>
+            Имеет родителя.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasKey">
+            <summary>
+            Объект имеет идентификационное поле.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasNext`1">
+            <summary>
+            Объект имеет следующего.
+            </summary>
+            <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasNext`1.IsHasNext">
+            <summary>
+            Имеет родителя.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasNext`1.NextId">
+            <summary>
+            Идентификатор следующего.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasParent`1">
+            <summary>
+            Объект имеет родителя.
+            </summary>
+            <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasParent`1.IsHasParent">
+            <summary>
+            Имеет родителя.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasParent`1.ParentId">
+            <summary>
+            Идентификатор родителя.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasPrevious`1">
+            <summary>
+            Объект имеет предыдущий.
+            </summary>
+            <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasPrevious`1.IsHasPrevious">
+            <summary>
+            Имеет родителя.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasPrevious`1.PreviousId">
+            <summary>
+            Идентификатор предыдущего.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasVersion`1">
+            <summary>
+            Указывает на то что объект имеет версионность.
+            </summary>
+            <typeparam name="T">Тип данных которым версионируется объект.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.Version">
+            <summary>
+            Номер версии.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.Stamp">
+            <summary>
+            Дата создания версии.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.CommandId">
+            <summary>
+            Идентификатор комманды, создавшей новую версию.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Business.IHasVersion">
+            <summary>
+            Указывает на то что объект имеет версионность.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.CommandToAggregate">
+            <summary>
+            Сведения о команде к агрегату.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.CommandToAggregate.CommandId">
+            <summary>
+            Уникальный идентификатор комманды.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.CommandToAggregate.CommandName">
+            <summary>
+            Имя метода агрегата, который вызывает команда.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.CommandToAggregate.SubjectName">
+            <summary>
+            Имя субъекта бизнес-операции.
+            Мапится на NameLastModification.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.CommandToAggregate.ToString">
+            <summary>Returns a string that represents the current object.</summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.CommandToAggregate.Commit(System.String,System.String)">
+            <summary>
+            Создаст структуру <see cref="T:Hive.SeedWorks.Events.CommandToAggregate"/>.
+            </summary>
+            <param name="commandName">Имя команды инициатора доменного события.</param>
+            <param name="nameLastModification">Имя инициировавшего событие.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.CommandToAggregate.Commit(System.Guid,System.String,System.String)">
+            <summary>
+            Создаст структуру <see cref="T:Hive.SeedWorks.Events.CommandToAggregate"/>.
+            </summary>
+            <param name="id">Идентификатор команды.</param>
+            <param name="commandName">Имя команды инициатора доменного события.</param>
+            <param name="nameLastModification">Имя инициировавшего событие.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.DomainEvent`2">
+            <summary>
+            Доменное событие предметной области.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст события.</typeparam>
+            <typeparam name="TKey">Ключевое поле агрегата.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.DomainEvent`2.AggregateId">
+            <summary>
+            Экземпляр агрегата.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.DomainEvent`2.Command">
+            <summary>
+            Имя бизнес-операции - доменное событие.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.DomainEvent`2.ChangedValueObjects">
+            <summary>
+            Словарь изменившихся объект значений.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.DomainEvent`2.BoundedContext">
+            <summary>
+            Имя ограниченного контекста в котором произошло событие.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.DomainEvent`2.TimeStamp">
+            <summary>
+            Версия аггрегата.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.DomainEventNotifier`2">
+            <summary>
+            Нотификатор о доменных событиях.
+            Базовый класс проксирования агрегата.
+            </summary>
+            <typeparam name="TBoundContext">Ограниченный контекст.</typeparam>
+            <typeparam name="TAggregate">Тип агрегата.</typeparam>
+        </member>
+        <member name="F:Hive.SeedWorks.Events.DomainEventNotifier`2.Aggregate">
+            <summary>
+            Агрегат, вызовы к которому необходимо проксировать.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.DomainEventNotifier`2.#ctor(`1)">
+            <summary>
+            Конструктор класса.
+            </summary>
+            <param name="aggregate">Тип агрегата.</param>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.IDomainEvent`2">
+            <summary>
+            Доменное событие предметной области.
+            </summary>
+            <typeparam name="TKey">Ключевое поле агрегата.</typeparam>
+            <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.IDomainEvent`2.AggregateId">
+            <summary>
+            Экземпляр агрегата.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.IDomainEvent`1">
+            <summary>
+            Доменное событие предметной области.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.IDomainEvent`1.Command">
+            <summary>
+            Имя бизнес-операции - доменное событие.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.IDomainEvent`1.ChangedValueObjects">
+            <summary>
+            Словарь изменившихся объект значений.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.IDomainEvent`1.BoundedContext">
+            <summary>
+            Имя ограниченного контекста в котором произошло событие.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Events.IDomainEvent`1.TimeStamp">
+            <summary>
+            Время доменного события над аггрегатом.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.IEventBus">
+            <summary>
+            Шина событий.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.IEventBusConsumer">
+            <summary>
+            Потребитель шины событий.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.IEventBusConsumer.Subscribe``1(Hive.SeedWorks.Pipelines.Abstractions.IDomainEventHandler{``0})">
+            <summary>
+            Подписаться на доменное событие.
+            </summary>
+            <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.IEventBusConsumer.Unsubscribe``1(Hive.SeedWorks.Pipelines.Abstractions.IDomainEventHandler{``0})">
+            <summary>
+            Отписаться от доменного события.
+            </summary>
+            <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Events.IEventBusProducer">
+            <summary>
+            Поставшик в шину событий.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.IEventBusProducer.Publish``1(Hive.SeedWorks.Events.IDomainEvent{``0})">
+            <summary>
+            Опубликовать доменное событие.
+            </summary>
+            <param name="domainEvent">Доменное событие.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.Events.IEventBusProducer.PublishAsync``1(Hive.SeedWorks.Events.IDomainEvent{``0})">
+            <summary>
+            Опубликовать доменное событие.
+            </summary>
+            <param name="domainEvent">Доменное событие.</param>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Version">
+            <summary>
+            Номер версии.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Stamp">
+            <summary>
+            Дата создания версии.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.CommandId">
+            <summary>
+            Идентификатор комманды, создавшей новую версию.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Id">
+            <summary>
+            Имеет идентификатор.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Root">
+            <summary>
+            Корень модели сущности.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.ValueObjects">
+            <summary>
+            Словарь объект значений.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Operations">
+            <summary>
+            Бизнес-операции - фабрики.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Validators">
+            <summary>
+            Валидаторы.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.AnemicModelBase`2">
+            <summary>
+            Базовый класс анемичной модели.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+            <typeparam name="TKey">Ключевое поле.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.#ctor(Hive.SeedWorks.LifeCircle.IAggregateRoot{`0,`1},System.Collections.Generic.IDictionary{System.String,Hive.SeedWorks.LifeCircle.IValueObject})">
+            <summary>
+            Конструктор анемичной модели.
+            Потомки должны реализовать свой конструктор с валидацией объект значений.
+            </summary>
+            <param name="root">Корень агрегации.</param>
+            <param name="valueObjects">Словарь объект значений.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.#ctor(Hive.SeedWorks.LifeCircle.IAggregateRoot{`0,`1},Hive.SeedWorks.LifeCircle.IValueObject[])">
+            <summary>
+            Конструктор анемичной модели.
+            Потомки должны реализовать свой конструктор с валидацией объект значений.
+            </summary>
+            <param name="root">Корень агрегации.</param>
+            <param name="valueObjects">Словарь объект значений.</param>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.Id">
+            <summary>
+            Имеет родителя.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.ContextName">
+            <summary>
+            Имя ограниченного контекста.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.Root">
+            <summary>
+            Корень модели сущности.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.AnemicModelBase`2.ValueObjects">
+            <summary>
+            Словарь объект значений.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.AnemicModelBase`1">
+            <summary>
+            Базовый класс анемичной модели.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.AnemicModelBase`1.#ctor(Hive.SeedWorks.LifeCircle.IAggregateRoot{`0,System.Guid},System.Collections.Generic.IDictionary{System.String,Hive.SeedWorks.LifeCircle.IValueObject})">
+            <summary>
+            Конструктор анемичной модели.
+            Потомки должны реализовать свой конструктор с валидацией объект значений.
+            </summary>
+            <param name="root">Корень агрегации.</param>
+            <param name="valueObjects">Словарь объект значений.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.AnemicModelBase`1.#ctor(Hive.SeedWorks.LifeCircle.IAggregateRoot{`0,System.Guid},Hive.SeedWorks.LifeCircle.IValueObject[])">
+            <summary>
+            Конструктор анемичной модели.
+            Потомки должны реализовать свой конструктор с валидацией объект значений.
+            </summary>
+            <param name="root">Корень агрегации.</param>
+            <param name="valueObjects">Словарь объект значений.</param>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregate`1">
+            <summary>
+            Агрегат.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregate`2">
+            <summary>
+            Агрегат.
+            </summary>
+            <typeparam name="TKey">Тип ключевого поля.</typeparam>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregateProvider`2">
+            <summary>
+            Провайдер получения экземпляра агрегата.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+            <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregateProvider`3">
+            <summary>
+            Провайдер получения экземпляра агрегата.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+            <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
+            <typeparam name="TModel">Тип модели.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.GetAggregateByIdAndVersion(System.Guid,System.Int32,Hive.SeedWorks.Events.CommandToAggregate)">
+            <summary>
+            Получение агрегата(ов) по идентификатору и версии.
+            </summary>
+            <param name="id">Идентификатор агрегата.</param>
+            <param name="version">Версия аргрегата.</param>
+            <param name="command">Команда иницировавшая операцию.</param>
+            <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.GetAggregateBySpec(Hive.SeedWorks.Specification.ISpecification{`1},Hive.SeedWorks.Events.CommandToAggregate)">
+            <summary>
+            Получение агрегата(ов) по спецификации.
+            </summary>
+            <param name="specification">Спецификация поиска.</param>
+            <param name="command">Команда иницировавшая операцию.</param>
+            <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.GetAggregateBySpec``1(Hive.SeedWorks.Specification.IQuerySpecification{``0,`1},``0,Hive.SeedWorks.Events.CommandToAggregate)">
+            <summary>
+            Получение агрегата(ов) по спецификации.
+            </summary>
+            <typeparam name="TIn">Тип dto запроса.</typeparam>
+            <param name="specification">Спецификация поиска.</param>
+            <param name="dto">Dto запроса.</param>
+            <param name="command">Команда иницировавшая операцию.</param>
+            <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.NewAggregate``1(``0,Hive.SeedWorks.Events.CommandToAggregate)">
+            <summary>
+            Создание экземпляра агрегата по соответствующей dto.
+            </summary>
+            <typeparam name="TIn">Тип dto команды.</typeparam>
+            <param name="dto">Dto команды.</param>
+            <param name="command">Команда иницировавшая операцию.</param>
+            <returns>Новый экземпляр команды КА.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.SaveChanges(`2)">
+            <summary>
+            Сохранение изменений.
+            </summary>
+            <param name="aggregate">Агрегат изменине в котором нужно сохранить.</param>
+            <returns>Агрегат с сохраненными изменениями.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregateRoot`2">
+            <summary>
+            Корень агрегата.
+            </summary>
+            <typeparam name="TKey">Тип ключевого поля.</typeparam>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAggregateRoot`1">
+            <summary>
+            Корень агрегата.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAnemicModel`2">
+            <summary>
+            Анемичная модель ограниченного контекста для Фабрики создания агрегата.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.IAnemicModel`2.Root">
+            <summary>
+            Корень модели сущности.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.IAnemicModel`2.ValueObjects">
+            <summary>
+            Словарь объект значений.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IAnemicModel`1">
+            <summary>
+            Анемичная модель ограниченного контекста для Фабрики создания агрегата.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IBoundedContext">
+            <summary>
+            Базовый интерфейс, указывающий на принадлежность
+            определённому ограниченному контексту.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IBoundedContextScope`1">
+            <summary>
+            Границы ограниченного контекста.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.IBoundedContextScope`1.Operations">
+            <summary>
+            Бизнес-операции - фабрики.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IEntity">
+            <summary>
+            Сущность.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IEntity`1">
+            <summary>
+            Сущность.
+            </summary>
+            <typeparam name="TKey">Тип ключевого поля.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.IValueObject">
+            <summary>
+            Объект-значение.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.FunctionWithoutSideEffectType">
+            <summary>
+            Тип функции без побочных эффектов.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.LifeCircle.Repository.FunctionWithoutSideEffectType.Query">
+            <summary>
+            Запрос
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.LifeCircle.Repository.FunctionWithoutSideEffectType.Command">
+            <summary>
+            Команда
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.ICommandRepository`2">
+            <summary>
+            Интерфейс репозитория команд.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+            <typeparam name="TAggregate">Модель для доступа к таблице/таблицам
+            в базе данных.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IPaging.Page">
+            <summary>
+            Номер страницы
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IPaging.PageSize">
+            <summary>
+            Кол-во элементов на странице
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IQueryRepository`1">
+            <summary>
+            Интерфейс репозитория запросов.
+            </summary>
+            <typeparam name="TEntity">Модель для доступа к таблице/таблицам
+            в базе данных.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IQueryRepository">
+            <summary>
+            Интерфейс репозитория запросов.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryCreate`2">
+            <summary>
+            Функциональность репозитория по созданию записи.
+            </summary>
+            <typeparam name="TAggregate">Тип записи.</typeparam>
+            <typeparam name="TBoundedContext">Ограниченный контекст предметной области.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryCreate`2.Add(`1)">
+            <summary>
+            Добавляет запись в базу данных.
+            </summary>
+            <param name="entity">Сущность хранящаяся в базе данных.</param>
+            <returns>Идентификатор сущности в базе даннх.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryCreate`2.AddAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Добавляет асинхронно запись в базу данных.
+            </summary>
+            <param name="entity">Сущность хранящаяся в базе данных.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <returns>Идентификатор сущности в базе даннх.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryCreate`2.AddRangeAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+            <summary>
+            Добавляет асинхронно записи в базу данных.
+            </summary>
+            <param name="entities">Сущности хранящаяся в базе данных.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <returns>Задача добавления новых сущностей.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryDelete`2">
+            <summary>
+            Интерфейс репозитория удаления.
+            </summary>
+            <typeparam name="TAggregate">Таблица в базе данных.</typeparam>
+            <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryDelete`2.Delete``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`1})">
+            <summary>
+            Удаление записи из базы данных.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация для удаления из базы данных.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryDelete`2.Delete(`1)">
+            <summary>
+            Удаление записи из базы данных.
+            </summary>
+            <param name="entity">Сущность для удаления из базы данных.</param>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount`1">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount`1.Count">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount`1.Count``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0})">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Условие выборки.</param>
+            <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount`1.CountAsync(System.Threading.CancellationToken)">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="cancellationToken">Токен отмены.</param>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount`1.CountAsync``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},System.Threading.CancellationToken)">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Условие выборки.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount.Count``1">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount.Count``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0})">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Условие выборки.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount.CountAsync``1(System.Threading.CancellationToken)">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="cancellationToken">Токен отмены.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadCount.CountAsync``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},System.Threading.CancellationToken)">
+            <summary>
+            Получить общее количество элементов.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Условие выборки.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
+            <returns>Возвращает количество элементов данных.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable`1">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable`1.Get(Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение всего набора записей.
+            </summary>
+            <returns>Набор записей.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable`1.Get``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},Hive.SeedWorks.Specification.IOrderSpecification{`0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="sorter">Условие сортировки.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable`1.GetReactive``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},Hive.SeedWorks.Specification.IOrderSpecification{`0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="sorter">Условие сортировки.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция сущностей.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable.Get``1(Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение всего набора записей.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <returns>Набор записей.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable.Get``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},Hive.SeedWorks.Specification.IOrderSpecification{``0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="sorter">Условие сортировки.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadEnumerable.GetReactive``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},Hive.SeedWorks.Specification.IOrderSpecification{``0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="sorter">Условие сортировки.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция сущностей.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable`1">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable`1.GetQueryable">
+            <summary>
+            Получение записей без спецификации.
+            </summary>
+            <returns>Коллекция записей.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable`1.GetQueryable(Hive.SeedWorks.Specification.ISpecification{`0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable`1.GetQueryable``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable">
+            <summary>
+            Интерфейс репозитория. Функциональность чтения.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable.GetQueryable``1">
+            <summary>
+            Получение записей без спецификации.
+            </summary>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <returns>Коллекция записей.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable.GetQueryable``1(Hive.SeedWorks.Specification.ISpecification{``0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadQueryable.GetQueryable``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},Hive.SeedWorks.LifeCircle.Repository.IPaging)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="paging">Паджинация запроса.</param>
+            <typeparam name="TEntity">Тип записи.</typeparam>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle`1">
+            <summary>
+            Репозиторий получения единственного агрегата.
+            </summary>
+            <typeparam name="TEntity">Тип сущности.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle`1.Get``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},Hive.SeedWorks.LifeCircle.Repository.SingleReadMode)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="mode">Режим поиска единственного значения.</param>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle`1.GetAsync``1(``0,Hive.SeedWorks.Specification.IQuerySpecification{``0,`0},Hive.SeedWorks.LifeCircle.Repository.SingleReadMode,System.Threading.CancellationToken)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="mode">Режим поиска единственного значения.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle">
+            <summary>
+            Репозиторий получения единственного агрегата.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle.Get``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},Hive.SeedWorks.LifeCircle.Repository.SingleReadMode)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="mode">Режим поиска единственного значения.</param>
+            <typeparam name="TEntity">Тип сущности.</typeparam>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryReadSingle.GetAsync``2(``1,Hive.SeedWorks.Specification.IQuerySpecification{``1,``0},Hive.SeedWorks.LifeCircle.Repository.SingleReadMode,System.Threading.CancellationToken)">
+            <summary>
+            Получение записи по спецификации.
+            </summary>
+            <param name="value">Значение для поиска по спецификации.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="mode">Режим поиска единственного значения.</param>
+            <param name="cancellationToken">Токен отмены.</param>
+            <typeparam name="TEntity">Тип сущности.</typeparam>
+            <typeparam name="TIn">Тип входная Dto поиска.</typeparam>
+            <returns>Коллекция агрегатов.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IRepositoryUpdate`2">
+            <summary>
+            Интерфейс репозитория обновления.
+            </summary>
+            <typeparam name="TAggregate">Таблица в базе данных.</typeparam>
+            <typeparam name="TBoundedContext">Ограниченный контекст предметной области.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IRepositoryUpdate`2.Update(`1)">
+            <summary>
+            Обновление сущностей в базе данных.
+            </summary>
+            <param name="entity">Сущность для обновления в базе данных.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ISqlProgrammability.ExecScalarFunc``1(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            Вызов Scalar-valued function
+            </summary>
+            <typeparam name="TResult">
+            Тип результата. Простой тип (ValueType or string)
+            </typeparam>
+            <param name="sqlFuncName">Название функции</param>
+            <param name="parameters">Параметры функции</param>
+            <returns><see cref="!:TResult"/></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ISqlProgrammability.ExecTableFunc``1(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            Вызов Table-valued function
+            </summary>
+            <typeparam name="TResult">Тип результата (коллекция сложных объектов)</typeparam>
+            <param name="sqlFuncName">Название функции</param>
+            <param name="parameters">Параметры функции</param>
+            <returns>Коллекция элементов <see cref="!:TResult"/></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ISqlProgrammability.ExecStoredProc(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            Выполнить хранимую процедуру
+            </summary>
+            <param name="sqlProcName">Название хранимой процедуры</param>
+            <param name="parameters">Параметры хранимой процедуры</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ISqlProgrammability.ExecStoredProcList``1(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            Выполнить хранимую процедуру с возвратом результата
+            NOTE: Требования к select запроса и свойствам типа результата см. <see cref="!:SqlResultMapper&lt;&gt;"/>
+            </summary>
+            <typeparam name="TResult">Тип результата (коллекция сложных объектов)</typeparam>
+            <param name="sqlProcName">Название хранимой процедуры</param>
+            <param name="parameters">Параметры хранимой процедуры</param>
+            <returns>Коллекция элементов <see cref="!:TResult"/></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ISqlProgrammability.ExecStoredProcSingle``1(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            Выполнить хранимую процедуру с возвратом результата
+            NOTE: Требования к select запроса и свойствам типа результата см. <see cref="!:SqlResultMapper&lt;&gt;"/>
+            </summary>
+            <typeparam name="TResult">Тип результата (сложный объект, единичный результат)</typeparam>
+            <param name="sqlProcName">Название хранимой процедуры</param>
+            <param name="parameters">Параметры хранимой процедуры</param>
+            <returns><see cref="!:TResult"/></returns>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.ITransaction">
+            <summary>
+            Управление транзакционностью.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.SetIsolationLevel(System.Transactions.IsolationLevel)">
+            <summary>
+            Управляет поведением блокировки и версиями строк инструкций.
+            </summary>
+            <param name="isolationLevel">Уровень изоляции.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.Begin">
+            <summary>
+            Отмечает начальную точку явной локальной транзакции.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.BeginAsync(System.Threading.CancellationToken)">
+            <summary>
+            Асинхронно отмечает начальную точку явной локальной транзакции.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.UseTransaction(System.Data.Common.DbTransaction)">
+            <summary>
+            Использование внешней транзакции.
+            </summary>
+            <param name="transaction">Внешняя транзакция.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.Commit">
+            <summary>
+            Отмечает успешное завершение явной или неявной транзакции.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.ITransaction.RollBack">
+            <summary>
+            Откатывает явные или неявные транзакции до начала или до точки сохранения транзакции.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2">
+            <summary>
+            Единица работы.
+            </summary>
+            <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
+            <typeparam name="TAggregate">Модель для доступа к таблице/таблицам
+            в базе данных.</typeparam>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.CommandRepository">
+            <summary>
+            Получение репозитория команд.
+            </summary>
+            <returns>Репозиторий интересующего типа.</returns>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.QueryRepository">
+            <summary>
+            Получение репозитория запросов.
+            </summary>
+            <returns>Репозиторий интересующего типа.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.Save">
+            <summary>
+            Сохранение результатов.
+            </summary>
+            <returns>Количество изменённых записей.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.SaveAsync(System.Threading.CancellationToken)">
+            <summary>
+            Асинхронное сохранение результатов
+            </summary>
+            <param name="cancellationToken">Токен отмены.</param>
+            <returns>Продолжение с количеством изменнёх записей.</returns>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.Programmability">
+            <summary>
+            Вызов хранимых процедур.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.Repository.IUnitOfWork`2.TransactionManager">
+            <summary>
+            Управление транзакциями.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.Repository.SingleReadMode">
+            <summary>
+            Режим поиска единственного значения.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.LifeCircle.ValueObjectWrapper`1">
+            <summary>
+            Обёртка над простыми системными типами.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.LifeCircle.ValueObjectWrapper`1.Value">
+            <summary>
+            Значение которое необхидимо предоставить как объект-значение.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.LifeCircle.ValueObjectWrapperExtention.ToValueObject``1(``0)">
+            <summary>
+            Преобразовать к объекту значению.
+            </summary>
+            <param name="value">
+            Простой тип, который нужно преобразовать к <see cref="T:Hive.SeedWorks.LifeCircle.IValueObject"/>.
+            </param>
+            <typeparam name="T">Тип значения.</typeparam>
+            <returns><see cref="T:Hive.SeedWorks.LifeCircle.IValueObject"/></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Monads.MonadExtentions.Either``2(``0,System.Func{``0,System.Boolean},System.Func{``0,``1},System.Func{``0,``1})">
+            <summary>
+            Разветвление результата.
+            Алльтернатива тернарному оператору присваивания,
+            для написания FluentApi-style code.
+            </summary>
+            <param name="o">Объект применения разветвления.</param>
+            <param name="condition">Условие разветвления.</param>
+            <param name="ifTrue">Функция при истинности условия.</param>
+            <param name="ifFalse">Функция при ложности условия.</param>
+            <typeparam name="TSource">Входящий тип запроса.</typeparam>
+            <typeparam name="TResult">Тип результирующего значения.</typeparam>
+            <returns>Результат разветвления.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Monads.MonadExtentions.PipeTo``2(``0,System.Func{``0,``1})">
+            <summary>
+            Применение функции к результирующему значению.
+            Для написания FluentApi-style code.
+            </summary>
+            <typeparam name="TSource">Входящий тип запроса.</typeparam>
+            <typeparam name="TResult">Тип результирующего значения.</typeparam>
+            <param name="source">Объект над которым нужно использовать функцию.</param>
+            <param name="func">Функция преобразования объекта.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Monads.MonadExtentions.Do``1(``0,System.Action{``0})">
+            <summary>
+            Выполнить функцию побочного эффекта над объектом.
+            </summary>
+            <typeparam name="T">Тип объекта над которым выполняется действие.</typeparam>
+            <param name="obj">Объект над которым выполняется действие.</param>
+            <param name="action">Действие над объектом.</param>
+            <returns>Объект над которым выполнено действие.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.ICommandHandler`2">
+            <summary>
+            Обработчик команд.
+            </summary>
+            <typeparam name="TIn">Входящий тип команды.</typeparam>
+            <typeparam name="TOut">Исходящий тип команды.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.ICommandHandlerAsync`2">
+            <summary>
+            Обработчик команд.
+            </summary>
+            <typeparam name="TIn">Входящий тип команды.</typeparam>
+            <typeparam name="TOut">Исходящий тип команды.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IHandler`2">
+            <summary>
+            Обработчик.
+            </summary>
+            <typeparam name="TIn">Входящие тип.</typeparam>
+            <typeparam name="TOut">Исходящий тип.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IHandler`2.Handle(`0)">
+            <summary>
+            Обработка.
+            </summary>
+            <param name="input">Входящее значение.</param>
+            <returns>Исходящее значение.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IHandlerAsync`2">
+            <summary>
+            Обработчик.
+            </summary>
+            <typeparam name="TIn">Входящие тип.</typeparam>
+            <typeparam name="TOut">Исходящий тип.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IHandlerAsync`2.Handle(`0)">
+            <summary>
+            Обработка.
+            </summary>
+            <param name="input">Входящее значение.</param>
+            <returns>Исходящее значение.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IQueryHandler`2">
+            <summary>
+            Обработчик запросов.
+            </summary>
+            <typeparam name="TIn">Тип для запроса.</typeparam>
+            <typeparam name="TOut">Тип результата запроса.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.Handlers.IQueryHandlerAsync`2">
+            <summary>
+            Обработчик запросов.
+            </summary>
+            <typeparam name="TIn">Тип для запроса.</typeparam>
+            <typeparam name="TOut">Тип результата запроса.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.ICommand">
+            <summary>
+            Команда.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.ICommand`1">
+            <summary>
+            Команда.
+            </summary>
+            <typeparam name="T">Тип команды.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.IDomainEventHandler`1">
+            <summary>
+            Обработчик доменного события.
+            </summary>
+            <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.IPermissionFilter`1">
+            <summary>
+            Фильтр доступа.
+            </summary>
+            <typeparam name="T">Входящий тип.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.IQuery">
+            <summary>
+            Операция запроса.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.IQuery`1">
+            <summary>
+            Операция запроса.
+            </summary>
+            <typeparam name="T">Тип для запроса.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.Abstractions.IValidationHandler`2">
+            <summary>
+            Обработчик валидации.
+            </summary>
+            <typeparam name="TIn">Входящий тип команды.</typeparam>
+            <typeparam name="TFailure">Тип ошибки.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.HandleLevel">
+            <summary>
+            Слой работы обработчика.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Diagnostics">
+            <summary>
+            Диагностика
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.TryCatch">
+            <summary>
+            Секция обработки ошибок
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Logining">
+            <summary>
+            Логгирование данных.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Authorization">
+            <summary>
+            Авторизация пользователя.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Validation">
+            <summary>
+            Валидация входящих данных.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Cache">
+            <summary>
+            Кэш данных.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.DataBase">
+            <summary>
+            База данных.
+            </summary>
+        </member>
+        <member name="F:Hive.SeedWorks.Pipelines.HandleLevel.Client">
+            <summary>
+            Чтение из клиента.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Pipelines.LinqQueryHandler`3">
+            <summary>
+            Обработчик запроса данных.
+            </summary>
+            <typeparam name="TQuery">Запрос к БД.</typeparam>
+            <typeparam name="TEntity">Сущность в БД.</typeparam>
+            <typeparam name="TProjection">Проекция.</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Result.AggregateResult`3">
+            <summary>
+            Результат выполнения бизнес-операции в агрегате.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Result.AggregateResult`3.Event">
+            <summary>
+            Событие предметной области.
+            </summary>
+        </member>
+        <member name="P:Hive.SeedWorks.Result.AggregateResult`3.Aggregate">
+            <summary>
+            Агрегат - источник события.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Result.AggregateResultFailure`3">
+            <summary>
+            Результат выполнения бизнес-операции в агрегате.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Result.AggregateResultSuccess`3">
+            <summary>
+            Результат выполнения бизнес-операции в агрегате.
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Result.Result`2">
+            <summary>
+            Результат обработки.
+            </summary>
+            <typeparam name="TSuccess">Тип удачной операции.</typeparam>
+            <typeparam name="TFailure">Тип неудачной операции.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.Result`2.#ctor(`0)">
+            <summary>
+            Конструктор для удачной операции.
+            </summary>
+            <param name="success">Удачный результат операции.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.Result`2.#ctor(`1)">
+            <summary>
+            Конструктор для неудачной операции.
+            </summary>
+            <param name="failure">Неудачный результат операции.</param>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.Result`2.ToString">
+            <summary>Returns a string that represents the current object.</summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.Result`2.Success(`0)">
+            <summary>
+            Фабричный метод удачной операции.
+            </summary>
+            <param name="success">Результат удачной операции.</param>
+            <returns>Результирующая развилка.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.Result`2.Failure(`1)">
+            <summary>
+            Фабричный метод удачной операции.
+            </summary>
+            <param name="failure">Результат неудачной операции.</param>
+            <returns>Результирующая развилка.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Result.TaskResult">
+            <summary>
+            Класс помошник для работы над конечным автоматом.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.TaskResult.Match``2(System.Threading.Tasks.Task{``1},System.Func{``1,``0},System.Func{System.AggregateException,``0})">
+            <summary>
+            Приведение к конечному виду результата обработки обещания.
+            </summary>
+            <param name="task"></param>
+            <param name="success"></param>
+            <param name="failure"></param>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TSuccess"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.TaskResult.Match``2(System.Threading.Tasks.Task{``1},System.Func{``1,``0},System.Func{System.AggregateException,``0},System.Func{``0})">
+            <summary>
+            Приведение к конечному виду результата обработки обещания.
+            </summary>
+            <param name="task">Задача общение.</param>
+            <param name="success"></param>
+            <param name="failure"></param>
+            <param name="cancel"></param>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TSuccess"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.TaskResult.ToResult``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            Привести задачу TPL к Result-монаде, с Exception отрицательным результатом.
+            </summary>
+            <param name="task">Промис задача.</param>
+            <typeparam name="TSuccess">Успешный результат.</typeparam>
+            <returns>Result-монада.</returns>
+            <exception cref="T:System.ApplicationException"></exception>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.TaskResult.ToTask``1(Hive.SeedWorks.Result.Result{``0,System.Exception})">
+            <summary>
+            Преобразование Result-монады к задаче TPL.
+            </summary>
+            <param name="resultMonad">Result-монада.</param>
+            <typeparam name="TSuccess">Успешный результат.</typeparam>
+            <returns>Промис задача.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Result.TaskResult.ToTask``1(System.Threading.Tasks.Task{Hive.SeedWorks.Result.Result{``0,System.Exception}})">
+            <summary>
+            Преобразование Result-монады к задаче TPL.
+            </summary>
+            <param name="resultMonadTask">Result-монада.</param>
+            <typeparam name="TSuccess">Успешный результат.</typeparam>
+            <returns>Промис задача.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Specification.GetByIdSpec`2">
+            <summary>
+            Спецификация по идентификатору.
+            </summary>
+            <typeparam name="TEntity">Тип сущности.</typeparam>
+            <typeparam name="TKey">Тип ключевого поля(ей).</typeparam>
+        </member>
+        <member name="T:Hive.SeedWorks.Specification.IOrderSpecification`1">
+            <summary>
+            Спецификация сортировки.
+            </summary>
+            <typeparam name="TEntity">Агрегат.</typeparam>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.IOrderSpecification`1.OrderBy">
+            <summary>
+            Функция подготовки условия сортировки.
+            </summary>
+            <returns>Дерево выражений для OrderBy.</returns>
+        </member>
+        <member name="T:Hive.SeedWorks.Specification.IQuerySpecification`2">
+            <summary>
+            Спецификация для запросов.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.IQuerySpecification`2.IsSatisfiedBy(`0)">
+            <summary>
+            Возаращает выражение для рассчёта выволняется ли условие
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Specification.ISpecification`1">
+            <summary>
+            Спецификация для объектов.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.ISpecification`1.IsSatisfiedBy">
+            <summary>
+            Возаращает выражение для рассчёта выволняется ли условие
+            </summary>
+        </member>
+        <member name="T:Hive.SeedWorks.Specification.ISpecificationEx`1">
+            <summary>
+            Расширяющаяся спецификация.
+            </summary>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.ToFunc``1(Hive.SeedWorks.Specification.ISpecification{``0})">
+            <summary>
+            Преобразование спецификации к предикату.
+            Рекоментудется кэшировать данную операцию!
+            </summary>
+            <param name="specification">Спецификация.</param>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Предикат для проверки объекта по спецификации в памяти.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.ToFunc``2(Hive.SeedWorks.Specification.IQuerySpecification{``0,``1},``0)">
+            <summary>
+            Преобразование спецификации к предикату.
+            Рекоментудется кэшировать данную операцию!
+            </summary>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="dto">Параметры спецификации.</param>
+            <typeparam name="TIn">Тип класса параметров спецификации.</typeparam>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Предикат для проверки объекта по спецификации в памяти.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.Where``2(System.Collections.Generic.IEnumerable{``1},Hive.SeedWorks.Specification.IQuerySpecification{``0,``1},``0)">
+            <summary>
+            Переопределение условия выборки по спецификации.
+            </summary>
+            <param name="enumerable">Исходное перечислениее.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="dto">Параметры спецификации.</param>
+            <typeparam name="TIn">Тип класса параметров спецификации.</typeparam>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Отфильтрованное по спецификации перечисление.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.Where``2(System.Linq.IQueryable{``1},Hive.SeedWorks.Specification.IQuerySpecification{``0,``1},``0)">
+            <summary>
+            Переопределение условия выборки по спецификации.
+            </summary>
+            <param name="queryable">Исходный запрос.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <param name="dto">Параметры спецификации.</param>
+            <typeparam name="TIn">Тип класса параметров спецификации.</typeparam>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Отфильтрованный по спецификации запрос.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.Where``1(System.Linq.IQueryable{``0},Hive.SeedWorks.Specification.ISpecification{``0})">
+            <summary>
+            Переопределение условия выборки по спецификации.
+            </summary>
+            <param name="queryable">Исходный запрос.</param>
+            <param name="specification">Спецификация запроса.</param>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Отфильтрованный по спецификации запрос.</returns>
+        </member>
+        <member name="M:Hive.SeedWorks.Specification.SpecificationExtention.ApplyTo``1(System.Func{``0,System.Boolean},``0)">
+            <summary>
+            Применяет предикат к конкретному объекту.
+            </summary>
+            <param name="specification">Прекат над типом.</param>
+            <param name="entity">Объект, проверяющийся на удолитворение условия.</param>
+            <typeparam name="TEntity">Тип объекта проверяемого по спецификации.</typeparam>
+            <returns>Результат проверки объекта на условие предеката.</returns>
+        </member>
+    </members>
+</doc>

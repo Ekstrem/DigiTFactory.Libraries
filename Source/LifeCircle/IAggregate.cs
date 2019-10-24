@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Hive.SeedWorks.Business;
+﻿using Hive.SeedWorks.Business;
+using System;
 
 namespace Hive.SeedWorks.LifeCircle
 {
@@ -21,17 +20,11 @@ namespace Hive.SeedWorks.LifeCircle
     /// <typeparam name="TKey">Тип ключевого поля.</typeparam>
     /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
     public interface IAggregate<TBoundedContext, out TKey> :
-        IAggregateRoot<TBoundedContext, TKey>
+        IHasKey<TKey>,
+        IAnemicModel<TBoundedContext, TKey>,
+        IBoundedContextScope<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        /// <summary>
-        /// Информация о версионности агрегата.
-        /// </summary>
         IHasVersion Version { get; }
-
-        /// <summary>
-        /// Словарь объект значений.
-        /// </summary>
-        IDictionary<string, IValueObject> ValueObjects { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Hive.SeedWorks.Events;
 using Hive.SeedWorks.Pipelines.Abstractions;
 using Hive.SeedWorks.Specification;
@@ -28,6 +29,15 @@ namespace Hive.SeedWorks.LifeCircle
         where TBoundedContext : IBoundedContext
         where TModel : class, TAggregate
     {
+        /// <summary>
+        /// Получение агрегата(ов) по идентификатору и версии.
+        /// </summary>
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <param name="version">Версия аргрегата.</param>
+        /// <param name="command">Команда иницировавшая операцию.</param>
+        /// <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
+        TAggregate GetAggregateByIdAndVersion(Guid id, int version, CommandToAggregate command);
+
         /// <summary>
         /// Получение агрегата(ов) по спецификации.
         /// </summary>
