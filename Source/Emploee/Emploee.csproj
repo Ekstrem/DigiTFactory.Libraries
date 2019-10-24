@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <RootNamespace>Emploee</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Hive.SeedWorks.Domain\Hive.SeedWorks.Domain.csproj" />
+      <ProjectReference Include="..\Hive.SeedWorks.csproj" />
+    </ItemGroup>
+
+</Project>

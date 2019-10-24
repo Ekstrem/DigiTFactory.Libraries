@@ -65,8 +65,12 @@ namespace Hive.SeedWorks.Domain
         /// </summary>
         public IList<IAggregateBusinessOperationFactory<IAnemicModel<TBoundedContext>, TBoundedContext>> Operations => _operations;
 
+        // Валидатор предметной области.
         public IList<IBusinessValidator<TBoundedContext>> Validators => _validators;
 
+        /// <summary>
+        /// Информация о версии.
+        /// </summary>
         IHasVersion IAggregate<TBoundedContext, TKey>.Version => _version;
     }
 }
