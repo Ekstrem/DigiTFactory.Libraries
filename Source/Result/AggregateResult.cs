@@ -7,31 +7,30 @@ namespace Hive.SeedWorks.Result
     /// <summary>
     /// Результат выполнения бизнес-операции в агрегате.
     /// </summary>
-    public abstract class AggregateResult<TBoundedContext, TAggregate, TKey>
-        where TAggregate : IAggregate<TBoundedContext, TKey>
+    public abstract class AggregateResult<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IDomainEvent<TBoundedContext, TKey> _domainEvent;
-        private readonly TAggregate _aggregate;
+        private readonly IDomainEvent<TBoundedContext> _domainEvent;
+        private readonly IAggregate<TBoundedContext> _aggregate;
 
         protected AggregateResult(
-            TAggregate aggregate,
+            IAggregate<TBoundedContext> aggregate,
             CommandToAggregate command,
             IDictionary<string, IValueObject> changedValueObjects)
         {
             _aggregate = aggregate;
-            _domainEvent = new DomainEvent<TBoundedContext, TKey>(
-                aggregate.Id, command, changedValueObjects);
+            _domainEvent = new DomainEvent<TBoundedContext>(
+                aggregate.Id, aggregate.VersionNumber, command, changedValueObjects);
         }
 
         /// <summary>
         /// Событие предметной области.
         /// </summary>
-        public IDomainEvent<TBoundedContext, TKey> Event => _domainEvent;
+        public IDomainEvent<TBoundedContext> Event => _domainEvent;
 
         /// <summary>
         /// Агрегат - источник события.
         /// </summary>
-        public TAggregate Aggregate => _aggregate;
+        public IAggregate<TBoundedContext> Aggregate => _aggregate;
     }
 }

@@ -7,15 +7,14 @@ namespace Hive.SeedWorks.Result
     /// <summary>
     /// Результат выполнения бизнес-операции в агрегате.
     /// </summary>
-    public abstract class AggregateResultFailure<TBoundedContext, TAggregate, TKey> :
-        AggregateResult<TBoundedContext, TAggregate, TKey>
-        where TAggregate : IAggregate<TBoundedContext, TKey>
+    public class AggregateResultFailure<TBoundedContext> :
+        AggregateResult<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
         private readonly string _exceptionReason;
 
-        protected AggregateResultFailure(
-            TAggregate aggregate,
+        internal AggregateResultFailure(
+            IAggregate<TBoundedContext> aggregate,
             CommandToAggregate command,
             IDictionary<string, IValueObject> changedValueObjects,
             string exceptionReason)

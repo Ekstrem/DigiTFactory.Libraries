@@ -1,30 +1,18 @@
-﻿using Hive.SeedWorks.Business;
-using System;
+﻿using System;
+using Hive.SeedWorks.Business;
 
 namespace Hive.SeedWorks.LifeCircle
 {
-    /// <summary>
-    /// Агрегат.
-    /// </summary>
-    /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-    public interface IAggregate<TBoundedContext> : 
-        IAggregateRoot<TBoundedContext>,
-        IAggregate<TBoundedContext, Guid>
-        where TBoundedContext : IBoundedContext
-    {
-    }
 
     /// <summary>
     /// Агрегат.
     /// </summary>
-    /// <typeparam name="TKey">Тип ключевого поля.</typeparam>
     /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-    public interface IAggregate<TBoundedContext, out TKey> :
-        IHasKey<TKey>,
-        IAnemicModel<TBoundedContext, TKey>,
+    public interface IAggregate<TBoundedContext> :
+        IHasComplexKey,
+        IAnemicModel<TBoundedContext>,
         IBoundedContextScope<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        IHasVersion Version { get; }
     }
 }

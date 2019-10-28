@@ -10,6 +10,16 @@ namespace Hive.SeedWorks.LifeCircle
     /// Провайдер получения экземпляра агрегата.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
+    public interface IAggregateProvider<TBoundedContext> :
+        IAggregateProvider<TBoundedContext, Aggregate<TBoundedContext>, IAggregate<TBoundedContext>>
+        where TBoundedContext : IBoundedContext
+    {
+    }
+
+    /// <summary>
+    /// Провайдер получения экземпляра агрегата.
+    /// </summary>
+    /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
     /// <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
     public interface IAggregateProvider<TBoundedContext, TAggregate> :
         IAggregateProvider<TBoundedContext, TAggregate, TAggregate>
@@ -29,6 +39,14 @@ namespace Hive.SeedWorks.LifeCircle
         where TBoundedContext : IBoundedContext
         where TModel : class, TAggregate
     {
+        /// <summary>
+        /// Получение агрегата(ов) по идентификатору и версии.
+        /// </summary>
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <param name="command">Команда иницировавшая операцию.</param>
+        /// <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
+        TAggregate GetAggregateByIdAndVersion(Guid id, CommandToAggregate command);
+
         /// <summary>
         /// Получение агрегата(ов) по идентификатору и версии.
         /// </summary>
@@ -66,16 +84,16 @@ namespace Hive.SeedWorks.LifeCircle
         /// Создание экземпляра агрегата по соответствующей dto.
         /// </summary>
         /// <typeparam name="TIn">Тип dto команды.</typeparam>
-        /// <param name="dto">Dto команды.</param>
+        /// <param name="anemicModel">Анемичная модель.</param>
         /// <param name="command">Команда иницировавшая операцию.</param>
         /// <returns>Новый экземпляр команды КА.</returns>
-        TAggregate NewAggregate<TIn>(TIn dto, CommandToAggregate command);
+        TAggregate NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command);
 
         /// <summary>
         /// Сохранение изменений.
         /// </summary>
         /// <param name="aggregate">Агрегат изменине в котором нужно сохранить.</param>
         /// <returns>Агрегат с сохраненными изменениями.</returns>
-        TAggregate SaveChanges(TAggregate aggregate);
+        void SaveChanges(TAggregate aggregate);
     }
 }

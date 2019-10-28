@@ -8,10 +8,9 @@ namespace Hive.SeedWorks.LifeCircle.Repository
 	/// <summary>
 	/// Интерфейс репозитория. Функциональность чтения.
 	/// </summary>
-	/// <typeparam name="TEntity">Тип записи.</typeparam>
-	public interface IRepositoryReadCount<TEntity>
-		where TEntity : class, IEntity
-	{
+	public interface IRepositoryReadCount<TBoundedContext>
+        where TBoundedContext : IBoundedContext
+    {
 		/// <summary>
 		/// Получить общее количество элементов.
 		/// </summary>
@@ -27,7 +26,7 @@ namespace Hive.SeedWorks.LifeCircle.Repository
 		/// <returns>Возвращает количество элементов данных.</returns>
 		long Count<TIn>(
 			TIn value,
-			IQuerySpecification<TIn, TEntity> specification)
+			IQuerySpecification<TIn, AnemicModel<TBoundedContext>> specification)
 			where TIn : IQuery;
 
 		/// <summary>
@@ -47,61 +46,8 @@ namespace Hive.SeedWorks.LifeCircle.Repository
 		/// <returns>Возвращает количество элементов данных.</returns>
 		Task<long> CountAsync<TIn>(
 			TIn value,
-			IQuerySpecification<TIn, TEntity> specification,
+			IQuerySpecification<TIn, AnemicModel<TBoundedContext>> specification,
 			CancellationToken cancellationToken = default)
-			where TIn : IQuery;
-	}
-
-	/// <summary>
-	/// Интерфейс репозитория. Функциональность чтения.
-	/// </summary>
-	public interface IRepositoryReadCount
-	{
-		/// <summary>
-		/// Получить общее количество элементов.
-		/// </summary>
-		/// <typeparam name="TEntity">Тип записи.</typeparam>
-		/// <returns>Возвращает количество элементов данных.</returns>
-		long Count<TEntity>()
-			where  TEntity : class, IEntity;
-
-		/// <summary>
-		/// Получить общее количество элементов.
-		/// </summary>
-		/// <param name="value">Значение для поиска по спецификации.</param>
-		/// <param name="specification">Условие выборки.</param>
-		/// <typeparam name="TEntity">Тип записи.</typeparam>
-		/// <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
-		/// <returns>Возвращает количество элементов данных.</returns>
-		long Count<TEntity, TIn>(
-			TIn value,
-			IQuerySpecification<TIn, TEntity> specification)
-			where TEntity : class, IEntity
-			where TIn : IQuery;
-
-		/// <summary>
-		/// Получить общее количество элементов.
-		/// </summary>
-		/// <param name="cancellationToken">Токен отмены.</param>
-		/// <typeparam name="TEntity">Тип записи.</typeparam>
-		/// <returns>Возвращает количество элементов данных.</returns>
-		Task<long> CountAsync<TEntity>(CancellationToken cancellationToken = default)
-			where TEntity : class, IEntity;
-
-		/// <summary>
-		/// Получить общее количество элементов.
-		/// </summary>
-		/// <param name="value">Значение для поиска по спецификации.</param>
-		/// <param name="specification">Условие выборки.</param>
-		/// <param name="cancellationToken">Токен отмены.</param>
-		/// <typeparam name="TEntity">Тип записи.</typeparam>
-		/// <typeparam name="TIn">Тип входная Dto фильтрации.</typeparam>
-		/// <returns>Возвращает количество элементов данных.</returns>
-		Task<long> CountAsync<TEntity, TIn>(
-			TIn value,
-			IQuerySpecification<TIn, TEntity> specification,
-			CancellationToken cancellationToken = default)
-			where TEntity : class, IEntity
 			where TIn : IQuery;
 	}
 }

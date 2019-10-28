@@ -90,28 +90,28 @@
             Идентификатор предыдущего.
             </summary>
         </member>
-        <member name="T:Hive.SeedWorks.Business.IHasVersion`1">
+        <member name="T:Hive.SeedWorks.Business.IHasVersionNumber`1">
             <summary>
             Указывает на то что объект имеет версионность.
             </summary>
             <typeparam name="T">Тип данных которым версионируется объект.</typeparam>
         </member>
-        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.Version">
+        <member name="P:Hive.SeedWorks.Business.IHasVersionNumber`1.VersionNumber">
             <summary>
             Номер версии.
             </summary>
         </member>
-        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.Stamp">
+        <member name="P:Hive.SeedWorks.Business.IHasVersionNumber`1.Stamp">
             <summary>
             Дата создания версии.
             </summary>
         </member>
-        <member name="P:Hive.SeedWorks.Business.IHasVersion`1.CommandId">
+        <member name="P:Hive.SeedWorks.Business.IHasVersionNumber`1.CommandId">
             <summary>
             Идентификатор комманды, создавшей новую версию.
             </summary>
         </member>
-        <member name="T:Hive.SeedWorks.Business.IHasVersion">
+        <member name="T:Hive.SeedWorks.Business.IHasVersionNumber">
             <summary>
             Указывает на то что объект имеет версионность.
             </summary>
@@ -285,7 +285,7 @@
             </summary>
             <param name="domainEvent">Доменное событие.</param>
         </member>
-        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.Version">
+        <member name="P:Hive.SeedWorks.LifeCircle.Aggregate`2.VersionNumber">
             <summary>
             Номер версии.
             </summary>
@@ -418,7 +418,7 @@
             <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
             <typeparam name="TModel">Тип модели.</typeparam>
         </member>
-        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.GetAggregateByIdAndVersion(System.Guid,System.Int32,Hive.SeedWorks.Events.CommandToAggregate)">
+        <member name="M:Hive.SeedWorks.LifeCircle.IAggregateProvider`3.GetAggregateByIdAndVersionNumber(System.Guid,System.Int32,Hive.SeedWorks.Events.CommandToAggregate)">
             <summary>
             Получение агрегата(ов) по идентификатору и версии.
             </summary>

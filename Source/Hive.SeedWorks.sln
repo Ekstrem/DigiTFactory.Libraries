@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.SeedWorks", "Hive.Seed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive.SeedWorks.Domain", "..\Hive.SeedWorks.Domain\Hive.SeedWorks.Domain.csproj", "{FA844D55-BB31-4A29-BB84-5A01B80EAF5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emploee", "Emploee\Emploee.csproj", "{8A6736E9-67F0-42D8-95C9-0F1DB4A1AF02}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{FA844D55-BB31-4A29-BB84-5A01B80EAF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA844D55-BB31-4A29-BB84-5A01B80EAF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA844D55-BB31-4A29-BB84-5A01B80EAF5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A6736E9-67F0-42D8-95C9-0F1DB4A1AF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A6736E9-67F0-42D8-95C9-0F1DB4A1AF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A6736E9-67F0-42D8-95C9-0F1DB4A1AF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A6736E9-67F0-42D8-95C9-0F1DB4A1AF02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

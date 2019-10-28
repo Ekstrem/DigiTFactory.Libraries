@@ -7,13 +7,12 @@ namespace Hive.SeedWorks.Result
     /// <summary>
     /// Результат выполнения бизнес-операции в агрегате.
     /// </summary>
-    public abstract class AggregateResultSuccess<TBoundedContext, TAggregate, TKey> :
-        AggregateResult<TBoundedContext, TAggregate, TKey>
-        where TAggregate : IAggregate<TBoundedContext, TKey>
+    public class AggregateResultSuccess<TBoundedContext> :
+        AggregateResult<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        protected AggregateResultSuccess(
-            TAggregate aggregate,
+        internal AggregateResultSuccess(
+            IAggregate<TBoundedContext> aggregate,
             CommandToAggregate command,
             IDictionary<string, IValueObject> changedValueObjects)
             : base(aggregate, command, changedValueObjects) { }

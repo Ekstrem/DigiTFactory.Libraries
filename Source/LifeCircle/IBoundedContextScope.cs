@@ -12,11 +12,8 @@ namespace Hive.SeedWorks.LifeCircle
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        IList<IAggregateBusinessOperationFactory<IAnemicModel<TBoundedContext>, TBoundedContext>> Operations { get; }
+        IList<IAggregateBusinessOperationFactory<TBoundedContext>> Operations { get; }
 
-        /// <summary>
-        /// Валидатор модели предметной области.
-        /// </summary>
         IList<IBusinessValidator<TBoundedContext>> Validators { get; }
     }
 }

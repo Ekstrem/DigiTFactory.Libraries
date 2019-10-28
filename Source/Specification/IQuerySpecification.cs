@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Hive.SeedWorks.Business;
 using Hive.SeedWorks.LifeCircle;
 using Hive.SeedWorks.Pipelines.Abstractions;
 
@@ -10,7 +11,7 @@ namespace Hive.SeedWorks.Specification
     /// </summary>
     public interface IQuerySpecification<in TIn, TEntity>
         where TIn : IQuery
-        where TEntity : IEntity
+        where TEntity : IHasKey
     {
         /// <summary>
         /// Возаращает выражение для рассчёта выволняется ли условие

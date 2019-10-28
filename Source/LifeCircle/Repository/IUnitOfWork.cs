@@ -7,23 +7,20 @@ namespace Hive.SeedWorks.LifeCircle.Repository
 	/// Единица работы.
 	/// </summary>
 	/// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-	/// <typeparam name="TAggregate">Модель для доступа к таблице/таблицам
-	/// в базе данных.</typeparam>
-	public interface IUnitOfWork<TBoundedContext, TAggregate>
+	public interface IUnitOfWork<TBoundedContext>
         where TBoundedContext : IBoundedContext
-		where TAggregate : class, IAggregate<TBoundedContext>
     {
 		/// <summary>
 		/// Получение репозитория команд.
 		/// </summary>
 		/// <returns>Репозиторий интересующего типа.</returns>
-		ICommandRepository<TBoundedContext, TAggregate> CommandRepository { get; }
+		ICommandRepository<TBoundedContext> CommandRepository { get; }
 
 		/// <summary>
 		/// Получение репозитория запросов.
 		/// </summary>
 		/// <returns>Репозиторий интересующего типа.</returns>
-		IQueryRepository<TAggregate> QueryRepository { get; }
+		IQueryRepository<IAnemicModel<TBoundedContext>> QueryRepository { get; }
 
         /// <summary>
         /// Сохранение результатов.

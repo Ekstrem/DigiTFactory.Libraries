@@ -16,7 +16,6 @@ namespace Hive.SeedWorks.LifeCircle.Repository
 		/// Получение записей без спецификации.
 		/// </summary>
 		/// <returns>Коллекция записей.</returns>
-		[Obsolete]
 		IQueryable<TEntity> GetQueryable();
 
 		/// <summary>

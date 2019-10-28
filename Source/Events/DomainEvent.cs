@@ -8,22 +8,22 @@ namespace Hive.SeedWorks.Events
     /// Доменное событие предметной области.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст события.</typeparam>
-    /// <typeparam name="TKey">Ключевое поле агрегата.</typeparam>
-    public class DomainEvent<TBoundedContext, TKey> :
-        IDomainEvent<TBoundedContext, TKey> 
+    public class DomainEvent<TBoundedContext> :
+        IDomainEvent<TBoundedContext> 
         where TBoundedContext : IBoundedContext
     {
         private readonly IDictionary<string, IValueObject> _changedValueObjects;
-        private readonly TKey _aggregateIdId;
+        private readonly Guid _id;
         private readonly CommandToAggregate _command;
         private readonly DateTime _timeStamp;
 
         public DomainEvent(
-            TKey aggregateIdId,
+            Guid id,
+            int version,
             CommandToAggregate command,
             IDictionary<string, IValueObject> changedValueObjects)
         {
-            _aggregateIdId = aggregateIdId;
+            _id = id;
             _command = command;
             _changedValueObjects = changedValueObjects;
             _timeStamp = DateTime.Now;
@@ -32,7 +32,7 @@ namespace Hive.SeedWorks.Events
         /// <summary>
         /// Экземпляр агрегата.
         /// </summary>
-        public TKey AggregateId => _aggregateIdId;
+        public Guid Id => _id;
 
         /// <summary>
         /// Имя бизнес-операции - доменное событие.

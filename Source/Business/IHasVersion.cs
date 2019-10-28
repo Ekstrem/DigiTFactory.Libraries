@@ -1,4 +1,5 @@
 ﻿using System;
+using Hive.SeedWorks.LifeCircle;
 
 namespace Hive.SeedWorks.Business
 {
@@ -11,7 +12,7 @@ namespace Hive.SeedWorks.Business
         /// <summary>
         /// Номер версии.
         /// </summary>
-        T Version { get; }
+        T VersionNumber { get; }
 
         /// <summary>
         /// Дата создания версии.
