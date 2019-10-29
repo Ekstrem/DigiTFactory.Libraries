@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Business;
+using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
 using Hive.SeedWorks.Result;
 

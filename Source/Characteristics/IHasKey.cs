@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.Business
+﻿namespace Hive.SeedWorks.Characteristics
 {
     /// <summary>
     /// Объект имеет идентификационное поле.

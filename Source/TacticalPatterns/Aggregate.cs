@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Hive.SeedWorks.Business;
+using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.LifeCircle

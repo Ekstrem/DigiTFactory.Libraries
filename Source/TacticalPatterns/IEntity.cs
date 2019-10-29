@@ -1,4 +1,4 @@
-﻿using Hive.SeedWorks.Business;
+﻿using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.LifeCircle
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hive.SeedWorks.Business
+namespace Hive.SeedWorks.Characteristics
 {
     /// <summary>
     /// Комплексный ключ агрегата.

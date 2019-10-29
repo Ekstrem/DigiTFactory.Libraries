@@ -1,7 +1,6 @@
 ﻿using System;
-using Hive.SeedWorks.LifeCircle;
 
-namespace Hive.SeedWorks.Business
+namespace Hive.SeedWorks.Characteristics
 {
     /// <summary>
     /// Указывает на то что объект имеет версионность.

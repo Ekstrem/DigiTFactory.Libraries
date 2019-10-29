@@ -1,19 +1,19 @@
-﻿namespace Hive.SeedWorks.Business
+﻿namespace Hive.SeedWorks.Characteristics
 {
     /// <summary>
-    /// Объект имеет предыдущий.
+    /// Объект имеет следующего.
     /// </summary>
     /// <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
-    public interface IHasPrevious<TKey>
+    public interface IHasNext<TKey>
     {
         /// <summary>
         /// Имеет родителя.
         /// </summary>
-        bool IsHasPrevious { get; }
+        bool IsHasNext { get; }
 
         /// <summary>
-        /// Идентификатор предыдущего.
+        /// Идентификатор следующего.
         /// </summary>
-        TKey PreviousId { get; set; }
+        TKey NextId { get; set; }
     }
 }

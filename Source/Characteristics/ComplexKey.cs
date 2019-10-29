@@ -1,7 +1,7 @@
 ﻿using System;
 using Hive.SeedWorks.Events;
 
-namespace Hive.SeedWorks.Business
+namespace Hive.SeedWorks.Characteristics
 {
     internal sealed class ComplexKey : IHasComplexKey
     {
