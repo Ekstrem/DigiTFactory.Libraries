@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Version>0.0.1</Version>
+    <Authors>Войтов Евгений</Authors>
+    <Company></Company>
+    <Product>Hive</Product>
+    <Copyright></Copyright>
+    <RepositoryUrl>https://github.com/Ekstrem/Hive</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <FileVersion>0.0.1.1</FileVersion>
+    <AssemblyVersion>0.0.1.1</AssemblyVersion>
+    <PackageIconUrl></PackageIconUrl>
+    <Description>Базовые интерфейсы для реализации Domain Driven Design.</Description>
+    <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
+    <AssemblyName>Hive.SeedWorks</AssemblyName>
+    <RootNamespace>Hive.SeedWorks</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.3" />
+    <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
