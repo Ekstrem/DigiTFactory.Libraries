@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hive.SeedWorks.Characteristics;
@@ -17,17 +17,16 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBoundedContext : IBoundedContext
     {
         private readonly IUnitOfWork<TBoundedContext> _unitOfWork;
+        private readonly IBoundedContextScope<TBoundedContext> _scope;
         private readonly IList<IAggregateBusinessOperationFactory<TBoundedContext>> _operations;
         private readonly IList<IBusinessValidator<TBoundedContext>> _validators;
 
         public AggregateProvider(
             IUnitOfWork<TBoundedContext> unitOfWork,
-            IList<IAggregateBusinessOperationFactory<TBoundedContext>> operations,
-            IList<IBusinessValidator<TBoundedContext>> validators)
+            IBoundedContextScope<TBoundedContext> scope)
         {
             _unitOfWork = unitOfWork;
-            _operations = operations;
-            _validators = validators;
+            _scope = scope;
         }
 
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command) 
@@ -41,14 +40,14 @@ namespace Hive.SeedWorks.TacticalPatterns
             var anemicModel = _unitOfWork.QueryRepository.GetQueryable()
                 .Single(f => f.Root.Id == id && f.Root.VersionNumber == version);
             var aggregate = Aggregate<TBoundedContext>
-                .CreateInstance(ComplexKey.Create(id, version, command), anemicModel, _operations, _validators);
+                .CreateInstance(ComplexKey.Create(id, version, command), anemicModel, _scope);
             return aggregate;
         }
 
         public IAggregate<TBoundedContext> NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command)
             => Aggregate<TBoundedContext>.CreateInstance(
                 command.CreateNewVersion(),
-                anemicModel, default, default);
+                anemicModel, _scope);
 
         public void SaveChanges(IAggregate<TBoundedContext> aggregate) 
             => _unitOfWork.Save();
