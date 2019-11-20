@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
@@ -12,37 +11,30 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBoundedContext : IBoundedContext
     {
         private readonly IHasVersion _version;
-        private readonly IList<IAggregateBusinessOperationFactory<TBoundedContext>> _operationFactories;
-        private readonly IList<IBusinessValidator<TBoundedContext>> _validators;
+        private readonly IBoundedContextScope<TBoundedContext> _scope;
         private readonly Guid _id;
 
         protected AggregateBusinessOperationFactory(
             Guid id,
             IHasVersion version,
-            IList<IAggregateBusinessOperationFactory<TBoundedContext>> operationFactories,
-            IList<IBusinessValidator<TBoundedContext>> validators)
+            IBoundedContextScope<TBoundedContext> scope)
         {
             _id = id;
             _version = version;
-            _operationFactories = operationFactories;
-            _validators = validators;
+            _scope = scope;
         }
 
         protected AggregateBusinessOperationFactory(
             CommandToAggregate command,
             IAggregate<TBoundedContext> aggregate)
-            : this(
-                aggregate.Id,
-                aggregate,
-                aggregate.Operations,
-                aggregate.Validators)
+            : this(aggregate.Id, aggregate, aggregate)
         {
         }
 
         public Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>> Handle(
             IAnemicModel<TBoundedContext> input, CommandToAggregate command)
         {
-            var result = _validators
+            var result = _scope.Validators
                 .Where(f => !f.ValidateModel(input))
                 .Select(m => m.GetType().Name)
                 .ToList();
@@ -53,7 +45,7 @@ namespace Hive.SeedWorks.TacticalPatterns
                         null, command, null, result.First()));
             }
 
-            var a = Aggregate<TBoundedContext>.CreateInstance(_id, _version, input, _operationFactories, _validators);
+            var a = Aggregate<TBoundedContext>.CreateInstance(_id, _version, input, _scope);
             return Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
                 .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null));
         }
