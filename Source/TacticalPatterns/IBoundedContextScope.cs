@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -12,7 +12,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        IList<IAggregateBusinessOperationFactory<TBoundedContext>> Operations { get; }
+        IDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations { get; }
 
         IList<IBusinessValidator<TBoundedContext>> Validators { get; }
     }
