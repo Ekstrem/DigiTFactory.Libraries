@@ -25,6 +25,9 @@ namespace Hive.SeedWorks.Characteristics
         public DateTime Stamp => _stamp;
 
         public Guid CommandId => _commandId;
+        
+        public static IComplexKey Create(Guid id, int versionNumber)
+            => new ComplexKey(id, versionNumber, null);
 
         public static IHasComplexKey Create(Guid id, int versionNumber, CommandToAggregate command)
             => new ComplexKey(id, versionNumber, command);
