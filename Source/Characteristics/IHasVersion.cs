@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hive.SeedWorks.Characteristics
 {
@@ -6,13 +6,8 @@ namespace Hive.SeedWorks.Characteristics
     /// Указывает на то что объект имеет версионность.
     /// </summary>
     /// <typeparam name="T">Тип данных которым версионируется объект.</typeparam>
-    public interface IHasVersion<out T>
+    public interface IHasVersion<T>: IVersion<T>
     {
-        /// <summary>
-        /// Номер версии.
-        /// </summary>
-        T VersionNumber { get; }
-
         /// <summary>
         /// Дата создания версии.
         /// </summary>
@@ -28,4 +23,14 @@ namespace Hive.SeedWorks.Characteristics
     /// Указывает на то что объект имеет версионность.
     /// </summary>
     public interface IHasVersion : IHasVersion<int> { }
+
+    public interface IVersion : IHasVersion<int> { }
+
+    public interface IVersion<T>
+    {
+        /// <summary>
+        /// Номер версии.
+        /// </summary>
+        T VersionNumber { get; }
+    }
 }
