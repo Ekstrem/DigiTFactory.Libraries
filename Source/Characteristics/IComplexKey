@@ -1,0 +1,4 @@
+namespace Hive.SeedWorks.Characteristics
+{
+    public interface IComplexKey<out TKey> : IHasKey<TKey> { }
+}
