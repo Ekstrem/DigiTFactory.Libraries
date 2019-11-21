@@ -45,9 +45,11 @@ namespace Hive.SeedWorks.TacticalPatterns
                         null, command, null, result.First()));
             }
 
-            var a = Aggregate<TBoundedContext>.CreateInstance(_id, _version, input, _scope);
-            return Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
-                .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null));
+            return _version
+                .PipeTo(v => ComplexKey.Create(_id, _version.VersionNumber))
+                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
+                .PipeTo(a => Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
+                    .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null)));
         }
     }
 }
