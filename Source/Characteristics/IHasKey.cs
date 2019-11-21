@@ -1,13 +1,15 @@
-﻿namespace Hive.SeedWorks.Characteristics
+using System;
+
+namespace Hive.SeedWorks.Characteristics
 {
     /// <summary>
     /// Объект имеет идентификационное поле.
     /// </summary>
     /// <typeparam name="TKey">Ключевой тип поиска родителя.</typeparam>
-    public interface IHasKey<out TKey> : IHasKey
+    public interface IHasKey<out TKey>
     {
         /// <summary>
-        /// Имеет родителя.
+        /// Имеет идентификатор.
         /// </summary>
         TKey Id { get; }
     }
@@ -16,5 +18,5 @@
     /// <summary>
     /// Объект имеет идентификационное поле.
     /// </summary>
-    public interface IHasKey { }
+    public interface IHasKey : IHasKey<Guid> { }
 }
