@@ -31,25 +31,24 @@ namespace Hive.SeedWorks.TacticalPatterns
         {
         }
 
+        
+
         public Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>> Handle(
             IAnemicModel<TBoundedContext> input, CommandToAggregate command)
-        {
-            var result = _scope.Validators
+            => _scope.Validators
                 .Where(f => !f.ValidateModel(input))
                 .Select(m => m.GetType().Name)
-                .ToList();
-            if (result.Any())
-            {
-                return Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
-                    .Failure(new AggregateResultFailure<TBoundedContext>(
-                        null, command, null, result.First()));
-            }
-
-            return _version
-                .PipeTo(v => ComplexKey.Create(_id, _version.VersionNumber))
-                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
-                .PipeTo(a => Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
-                    .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null)));
-        }
+                .ToList()
+                .Either(c => c.Any(),
+                    s => Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
+                        .Failure(new AggregateResultFailure<TBoundedContext>(
+                            null, command, null, s.First())),
+                    f => _id
+                        .Either(c => _id == default, s => command.CommandId, n => _id)
+                        .PipeTo(id => ComplexKey.Create(id, _version.VersionNumber))
+                        .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
+                        .PipeTo(a =>
+                            Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
+                                .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null))));
     }
 }
