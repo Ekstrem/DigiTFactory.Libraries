@@ -11,5 +11,5 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Сущность.
     /// </summary>
     /// <typeparam name="TKey">Тип ключевого поля.</typeparam>
-    public interface IEntity<out TKey> : IEntity, IHasKey<TKey> { }
+    public interface IEntity<out TKey> : IValueObject, IHasKey<TKey> { }
 }

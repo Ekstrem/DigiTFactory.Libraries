@@ -7,16 +7,16 @@ namespace Hive.SeedWorks.Events
     /// </summary>
     public class CommandToAggregate
     {
-        private readonly Guid _commandId;
+        private readonly Guid _correlationToken;
         private readonly string _commandName;
         private readonly string _subjectName;
 
         public CommandToAggregate(
-            Guid commandId,
+            Guid correlationToken,
             string commandName,
             string subjectName)
         {
-            _commandId = commandId;
+            _correlationToken = correlationToken;
             _commandName = commandName;
             _subjectName = subjectName;
         }
@@ -25,15 +25,15 @@ namespace Hive.SeedWorks.Events
             string commandName,
             string subjectName)
         {
-            _commandId = Guid.NewGuid();
+            _correlationToken = Guid.NewGuid();
             _commandName = commandName;
             _subjectName = subjectName;
         }
 
         /// <summary>
-        /// Уникальный идентификатор комманды.
+        /// Маркер корреляции.
         /// </summary>
-        public Guid CommandId => _commandId;
+        public Guid CorrelationToken => _correlationToken;
 
         /// <summary>
         /// Имя метода агрегата, который вызывает команда.

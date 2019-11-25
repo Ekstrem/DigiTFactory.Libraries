@@ -7,21 +7,27 @@
     <Authors>Войтов Евгений</Authors>
     <Company></Company>
     <Product>Hive</Product>
-    <Copyright></Copyright>
+    <Copyright>Evgeniy Voitov 2019</Copyright>
     <RepositoryUrl>https://github.com/Ekstrem/Hive</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>0.0.1.1</FileVersion>
-    <AssemblyVersion>0.0.1.1</AssemblyVersion>
+    <FileVersion>0.0.1.2</FileVersion>
+    <AssemblyVersion>0.0.1.2</AssemblyVersion>
     <PackageIconUrl></PackageIconUrl>
     <Description>Базовые интерфейсы для реализации Domain Driven Design.</Description>
     <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
     <AssemblyName>Hive.SeedWorks</AssemblyName>
     <RootNamespace>Hive.SeedWorks</RootNamespace>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
+    <DocumentationFile>..\Bin\Docs\Fida.Common.Primitives.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">
+    <OutputPath>..\Bin\</OutputPath>
   </PropertyGroup>
 
 
@@ -32,6 +38,13 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

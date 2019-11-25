@@ -28,6 +28,6 @@ namespace Hive.SeedWorks.Characteristics
         /// <summary>
         /// Идентификатор комманды, создавшей новую версию.
         /// </summary>
-        public Guid CommandId => _commandId;
+        public Guid CorrelationToken => _commandId;
     }
 }

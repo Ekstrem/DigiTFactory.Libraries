@@ -37,7 +37,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Идентификатор комманды источника последней версии.
         /// </summary>
-        public Guid CommandId => _key.CommandId;
+        public Guid CorrelationToken => _key.CorrelationToken;
 
         /// <summary>
         /// Корень модели сущности.

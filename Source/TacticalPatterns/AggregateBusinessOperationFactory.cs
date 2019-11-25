@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
+using Hive.SeedWorks.Monads;
 using Hive.SeedWorks.Result;
 
 namespace Hive.SeedWorks.TacticalPatterns
@@ -44,8 +45,8 @@ namespace Hive.SeedWorks.TacticalPatterns
                         .Failure(new AggregateResultFailure<TBoundedContext>(
                             null, command, null, s.First())),
                     f => _id
-                        .Either(c => _id == default, s => command.CommandId, n => _id)
-                        .PipeTo(id => ComplexKey.Create(id, _version.VersionNumber))
+                        .Either(c => _id == default, s => command.CorrelationToken, n => _id)
+                        .PipeTo(id => ComplexKey.Create(id, _version.VersionNumber, command))
                         .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
                         .PipeTo(a =>
                             Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>

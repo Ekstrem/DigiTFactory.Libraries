@@ -20,7 +20,7 @@ namespace Hive.SeedWorks.TacticalPatterns.Repository
 		/// Получение репозитория запросов.
 		/// </summary>
 		/// <returns>Репозиторий интересующего типа.</returns>
-		IQueryRepository<IAnemicModel<TBoundedContext>> QueryRepository { get; }
+		IQueryRepository<TBoundedContext> QueryRepository { get; }
 
         /// <summary>
         /// Сохранение результатов.
@@ -39,10 +39,5 @@ namespace Hive.SeedWorks.TacticalPatterns.Repository
         /// Вызов хранимых процедур.
         /// </summary>
         ISqlProgrammability Programmability { get; }
-
-        /// <summary>
-        /// Управление транзакциями.
-        /// </summary>
-        ITransaction TransactionManager { get; }
     }
 }
