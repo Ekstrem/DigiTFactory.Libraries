@@ -42,7 +42,6 @@ namespace Hive.SeedWorks.Events
 
         /// <summary>
         /// Имя субъекта бизнес-операции.
-        /// Мапится на NameLastModification.
         /// </summary>
         public string SubjectName => _subjectName;
 

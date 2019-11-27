@@ -30,6 +30,10 @@
     <OutputPath>..\Bin\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Characteristics\IComplexKey.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.3" />

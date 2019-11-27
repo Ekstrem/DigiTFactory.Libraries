@@ -12,8 +12,11 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        IDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations { get; }
+        IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations { get; }
 
-        IList<IBusinessValidator<TBoundedContext>> Validators { get; }
+        /// <summary>
+        /// Валидаторы модели.
+        /// </summary>
+        IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators { get; }
     }
 }

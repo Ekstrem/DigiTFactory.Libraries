@@ -52,12 +52,12 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        public IDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations => _scope.Operations;
+        public IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations => _scope.Operations;
 
         /// <summary>
         /// Валидаторы модели бизнес-объекта.
         /// </summary>
-        public IList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
+        public IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
 
         public static IAggregate<TBoundedContext> CreateInstance(
             IHasComplexKey key,

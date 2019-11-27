@@ -38,7 +38,19 @@ namespace Hive.SeedWorks.TacticalPatterns
         public AnemicModel(IAnemicModel<TBoundedContext> model)
             : this(model.Root, GetValueObjects(model))
         {
+        }
 
+        /// <summary>
+        /// Конструктор анемичной модели.
+        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
+        /// </summary>
+        /// <param name="root">Корень агрегации.</param>
+        /// <param name="valueObjects">Словарь объект значений.</param>
+        public AnemicModel(
+            IAggregateRoot<TBoundedContext> root,
+            params IValueObject[] valueObjects)
+            : this(root, valueObjects.ToImmutableDictionary(k => k.GetType().Name, v => v))
+        {
         }
 
         private static IDictionary<string, IValueObject> GetValueObjects(IAnemicModel<TBoundedContext> model)
@@ -51,19 +63,6 @@ namespace Hive.SeedWorks.TacticalPatterns
             }
 
             return valueObjects;
-        }
-
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="root">Корень агрегации.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        protected AnemicModel(
-            IAggregateRoot<TBoundedContext> root,
-            params IValueObject[] valueObjects)
-            : this(root, valueObjects.ToImmutableDictionary(k => k.GetType().Name, v => v))
-        {
         }
 
         /// <summary>
