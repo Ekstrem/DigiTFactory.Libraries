@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -13,45 +14,44 @@ namespace Hive.SeedWorks.TacticalPatterns
         : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IAggregateRoot<TBoundedContext> _root;
-        private readonly IDictionary<string, IValueObject> _valueObjects;
+		private Guid _id;
+		protected int _number;
+		private DateTime _stamp;
+		private Guid _correlationToken;
 
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="root">Корень агрегации.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        public AnemicModel(
-            IAggregateRoot<TBoundedContext> root,
-            IDictionary<string, IValueObject> valueObjects)
-        {
-            _root = root;
-            _valueObjects = valueObjects;
-        }
+		protected AnemicModel()
+		{
+		}
 
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="model">Анемичная модель бизнес-объекта.</param>
-        public AnemicModel(IAnemicModel<TBoundedContext> model)
-            : this(model.Root, GetValueObjects(model))
-        {
-        }
+		public AnemicModel(Guid id, int number, CommandToAggregate command)
+		{
+			_id = id;
+			_number = number;
+			_stamp = DateTime.Now;
+			_correlationToken = command.CorrelationToken;
+		}
 
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="root">Корень агрегации.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        public AnemicModel(
-            IAggregateRoot<TBoundedContext> root,
-            params IValueObject[] valueObjects)
-            : this(root, valueObjects.ToImmutableDictionary(k => k.GetType().Name, v => v))
-        {
-        }
+		/// <summary>
+		/// Идентификатор сущности.
+		/// </summary>
+		public Guid Id => _id;
+
+		/// <summary>
+		/// Номер версии.
+		/// </summary>
+		public int VersionNumber => _number;
+
+		/// <summary>
+		/// Временная метка.
+		/// </summary>
+		public DateTime Stamp => _stamp;
+
+		/// <summary>
+		/// Маркер корреляции.
+		/// </summary>
+		public Guid CorrelationToken => _correlationToken;
+
+		private readonly IDictionary<string, IValueObject> _valueObjects;
 
         private static IDictionary<string, IValueObject> GetValueObjects(IAnemicModel<TBoundedContext> model)
         {
@@ -66,19 +66,9 @@ namespace Hive.SeedWorks.TacticalPatterns
         }
 
         /// <summary>
-        /// Имеет родителя.
-        /// </summary>
-        public Guid Id { get; protected set; }
-
-        /// <summary>
         /// Имя ограниченного контекста.
         /// </summary>
         protected string ContextName => typeof(TBoundedContext).Name;
-
-        /// <summary>
-        /// Корень модели сущности.
-        /// </summary>
-        public IAggregateRoot<TBoundedContext> Root => _root;
 
         /// <summary>
         /// Словарь объект значений.

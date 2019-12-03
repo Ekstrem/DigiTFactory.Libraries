@@ -29,27 +29,26 @@ namespace Hive.SeedWorks.TacticalPatterns
             _scope = scope;
         }
 
-        public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command) 
+        public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command)
             => _unitOfWork.QueryRepository.GetQueryable()
-                .Where(f => f.Root.Id == id)
-                .Max(f => f.Root.VersionNumber)
+                .Where(f => f.Id == id)
+                .Max(f => f.VersionNumber)
                 .PipeTo(version => GetAggregateByIdAndVersion(id, version, command));
 
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, int version, CommandToAggregate command)
         {
             var anemicModel = _unitOfWork.QueryRepository.GetQueryable()
-                .Single(f => f.Root.Id == id && f.Root.VersionNumber == version);
+                .Single(f => f.Id == id && f.VersionNumber == version);
             var aggregate = Aggregate<TBoundedContext>
-                .CreateInstance(ComplexKey.Create(id, version, command), anemicModel, _scope);
+                .CreateInstance(anemicModel, _scope);
             return aggregate;
         }
 
         public IAggregate<TBoundedContext> NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command)
             => Aggregate<TBoundedContext>.CreateInstance(
-                command.CreateNewVersion(),
                 anemicModel, _scope);
 
-        public void SaveChanges(IAggregate<TBoundedContext> aggregate) 
+        public void SaveChanges(IAggregate<TBoundedContext> aggregate)
             => _unitOfWork.Save();
     }
 }

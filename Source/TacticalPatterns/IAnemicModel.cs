@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -6,13 +7,9 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Анемичная модель ограниченного контекста для Фабрики создания агрегата.
     /// </summary>
     public interface IAnemicModel<TBoundedContext>
-        where TBoundedContext : IBoundedContext
+		: IHasComplexKey
+		where TBoundedContext : IBoundedContext
     {
-        /// <summary>
-        /// Корень модели сущности.
-        /// </summary>
-        IAggregateRoot<TBoundedContext> Root { get; }
-
         /// <summary>
         /// Словарь объект значений.
         /// </summary>
