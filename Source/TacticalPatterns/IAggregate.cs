@@ -8,7 +8,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
     public interface IAggregate<TBoundedContext> :
-        IHasComplexKey,
+        IComplexKey,
         IAnemicModel<TBoundedContext>,
         IBoundedContextScope<TBoundedContext>
         where TBoundedContext : IBoundedContext

@@ -6,7 +6,7 @@ namespace Hive.SeedWorks.Events
     /// <summary>
     /// Сведения о команде к агрегату.
     /// </summary>
-    public class CommandToAggregate : IHasVersion
+    public class CommandToAggregate : IHasVersion, ICommandSubject
     {
         private readonly Guid _correlationToken;
         private readonly string _commandName;

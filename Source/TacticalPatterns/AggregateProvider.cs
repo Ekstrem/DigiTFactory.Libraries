@@ -18,8 +18,6 @@ namespace Hive.SeedWorks.TacticalPatterns
     {
         private readonly IUnitOfWork<TBoundedContext> _unitOfWork;
         private readonly IBoundedContextScope<TBoundedContext> _scope;
-        private readonly IList<IAggregateBusinessOperationFactory<TBoundedContext>> _operations;
-        private readonly IList<IBusinessValidator<TBoundedContext>> _validators;
 
         public AggregateProvider(
             IUnitOfWork<TBoundedContext> unitOfWork,
@@ -32,21 +30,21 @@ namespace Hive.SeedWorks.TacticalPatterns
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command) 
             => _unitOfWork.QueryRepository.GetQueryable()
                 .Where(f => f.Root.Id == id)
-                .Max(f => f.Root.VersionNumber)
-                .PipeTo(version => GetAggregateByIdAndVersion(id, version, command));
+                .Max(f => f.Root.Version)
+                .PipeTo(version => GetAggregateByIdAndVersion(id, command));
 
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, int version, CommandToAggregate command)
         {
             var anemicModel = _unitOfWork.QueryRepository.GetQueryable()
-                .Single(f => f.Root.Id == id && f.Root.VersionNumber == version);
+                .Single(f => f.Root.Id == id && f.Root.Version == version);
             var aggregate = Aggregate<TBoundedContext>
-                .CreateInstance(ComplexKey.Create(id, version, command), anemicModel, _scope);
+                .CreateInstance(ComplexKey.Create(id, command), anemicModel, _scope);
             return aggregate;
         }
 
         public IAggregate<TBoundedContext> NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command)
             => Aggregate<TBoundedContext>.CreateInstance(
-                command.CreateNewVersion(),
+                ComplexKey.CreateWithUsingCorrelationToken(command),
                 anemicModel, _scope);
 
         public void SaveChanges(IAggregate<TBoundedContext> aggregate) 

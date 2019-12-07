@@ -9,12 +9,12 @@ namespace Hive.SeedWorks.TacticalPatterns
         IAggregate<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IHasComplexKey _key;
+        private readonly IComplexKey _key;
         private readonly IAnemicModel<TBoundedContext> _anemicModel;
         private readonly IBoundedContextScope<TBoundedContext> _scope;
 
         private Aggregate(
-            IHasComplexKey key,
+            IComplexKey key,
             IAnemicModel<TBoundedContext> anemicModel,
             IBoundedContextScope<TBoundedContext> scope)
         {
@@ -59,7 +59,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         public IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
 
         public static IAggregate<TBoundedContext> CreateInstance(
-            IHasComplexKey key,
+            IComplexKey key,
             IAnemicModel<TBoundedContext> anemicModel, 
             IBoundedContextScope<TBoundedContext> scope)
             => new Aggregate<TBoundedContext>(key, anemicModel, scope);
@@ -69,7 +69,7 @@ namespace Hive.SeedWorks.TacticalPatterns
             IAggregate<TBoundedContext> currentAggregate,
             CommandToAggregate command)
             => new Aggregate<TBoundedContext>(
-                command.Version,
+                ComplexKey.CreateWithUsingCorrelationToken(command),
                 anemicModel,
                 currentAggregate);
     }

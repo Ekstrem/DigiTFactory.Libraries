@@ -19,7 +19,6 @@ namespace Hive.SeedWorks.Events
 
         public DomainEvent(
             Guid id,
-            int version,
             CommandToAggregate command,
             IDictionary<string, IValueObject> changedValueObjects)
         {

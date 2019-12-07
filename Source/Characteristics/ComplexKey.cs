@@ -3,7 +3,7 @@ using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.Characteristics
 {
-    public sealed class ComplexKey : IHasComplexKey, IComplexKey
+    public sealed class ComplexKey : IComplexKey
     {
         private readonly Guid _id;
         private readonly long _version;
