@@ -6,14 +6,14 @@ namespace Hive.SeedWorks.Characteristics
     /// Указывает на то что объект имеет версионность.
     /// </summary>
     /// <typeparam name="T">Тип данных которым версионируется объект.</typeparam>
-    public interface IHasVersion<T>
+    public interface IHasVersion<out T>
     {
         /// <summary>
-        /// Дата создания версии. Определяет версию.
+        /// Определяет версию. Ожидаемое использование - дата создания версии в милисекундах.
         /// Является приведением <see cref="DateTimeOffset"/> к формату времени
         /// Unix в милисекундах.
         /// </summary>
-        long StampVersion { get; }
+        T Version { get; }
 
         /// <summary>
         /// Идентификатор комманды, создавшей новую версию.
