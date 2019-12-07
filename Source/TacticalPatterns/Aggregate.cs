@@ -28,11 +28,10 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// </summary>
         public Guid Id => _key.Id;
 
-        //Текущая версия агрегата.
-        public int VersionNumber => _key.VersionNumber;
-
-        //Дата создания последней версии.
-        public DateTime Stamp => _key.Stamp;
+        /// <summary>
+        /// Текущая версия агрегата.
+        /// </summary>
+        public long Version => _key.Version;
 
         /// <summary>
         /// Идентификатор комманды источника последней версии.
@@ -70,7 +69,7 @@ namespace Hive.SeedWorks.TacticalPatterns
             IAggregate<TBoundedContext> currentAggregate,
             CommandToAggregate command)
             => new Aggregate<TBoundedContext>(
-                command.GetNextComplexKey(currentAggregate.Id, currentAggregate.VersionNumber),
+                command.Version,
                 anemicModel,
                 currentAggregate);
     }
