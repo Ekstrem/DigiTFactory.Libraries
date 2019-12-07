@@ -27,7 +27,7 @@ namespace Hive.SeedWorks.Characteristics
         /// Является приведением <see cref="DateTimeOffset"/> к формату времени
         /// Unix в милисекундах.
         /// </summary>
-        public long StampVersion => _stamp;
+        public long Version => _stamp;
 
         /// <summary>
         /// Идентификатор комманды, создавшей новую версию.
