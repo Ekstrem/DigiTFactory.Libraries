@@ -1,0 +1,37 @@
+ICommand -> +AggregateProvider : GetAggregateByIdAndVersion
+AggregateProvider -> +UnitOfWork : Get AnemicModel By id&v
+UnitOfWork --> -AggregateProvider : Anemic model
+AggregateProvider -> *Aggregate : Create aggregate
+
+Aggregate ->+AggregateBusinessOperationFactory : Get business operations
+AggregateBusinessOperationFactory ->*AggregateBusinessOperation : Create operation with complex key 
+AggregateBusinessOperation -> AggregateBusinessOperationFactory : Business operations for instance.
+AggregateBusinessOperationFactory -> -Aggregate : Operations
+
+Aggregate -> AggregateProvider : aggregate instance
+AggregateProvider -->-ICommand : aggregate instance
+
+ICommand -> +Aggregate : Calling business operation
+Aggregate -> +AggregateBusinessOperation : Handle operation with anemic model and CommandToAggregate
+AggregateBusinessOperation -> +AggregateValidator : validate anemic model
+AggregateValidator -> -AggregateBusinessOperation : Validated result
+AggregateBusinessOperation --> +DomainNotifier : Notify EventBus
+DomainNotifier -> +EventBus : Domain Event
+EventBus -> -DomainNotifier : Success
+DomainNotifier --> +AggregateProvider : new version for cache
+DomainNotifier --> -AggregateBusinessOperation : success published
+AggregateBusinessOperation -> -Aggregate : Create new vertion of aggregate
+Aggregate -> -ICommand : OperationResult
+
+PersistenceCommandHandler -> +PersistenceCommandHandler : Timer event
+PersistenceCommandHandler -> +EventBus : Check for updates
+EventBus  --> -PersistenceCommandHandler : New Changes Event
+PersistenceCommandHandler --> AggregateProvider : Apply changes
+
+opt other microservice instance (has new instance)
+AggregateProvider -> +UnitOfWork : Get instance by id&v
+UnitOfWork --> AggregateProvider : anemic model instance
+AggregateProvider -> AggregateProvider : apply changes
+end
+AggregateProvider -> UnitOfWork : Save new version
+AggregateProvider -> -PersistenceCommandHandler : saved

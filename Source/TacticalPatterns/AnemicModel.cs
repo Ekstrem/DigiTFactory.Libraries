@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Hive.SeedWorks.Events;
 
@@ -15,19 +14,17 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBoundedContext : IBoundedContext
     {
 		private Guid _id;
-		protected int _number;
-		private DateTime _stamp;
+		protected long _version;
 		private Guid _correlationToken;
 
 		protected AnemicModel()
 		{
 		}
 
-		public AnemicModel(Guid id, int number, CommandToAggregate command)
+		public AnemicModel(Guid id, long version, CommandToAggregate command)
 		{
 			_id = id;
-			_number = number;
-			_stamp = DateTime.Now;
+			_version = version;
 			_correlationToken = command.CorrelationToken;
 		}
 
@@ -39,12 +36,7 @@ namespace Hive.SeedWorks.TacticalPatterns
 		/// <summary>
 		/// Номер версии.
 		/// </summary>
-		public int VersionNumber => _number;
-
-		/// <summary>
-		/// Временная метка.
-		/// </summary>
-		public DateTime Stamp => _stamp;
+		public long Version => _version;
 
 		/// <summary>
 		/// Маркер корреляции.

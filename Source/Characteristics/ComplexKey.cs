@@ -1,25 +1,27 @@
-﻿using System;
+using System;
 using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.Characteristics
 {
-    public sealed class ComplexKey : IHasComplexKey, IComplexKey
+    public sealed class ComplexKey : IComplexKey
     {
         private Guid _id;
-        private int _number;
-        private DateTime _stamp;
+        private long _version;
         private Guid _correlationToken;
 
-		internal ComplexKey()
-		{
-		}
-		internal ComplexKey(Guid id, int number, CommandToAggregate command)
+        private ComplexKey()
+        {
+        }
+
+        private ComplexKey(Guid id, long version, Guid correlationToken)
         {
             _id = id;
-            _number = number;
-            _stamp = DateTime.Now;
-            _correlationToken = command?.CorrelationToken ?? Guid.NewGuid();
+            _version = version;
+            _correlationToken = correlationToken;
         }
+
+        private ComplexKey(Guid id, CommandToAggregate command)
+            : this(id, command.Version, command.CorrelationToken) { }
 
         /// <summary>
         /// Идентификатор сущности.
@@ -27,26 +29,43 @@ namespace Hive.SeedWorks.Characteristics
         public Guid Id => _id;
 
         /// <summary>
-        /// Номер версии.
+        /// Определяет версию. Ожидаемое использование - дата создания версии в милисекундах.
+        /// Является приведением <see cref="DateTimeOffset"/> к формату времени
+        /// Unix в милисекундах.
         /// </summary>
-        public int VersionNumber => _number;
+        public long Version => _version;
 
         /// <summary>
-        /// Временная метка.
-        /// </summary>
-        public DateTime Stamp => _stamp;
-
-        /// <summary>
-        /// Маркер корреляции.
+        /// Идентификатор комманды, создавшей новую версию.
         /// </summary>
         public Guid CorrelationToken => _correlationToken;
 
-        public static ComplexKey Create(Guid id, int versionNumber)
-            => new ComplexKey(id, versionNumber, null);
+        /// <summary>
+        /// Создание экземляра комплексного ключа.
+        /// </summary>
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <param name="version">Версия агрегата.</param>
+        /// <param name="correlationToken">Токен корреляции.</param>
+        /// <returns></returns>
+        public static ComplexKey Create(Guid id, long version, Guid correlationToken)
+            => new ComplexKey(id, version, correlationToken);
 
-        public static IHasComplexKey Create(Guid id, int versionNumber, CommandToAggregate command)
-            => new ComplexKey(id, versionNumber, command);
+        /// <summary>
+        /// Создание экземляра комплексного ключа.
+        /// </summary>
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <param name="command">Комманда к агрегату.</param>
+        /// <returns></returns>
+        public static ComplexKey Create(Guid id, CommandToAggregate command)
+            => new ComplexKey(id, command);
+
+        /// <summary>
+        /// Создание экземпляра комплексного ключа полностью из данных о команде к агрегату,
+        /// т.е. с использованием маркера корреляции.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        public static ComplexKey CreateWithUsingCorrelationToken(CommandToAggregate command)
+            => new ComplexKey(command.CorrelationToken, command.Version, command.CorrelationToken);
     }
-
-    public interface IComplexKey : IHasKey, IHasVersion { }
 }

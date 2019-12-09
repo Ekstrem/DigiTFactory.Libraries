@@ -20,7 +20,7 @@ namespace Hive.SeedWorks.Result
         {
             _aggregate = aggregate;
             _domainEvent = new DomainEvent<TBoundedContext>(
-                aggregate.Id, aggregate.VersionNumber, command, changedValueObjects);
+                aggregate.Id, command, changedValueObjects);
         }
 
         /// <summary>

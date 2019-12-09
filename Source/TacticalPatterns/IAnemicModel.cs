@@ -6,9 +6,9 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// <summary>
     /// Анемичная модель ограниченного контекста для Фабрики создания агрегата.
     /// </summary>
-    public interface IAnemicModel<TBoundedContext>
-		: IHasComplexKey
-		where TBoundedContext : IBoundedContext
+    public interface IAnemicModel<TBoundedContext> :
+        IComplexKey
+        where TBoundedContext : IBoundedContext
     {
         /// <summary>
         /// Словарь объект значений.

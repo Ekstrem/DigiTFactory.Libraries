@@ -5,7 +5,7 @@ using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
-    public class Aggregate<TBoundedContext> :
+    public class Aggregate<TBoundedContext> : 
         IAggregate<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
@@ -25,11 +25,10 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// </summary>
         public Guid Id => _anemicModel.Id;
 
-        //Текущая версия агрегата.
-        public int VersionNumber => _anemicModel.VersionNumber;
-
-        //Дата создания последней версии.
-        public DateTime Stamp => _anemicModel.Stamp;
+        /// <summary>
+        /// Текущая версия агрегата.
+        /// </summary>
+        public long Version => _anemicModel.Version;
 
         /// <summary>
         /// Идентификатор комманды источника последней версии.
@@ -52,8 +51,16 @@ namespace Hive.SeedWorks.TacticalPatterns
         public IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
 
         public static IAggregate<TBoundedContext> CreateInstance(
-            IAnemicModel<TBoundedContext> anemicModel,
+            IAnemicModel<TBoundedContext> anemicModel, 
             IBoundedContextScope<TBoundedContext> scope)
             => new Aggregate<TBoundedContext>(anemicModel, scope);
+
+        public static IAggregate<TBoundedContext> CreateInstance(
+            IAnemicModel<TBoundedContext> anemicModel,
+            IAggregate<TBoundedContext> currentAggregate,
+            CommandToAggregate command)
+            => new Aggregate<TBoundedContext>(
+                anemicModel,
+                currentAggregate);
     }
 }

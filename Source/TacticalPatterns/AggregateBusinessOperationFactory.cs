@@ -7,7 +7,7 @@ using Hive.SeedWorks.Result;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
-    public abstract class AggregateBusinessOperationFactory<TBoundedContext> :
+    public abstract class AggregateBusinessOperationFactory<TBoundedContext> : 
         IAggregateBusinessOperationFactory<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
@@ -32,7 +32,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         {
         }
 
-
+        
 
         public Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>> Handle(
             IAnemicModel<TBoundedContext> input, CommandToAggregate command)
@@ -46,7 +46,7 @@ namespace Hive.SeedWorks.TacticalPatterns
                             null, command, null, s.First())),
                     f => _id
                         .Either(c => _id == default, s => command.CorrelationToken, n => _id)
-                        .PipeTo(id => ComplexKey.Create(id, _version.VersionNumber, command))
+                        .PipeTo(id => ComplexKey.Create(id, command))
                         .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(input, _scope))
                         .PipeTo(a =>
                             Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
