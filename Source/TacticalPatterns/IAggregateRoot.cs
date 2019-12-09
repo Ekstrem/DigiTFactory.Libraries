@@ -6,7 +6,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Корень агрегата.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-    public interface IAggregateRoot<TBoundedContext> : IComplexKey, IValueObject
+    public interface IAggregateRoot<TBoundedContext> : IValueObject
         where TBoundedContext : IBoundedContext
     {
     }
