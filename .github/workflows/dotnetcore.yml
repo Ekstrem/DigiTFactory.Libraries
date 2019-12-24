@@ -9,8 +9,6 @@ on:
 
 jobs:
   build:
-    name: DefaultCI
-
     runs-on: ubuntu-latest
 
     steps:
