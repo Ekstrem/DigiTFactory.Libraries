@@ -1,9 +1,15 @@
 name: .NET Core
 
-on: [push]
+on: 
+  push:
+    branches: 
+      - master
+    paths:
+      - 'Source/*
 
 jobs:
   build:
+    name: DefaultCI
 
     runs-on: ubuntu-latest
 
@@ -14,4 +20,4 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build Soutce/Hive.SeedWorks.csproj --configuration Release
