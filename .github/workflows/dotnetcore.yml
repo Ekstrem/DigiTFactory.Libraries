@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    paths:
-      - Source/*
+    #paths:
+      #- Source/*
 
 jobs:
   build:
