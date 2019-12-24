@@ -1,6 +1,5 @@
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/dotnetcore.yml/badge.svg)
 # Hive
-![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/badge.svg)
-
 Framework быстрой разработки микросервисов декомпозированных по субдомену.
 
 ## Проблема
