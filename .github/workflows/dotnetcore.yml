@@ -1,11 +1,11 @@
 name: .NET Core
 
 on:
-  push:
+  [push]:
     branches:
       - master
     paths:
-      - 'Source/*
+      - 'Source/*'
 
 jobs:
   build:
