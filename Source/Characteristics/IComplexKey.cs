@@ -8,7 +8,7 @@ namespace Hive.SeedWorks.Characteristics
     /// Комплексный ключ агрегата с рекомендуемыми типами данных.
     /// </summary>
     public interface IComplexKey :
-        // IComplexKey<Guid, long>,
+        IComplexKey<Guid, long>,
         IHasKey, 
         IHasVersion
     {

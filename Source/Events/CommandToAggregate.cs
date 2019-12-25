@@ -16,13 +16,21 @@ namespace Hive.SeedWorks.Events
         private CommandToAggregate(
             Guid correlationToken,
             string commandName,
-            string subjectName)
+            string subjectName,
+            DateTimeOffset dateTimeOffset)
         {
             _correlationToken = correlationToken;
             _commandName = commandName;
             _subjectName = subjectName;
-            _version = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            _version = dateTimeOffset.ToUnixTimeMilliseconds();
         }
+
+        private CommandToAggregate(
+            Guid correlationToken,
+            string commandName,
+            string subjectName)
+            : this(correlationToken,commandName,subjectName, DateTimeOffset.UtcNow)
+        { }
 
         /// <summary>
         /// Маркер корреляции.
