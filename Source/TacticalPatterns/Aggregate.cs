@@ -41,7 +41,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Корень модели сущности.
         /// </summary>
-        public IAggregateRoot<TBoundedContext> Root => _anemicModel.Root;
+        public IAggregateRoot<TBoundedContext> Root => _anemicModel;
 
         /// <summary>
         /// Словарь объект значений.

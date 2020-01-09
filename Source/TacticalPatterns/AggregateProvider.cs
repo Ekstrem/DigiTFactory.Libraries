@@ -29,14 +29,14 @@ namespace Hive.SeedWorks.TacticalPatterns
 
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command) 
             => _unitOfWork.QueryRepository.GetQueryable()
-                .Where(f => f.Root.Id == id)
-                .Max(f => f.Root.Version)
+                .Where(f => f.Id == id)
+                .Max(f => f.Version)
                 .PipeTo(version => GetAggregateByIdAndVersion(id, command));
 
         public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, int version, CommandToAggregate command)
         {
             var anemicModel = _unitOfWork.QueryRepository.GetQueryable()
-                .Single(f => f.Root.Id == id && f.Root.Version == version);
+                .Single(f => f.Id == id && f.Version == version);
             var aggregate = Aggregate<TBoundedContext>
                 .CreateInstance(ComplexKey.Create(id, command), anemicModel, _scope);
             return aggregate;

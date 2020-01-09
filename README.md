@@ -1,6 +1,8 @@
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/seedworks.yml/badge.svg)
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/users.yml/badge.svg)
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/dotnetcore.yml/badge.svg)
 # Hive
 Framework быстрой разработки микросервисов декомпозированных по субдомену.
-
 
 ## Проблема
 При производстве программного обеспечения на основе архитектурного стиля микросервисы очень важным выступает предметно-ориентированное проектирование. У разработчиков очень часто возникают проблемы обучения, фокусировки на тактических паттернах и в принципе чисто технических проблемах. При этом теряется самое главное - моделирование, коммуникация, фиксация на главных задачах бизнеса.
