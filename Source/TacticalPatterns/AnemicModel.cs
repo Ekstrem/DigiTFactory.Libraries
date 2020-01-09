@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hive.SeedWorks.Events;
@@ -9,7 +9,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Базовый класс анемичной модели.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    public class AnemicModel<TBoundedContext>
+    public abstract class AnemicModel<TBoundedContext>
         : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {

@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Анемичная модель ограниченного контекста для Фабрики создания агрегата.
+    /// Анемичная модель должна содержать объект-значения, реализующие интерфейс <see cref="IValueObject"/>.
     /// </summary>
     public interface IAnemicModel<TBoundedContext> :
-        IComplexKey
+        IComplexKey,
+        IAggregateRoot<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
