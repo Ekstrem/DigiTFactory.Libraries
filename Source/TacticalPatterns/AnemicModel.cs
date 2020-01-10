@@ -17,7 +17,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBoundedContext : IBoundedContext
     {
         private readonly IComplexKey _complexKey;
-        private readonly IDictionary<string, IValueObject> _valueObjects;
+        private readonly IDictionary<string, IValueObject> _invariants;
 
         /// <summary>
         /// Конструктор анемичной модели.
@@ -27,16 +27,16 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <param name="valueObjects">Словарь объект значений.</param>
         public AnemicModel(
             IComplexKey complexKey,
-            IDictionary<string, IValueObject> valueObjects)
+            IDictionary<string, IValueObject> invariants)
         {
             _complexKey = complexKey;
             // validating Aggregate Root.
-            if (!valueObjects.ContainsKey("Root"))
+            if (!invariants.ContainsKey("Root"))
             {
                 throw new ArgumentException("Root must be Root.");
             }
 
-            _valueObjects = valueObjects;
+            _invariants = invariants;
         }
 
         /// <summary>
@@ -44,11 +44,11 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// Потомки должны реализовать свой конструктор с валидацией объект значений.
         /// </summary>
         /// <param name="root">Корень агрегата.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
+        /// <param name="invariants">Словарь объект значений.</param>
         public AnemicModel(
             IAggregateRoot<TBoundedContext> root,
-            IDictionary<string, IValueObject> valueObjects)
-            : this((IComplexKey)root, valueObjects.Do(vo => vo.Add("Root", root)))
+            IDictionary<string, IValueObject> invariants)
+            : this((IComplexKey)root, invariants.Do(vo => vo.Add("Root", root)))
         {
         }
 
@@ -57,11 +57,11 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// Потомки должны реализовать свой конструктор с валидацией объект значений.
         /// </summary>
         /// <param name="complexKey">Составной ключ.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
+        /// <param name="invariants">Словарь объект значений.</param>
         public AnemicModel(
             IComplexKey complexKey,
-            params IValueObject[] valueObjects)
-            : this(complexKey, valueObjects.ToImmutableDictionary(k => k.GetType().Name, v => v))
+            params IValueObject[] invariants)
+            : this(complexKey, invariants.ToImmutableDictionary(k => k.GetType().Name, v => v))
         {
         }
 
@@ -85,6 +85,6 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Словарь объект значений.
         /// </summary>
-        public IDictionary<string, IValueObject> ValueObjects => _valueObjects;
+        public IDictionary<string, IValueObject> Invariants => _invariants;
     }
 }
