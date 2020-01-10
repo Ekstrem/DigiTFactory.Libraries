@@ -17,6 +17,6 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Валидаторы модели.
         /// </summary>
-        IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators { get; }
+        IReadOnlyList<IBusinessEntityValidator<TBoundedContext>> Validators { get; }
     }
 }
