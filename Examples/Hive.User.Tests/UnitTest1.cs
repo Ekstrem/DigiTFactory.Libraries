@@ -3,6 +3,9 @@ using Hive.SeedWorks.Events;
 using Hive.SeedWorks.Monads;
 using Hive.SeedWorks.TacticalPatterns;
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Xunit;
 
 namespace Hive.User.Tests
@@ -12,14 +15,31 @@ namespace Hive.User.Tests
         [Fact]
         public void Test1()
         {
-            var root = CommandToAggregate.Commit("Test", "Test")
-                .PipeTo(cta => ComplexKey.Create(Guid.NewGuid(), 0, cta))
-                .PipeTo(ck => new EmployeeRoot(ck, "Пётр", "Иванов", DateTime.MinValue));
-            var anemicModel = new AnemicModel<IEmployee>(root);
-            var scope = new EmployeeScope(new[] { new Create()})
-            var aggregate = Aggregate<IEmployee>.CreateInstance(root, anemicModel, null);
+            var anemicModel = Employee.CreateTest(NewComplexKey());
+            var operations = new List<IAggregateBusinessOperation<IEmployee>>
+            {
+                new Create(),
+                new ChangeSecondName(),
+            };
+            var validators = new[] {new NamesValidator(),}.ToList();
+            var scope = new EmployeeScope(operations, validators);
+            var aggregate = Aggregate<IEmployee>.CreateInstance(anemicModel, anemicModel, scope);
+
             var create = aggregate.Operations.TryGetValue(nameof(Create), out var operation) ? operation : null;
-            var agr = create.Handle(anemicModel, CommandToAggregate.Commit("Test", "Test"));
+            Assert.NotNull(create);
+            var aggregateCreateResult = create.Handle(anemicModel, NewCommand(), scope);
+            Assert.NotNull(aggregateCreateResult);
+
+            var aggregateResult = aggregateCreateResult.Aggregate
+                .Operations[nameof(ChangeSecondName)]
+                .Handle(Employee.CreateChangeNameTest(NewComplexKey()), NewCommand(), scope);
+            Assert.NotNull(aggregateResult);
         }
+
+        private CommandToAggregate NewCommand()
+            => CommandToAggregate.Commit(Guid.NewGuid(), "Test", "Test");
+
+        private IComplexKey NewComplexKey()
+            => ComplexKey.CreateWithUsingCorrelationToken(NewCommand());
     }
 }
