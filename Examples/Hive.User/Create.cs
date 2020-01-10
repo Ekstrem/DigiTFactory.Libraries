@@ -5,19 +5,8 @@ using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.User
 {
-    public class Create{ // AggregateBusinessOperationFactory<IEmployee> {
-        public Create(
-            CommandToAggregate command)
-        {
-            scope
-
-        }
-
-        //public Create(
-        //    CommandToAggregate command,
-        //    IAggregate<IEmployee> aggregate)
-        //    : base(command, aggregate)
-        //{
-        //}
+    public sealed class Create : AggregateBusinessOperation<Create, IEmployee>
+    {
+        public Create() : base(null) { }        
     }
 }
