@@ -53,7 +53,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        public IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations => _scope.Operations;
+        public IReadOnlyDictionary<string, IAggregateBusinessOperation<TBoundedContext>> Operations => _scope.Operations;
 
         /// <summary>
         /// Валидаторы модели бизнес-объекта.
