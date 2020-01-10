@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
 using Hive.SeedWorks.Monads;
 using Hive.SeedWorks.TacticalPatterns.Repository;
@@ -38,16 +36,14 @@ namespace Hive.SeedWorks.TacticalPatterns
             var anemicModel = _unitOfWork.QueryRepository.GetQueryable()
                 .Single(f => f.Id == id && f.Version == version);
             var aggregate = Aggregate<TBoundedContext>
-                .CreateInstance(ComplexKey.Create(id, command), anemicModel, _scope);
+                .CreateInstance(anemicModel, _scope);
             return aggregate;
         }
 
         public IAggregate<TBoundedContext> NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command)
-            => Aggregate<TBoundedContext>.CreateInstance(
-                ComplexKey.CreateWithUsingCorrelationToken(command),
-                anemicModel, _scope);
+            => Aggregate<TBoundedContext>.CreateInstance(anemicModel, _scope);
 
-        public void SaveChanges(IAggregate<TBoundedContext> aggregate) 
+        public void SaveChanges(IAggregate<TBoundedContext> aggregate)
             => _unitOfWork.Save();
     }
 }
