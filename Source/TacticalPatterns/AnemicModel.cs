@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Monads;
+using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -12,75 +9,58 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Базовый класс анемичной модели.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    public abstract class AnemicModel<TBoundedContext> : 
-        IAnemicModel<TBoundedContext>
+    public abstract class AnemicModel<TBoundedContext>
+        : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IComplexKey _complexKey;
-        private readonly IDictionary<string, IValueObject> _valueObjects;
+		private Guid _id;
+		protected long _version;
+		private Guid _correlationToken;
 
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="complexKey">Составной ключ.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        public AnemicModel(
-            IComplexKey complexKey,
-            IDictionary<string, IValueObject> valueObjects)
+		protected AnemicModel()
+		{
+		}
+
+		public AnemicModel(Guid id, long version, CommandToAggregate command)
+		{
+			_id = id;
+			_version = version;
+			_correlationToken = command.CorrelationToken;
+		}
+
+		/// <summary>
+		/// Идентификатор сущности.
+		/// </summary>
+		public Guid Id => _id;
+
+		/// <summary>
+		/// Номер версии.
+		/// </summary>
+		public long Version => _version;
+
+		/// <summary>
+		/// Маркер корреляции.
+		/// </summary>
+		public Guid CorrelationToken => _correlationToken;
+
+		private readonly IDictionary<string, IValueObject> _valueObjects;
+
+        private static IDictionary<string, IValueObject> GetValueObjects(IAnemicModel<TBoundedContext> model)
         {
-            _complexKey = complexKey;
-            // validating Aggregate Root.
-            if (!valueObjects.ContainsKey("Root"))
+            var valueObjects = model.ValueObjects;
+            var minedValueObjects = model.GetFields();
+            foreach (var key in minedValueObjects.Keys.Except(valueObjects.Keys))
             {
-                throw new ArgumentException("Root must be Root.");
+                valueObjects.TryAdd(key, minedValueObjects[key]);
             }
 
-            _valueObjects = valueObjects;
+            return valueObjects;
         }
 
         /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
+        /// Имя ограниченного контекста.
         /// </summary>
-        /// <param name="root">Корень агрегата.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        public AnemicModel(
-            IAggregateRoot<TBoundedContext> root,
-            IDictionary<string, IValueObject> valueObjects)
-            : this((IComplexKey)root, valueObjects.Do(vo => vo.Add("Root", root)))
-        {
-        }
-
-        /// <summary>
-        /// Конструктор анемичной модели.
-        /// Потомки должны реализовать свой конструктор с валидацией объект значений.
-        /// </summary>
-        /// <param name="complexKey">Составной ключ.</param>
-        /// <param name="valueObjects">Словарь объект значений.</param>
-        public AnemicModel(
-            IComplexKey complexKey,
-            params IValueObject[] valueObjects)
-            : this(complexKey, valueObjects.ToImmutableDictionary(k => k.GetType().Name, v => v))
-        {
-        }
-
-        /// <summary>
-        /// Имеет идентификатор.
-        /// </summary>
-        public Guid Id => _complexKey.Id;
-
-        /// <summary>
-        /// Определяет версию. Ожидаемое использование - дата создания версии в милисекундах.
-        /// Является приведением <see cref="DateTimeOffset"/> к формату времени
-        /// Unix в милисекундах.
-        /// </summary>
-        public long Version => _complexKey.Version;
-
-        /// <summary>
-        /// Идентификатор комманды, создавшей новую версию.
-        /// </summary>
-        public Guid CorrelationToken => _complexKey.CorrelationToken;
+        protected string ContextName => typeof(TBoundedContext).Name;
 
         /// <summary>
         /// Словарь объект значений.

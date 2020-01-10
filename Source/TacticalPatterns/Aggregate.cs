@@ -9,16 +9,13 @@ namespace Hive.SeedWorks.TacticalPatterns
         IAggregate<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IComplexKey _key;
         private readonly IAnemicModel<TBoundedContext> _anemicModel;
         private readonly IBoundedContextScope<TBoundedContext> _scope;
 
         private Aggregate(
-            IComplexKey key,
             IAnemicModel<TBoundedContext> anemicModel,
             IBoundedContextScope<TBoundedContext> scope)
         {
-            _key = key;
             _anemicModel = anemicModel;
             _scope = scope;
         }
@@ -26,22 +23,17 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Идентификатор агрегата.
         /// </summary>
-        public Guid Id => _key.Id;
+        public Guid Id => _anemicModel.Id;
 
         /// <summary>
         /// Текущая версия агрегата.
         /// </summary>
-        public long Version => _key.Version;
+        public long Version => _anemicModel.Version;
 
         /// <summary>
         /// Идентификатор комманды источника последней версии.
         /// </summary>
-        public Guid CorrelationToken => _key.CorrelationToken;
-
-        /// <summary>
-        /// Корень модели сущности.
-        /// </summary>
-        public IAggregateRoot<TBoundedContext> Root => _anemicModel;
+        public Guid CorrelationToken => _anemicModel.CorrelationToken;
 
         /// <summary>
         /// Словарь объект значений.
@@ -59,17 +51,15 @@ namespace Hive.SeedWorks.TacticalPatterns
         public IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
 
         public static IAggregate<TBoundedContext> CreateInstance(
-            IComplexKey key,
             IAnemicModel<TBoundedContext> anemicModel, 
             IBoundedContextScope<TBoundedContext> scope)
-            => new Aggregate<TBoundedContext>(key, anemicModel, scope);
+            => new Aggregate<TBoundedContext>(anemicModel, scope);
 
         public static IAggregate<TBoundedContext> CreateInstance(
             IAnemicModel<TBoundedContext> anemicModel,
             IAggregate<TBoundedContext> currentAggregate,
             CommandToAggregate command)
             => new Aggregate<TBoundedContext>(
-                ComplexKey.CreateWithUsingCorrelationToken(command),
                 anemicModel,
                 currentAggregate);
     }
