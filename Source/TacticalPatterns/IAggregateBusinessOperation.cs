@@ -10,7 +10,8 @@ namespace Hive.SeedWorks.TacticalPatterns
     {
         string Name { get; }
 
-        AggregateResult<TBoundedContext> Handle(IAnemicModel<TBoundedContext> input, CommandToAggregate command);
+        AggregateResult<TBoundedContext> Handle(
+            IAnemicModel<TBoundedContext> input, CommandToAggregate command, IBoundedContextScope<TBoundedContext> scope);
     }
 
     public abstract class AggregateBusinessOperation<TBusinessOperation, TBoundedContext>
@@ -18,21 +19,24 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBusinessOperation : IAggregateBusinessOperation<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IBusinessOperationValidator<TBusinessOperation, TBoundedContext> _validator;
+        private readonly IBusinessOperationValidator<TBoundedContext> _validator;
 
         protected AggregateBusinessOperation(
-            IBusinessOperationValidator<TBusinessOperation, TBoundedContext> validator)
+            IBusinessOperationValidator<TBoundedContext> validator)
         {
             _validator = validator;
         }
 
         public virtual string Name => typeof(TBusinessOperation).Name;
 
-        public AggregateResult<TBoundedContext> Handle(IAnemicModel<TBoundedContext> input, CommandToAggregate command)
+        public AggregateResult<TBoundedContext> Handle(
+            IAnemicModel<TBoundedContext> input,
+            CommandToAggregate command,
+            IBoundedContextScope<TBoundedContext> scope)
             => input.Id
                 .Either(c => c == default, s => command.CorrelationToken, n => n)
                 .PipeTo(id => ComplexKey.Create(id, command))
-                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
+                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, scope))
                 // TODO: add changed values
                 .PipeTo(a => new AggregateResult<TBoundedContext>(a, command, null));
     }
