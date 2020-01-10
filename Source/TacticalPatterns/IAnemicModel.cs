@@ -11,8 +11,8 @@ namespace Hive.SeedWorks.TacticalPatterns
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
-        /// Словарь объект значений.
+        /// Инварианты агрегата.
         /// </summary>
-        IDictionary<string, IValueObject> ValueObjects { get; }
+        IDictionary<string, IValueObject> Invariants { get; }
     }
 }
