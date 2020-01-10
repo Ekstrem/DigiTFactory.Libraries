@@ -30,26 +30,15 @@ namespace Hive.SeedWorks.TacticalPatterns
             IAggregate<TBoundedContext> aggregate)
             : this(aggregate.Id, aggregate, aggregate)
         {
-        }
+        }        
 
-        
-
-        public Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>> Handle(
+        public AggregateResult<TBoundedContext> Handle(
             IAnemicModel<TBoundedContext> input, CommandToAggregate command)
-            => _scope.Validators
-                .Where(f => !f.ValidateModel(input))
-                .Select(m => m.GetType().Name)
-                .ToList()
-                .Either(c => c.Any(),
-                    s => Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
-                        .Failure(new AggregateResultFailure<TBoundedContext>(
-                            null, command, null, s.First())),
-                    f => _id
-                        .Either(c => _id == default, s => command.CorrelationToken, n => _id)
-                        .PipeTo(id => ComplexKey.Create(id, command))
-                        .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
-                        .PipeTo(a =>
-                            Result<AggregateResultSuccess<TBoundedContext>, AggregateResultFailure<TBoundedContext>>
-                                .Success(new AggregateResultSuccess<TBoundedContext>(a, command, null))));
+            => _id
+                .Either(c => _id == default, s => command.CorrelationToken, n => _id)
+                .PipeTo(id => ComplexKey.Create(id, command))
+                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, _scope))
+                // TODO: add changed values
+                .PipeTo(a => new AggregateResult<TBoundedContext>(a, command, null));
     }
 }
