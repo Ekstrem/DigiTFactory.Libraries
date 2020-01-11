@@ -10,8 +10,8 @@ namespace Hive.User
         private readonly IReadOnlyList<IBusinessValidator<IEmployee>> _validators;
 
         public EmployeeScope(
-            IReadOnlyList<IAggregateBusinessOperationFactory<IEmployee>> operations, 
-            IReadOnlyList<IBusinessValidator<IEmployee>> validators)
+            IReadOnlyList<IAggregateBusinessOperation<IEmployee>> operations, 
+            IReadOnlyList<IBusinessEntityValidator<IEmployee>> validators)
         {
             _operations = operations.ToImmutableDictionary(k => k.GetType().Name, v => v);
             _validators = validators;

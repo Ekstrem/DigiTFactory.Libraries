@@ -1,6 +1,7 @@
 namespace Hive.SeedWorks.TacticalPatterns
 {
-    public interface IAggregateBusinessOperationFactory<TBoundedContext>
+    public interface IBusinessEntityValidator<TBoundedContext>
+        : IValidator<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
     }

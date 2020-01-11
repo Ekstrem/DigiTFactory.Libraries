@@ -1,6 +1,8 @@
-﻿namespace Hive.User
+using Hive.SeedWorks.TacticalPatterns;
+
+namespace Hive.User
 {
-    public interface INtId
+    public interface INtId : IValueObject
     {
         string Domain { get; }
         string Login { get; }
