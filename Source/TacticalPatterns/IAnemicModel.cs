@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -7,6 +8,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Анемичная модель должна содержать объект-значения, реализующие интерфейс <see cref="IValueObject"/>.
     /// </summary>
     public interface IAnemicModel<TBoundedContext> :
+        IComplexKey,
         IAggregateRoot<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {

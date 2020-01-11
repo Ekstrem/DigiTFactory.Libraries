@@ -5,9 +5,13 @@ namespace Hive.SeedWorks.Characteristics
 {
     public sealed class ComplexKey : IComplexKey
     {
-        private readonly Guid _id;
-        private readonly long _version;
-        private readonly Guid _correlationToken;
+        private Guid _id;
+        private long _version;
+        private Guid _correlationToken;
+
+        private ComplexKey()
+        {
+        }
 
         private ComplexKey(Guid id, long version, Guid correlationToken)
         {
@@ -43,7 +47,7 @@ namespace Hive.SeedWorks.Characteristics
         /// <param name="version">Версия агрегата.</param>
         /// <param name="correlationToken">Токен корреляции.</param>
         /// <returns></returns>
-        public static IComplexKey Create(Guid id, long version, Guid correlationToken)
+        public static ComplexKey Create(Guid id, long version, Guid correlationToken)
             => new ComplexKey(id, version, correlationToken);
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace Hive.SeedWorks.Characteristics
         /// <param name="id">Идентификатор агрегата.</param>
         /// <param name="command">Комманда к агрегату.</param>
         /// <returns></returns>
-        public static IComplexKey Create(Guid id, CommandToAggregate command)
+        public static ComplexKey Create(Guid id, CommandToAggregate command)
             => new ComplexKey(id, command);
 
         /// <summary>
@@ -61,7 +65,7 @@ namespace Hive.SeedWorks.Characteristics
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        public static IComplexKey CreateWithUsingCorrelationToken(CommandToAggregate command)
+        public static ComplexKey CreateWithUsingCorrelationToken(CommandToAggregate command)
             => new ComplexKey(command.CorrelationToken, command.Version, command.CorrelationToken);
     }
 }
