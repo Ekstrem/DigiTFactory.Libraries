@@ -1,5 +1,5 @@
-![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/seedworks.yml/badge.svg)
-![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/users.yml/badge.svg)
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/BuildSeedWorks/badge.svg)
+![](https://github.com/Ekstrem/Hive/workflows/.github/workflows/BuildEmployee/badge.svg)
 # Hive
 Framework быстрой разработки микросервисов декомпозированных по субдомену.
 
