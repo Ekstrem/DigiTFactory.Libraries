@@ -36,7 +36,7 @@ namespace Hive.SeedWorks.TacticalPatterns
             => input.Id
                 .Either(c => c == default, s => command.CorrelationToken, n => n)
                 .PipeTo(id => ComplexKey.Create(id, command))
-                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(ck, input, scope))
+                .PipeTo(ck => Aggregate<TBoundedContext>.CreateInstance(input, scope))
                 // TODO: add changed values
                 .PipeTo(a => new AggregateResult<TBoundedContext>(a, command, null));
     }

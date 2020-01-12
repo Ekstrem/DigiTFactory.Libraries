@@ -1,9 +1,6 @@
-﻿using System;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Events;
-using Hive.SeedWorks.TacticalPatterns;
+﻿using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     public sealed class Create : AggregateBusinessOperation<Create, IEmployee>
     {

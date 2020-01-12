@@ -1,6 +1,6 @@
 ﻿using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     /// <summary>
     /// Модель сотрудника компании.

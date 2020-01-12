@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User.Tests
+namespace Hive.Employee.Tests
 {
     internal class Employee : 
         AnemicModel<IEmployee>,

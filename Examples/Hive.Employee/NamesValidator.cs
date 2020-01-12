@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     public class NamesValidator : IBusinessEntityValidator<IEmployee>
     {

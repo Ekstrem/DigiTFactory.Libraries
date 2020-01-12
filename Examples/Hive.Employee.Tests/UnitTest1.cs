@@ -1,14 +1,12 @@
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Events;
-using Hive.SeedWorks.Monads;
-using Hive.SeedWorks.TacticalPatterns;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
+using Hive.SeedWorks.Characteristics;
+using Hive.SeedWorks.Events;
+using Hive.SeedWorks.TacticalPatterns;
 using Xunit;
 
-namespace Hive.User.Tests
+namespace Hive.Employee.Tests
 {
     public class UnitTest1
     {
@@ -23,7 +21,7 @@ namespace Hive.User.Tests
             };
             var validators = new[] {new NamesValidator(),}.ToList();
             var scope = new EmployeeScope(operations, validators);
-            var aggregate = Aggregate<IEmployee>.CreateInstance(anemicModel, anemicModel, scope);
+            var aggregate = Aggregate<IEmployee>.CreateInstance(anemicModel, scope);
 
             var create = aggregate.Operations.TryGetValue(nameof(Create), out var operation) ? operation : null;
             Assert.NotNull(create);

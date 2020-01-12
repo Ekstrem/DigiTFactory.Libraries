@@ -1,4 +1,4 @@
-namespace Hive.User.Tests
+namespace Hive.Employee.Tests
 {
     internal class NtId : INtId
     {

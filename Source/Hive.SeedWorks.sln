@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.SeedWorks", "Hive.Seed
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{AB6131C8-301B-4386-836C-869ECF8072A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.User", "..\Examples\Hive.User\Hive.User.csproj", "{6CBB7BEF-41F3-4C2B-9275-93B5ACB54426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.Employee", "..\Examples\Hive.Employee\Hive.Employee.csproj", "{6CBB7BEF-41F3-4C2B-9275-93B5ACB54426}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.User.Tests", "..\Examples\Hive.User.Tests\Hive.User.Tests.csproj", "{FEBFD909-C914-477A-95CA-B1D3C90868C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hive.Employee.Tests", "..\Examples\Hive.Employee.Tests\Hive.Employee.Tests.csproj", "{FEBFD909-C914-477A-95CA-B1D3C90868C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

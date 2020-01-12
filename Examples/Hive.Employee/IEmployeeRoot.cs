@@ -2,7 +2,7 @@
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     public interface IEmployeeRoot : IAggregateRoot<IEmployee>
     {

@@ -1,6 +1,6 @@
 using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     public sealed class ChangeSecondName : AggregateBusinessOperation<ChangeSecondName, IEmployee>
     {

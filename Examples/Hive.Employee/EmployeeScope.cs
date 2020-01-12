@@ -2,12 +2,12 @@
 using System.Collections.Immutable;
 using Hive.SeedWorks.TacticalPatterns;
 
-namespace Hive.User
+namespace Hive.Employee
 {
     public class EmployeeScope : IBoundedContextScope<IEmployee>
     {
-        private readonly IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<IEmployee>> _operations;
-        private readonly IReadOnlyList<IBusinessValidator<IEmployee>> _validators;
+        private readonly IReadOnlyDictionary<string, IAggregateBusinessOperation<IEmployee>> _operations;
+        private readonly IReadOnlyList<IBusinessEntityValidator<IEmployee>> _validators;
 
         public EmployeeScope(
             IReadOnlyList<IAggregateBusinessOperation<IEmployee>> operations, 
@@ -17,8 +17,8 @@ namespace Hive.User
             _validators = validators;
         }
 
-        public IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<IEmployee>> Operations => _operations;
+        public IReadOnlyDictionary<string, IAggregateBusinessOperation<IEmployee>> Operations => _operations;
 
-        public IReadOnlyList<IBusinessValidator<IEmployee>> Validators => _validators;
+        public IReadOnlyList<IBusinessEntityValidator<IEmployee>> Validators => _validators;
     }
 }
