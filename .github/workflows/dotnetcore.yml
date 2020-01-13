@@ -1,0 +1,26 @@
+name: Build and push SeedWorks
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - Source/*
+      - .github/workflows/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.207 #108
+    - name: Build with dotnet
+      run: dotnet build Source/Hive.SeedWorks.csproj --configuration Release
+    - name: Project pack
+      run : dotnet pack --configuration Release
+    - name: Nuget push
+      run : dotnet nuget push "Soutce/bin/Release/Hive.SeedWorks.0.0.1.nupkg" --source "github"
