@@ -1,4 +1,4 @@
-name: BuildSeedWorks
+name: Build SeedWorks
 
 on:
   push:
