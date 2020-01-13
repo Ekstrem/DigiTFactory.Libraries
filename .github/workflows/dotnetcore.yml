@@ -20,7 +20,6 @@ jobs:
         dotnet-version: 2.2.207 #108
     - name: Build with dotnet
       run: dotnet build Source/Hive.SeedWorks.csproj --configuration Release
-    - name: Project pack
-      run : dotnet pack --configuration Release
+    # - name: Project pack      run : dotnet pack --configuration Release
     - name: Nuget push
       run : dotnet nuget push "Soutce/bin/Release/Hive.SeedWorks.0.0.1.nupkg" --source "github"
