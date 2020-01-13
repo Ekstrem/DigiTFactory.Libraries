@@ -1,4 +1,4 @@
-name: BuildEmployee
+name: Build Employee
 
 on:
   push:
