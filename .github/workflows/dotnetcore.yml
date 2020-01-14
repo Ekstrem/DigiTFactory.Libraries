@@ -1,4 +1,4 @@
-name: Build
+name: Build and push SeedWorks
 
 on:
   push:
@@ -20,3 +20,8 @@ jobs:
         dotnet-version: 2.2.207 #108
     - name: Build with dotnet
       run: dotnet build Source/Hive.SeedWorks.csproj --configuration Release
+    - name: Project pack
+      run : dotnet pack Source/Hive.SeedWorks.csproj --configuration Release --output bin/nupkgs
+    - name: Nuget push
+      run : dotnet nuget push "/home/runner/work/Hive/Hive/Source/bin/nupkgs/Hive.SeedWorks.0.0.1.nupkg" --source "https://github.com/Ekstrem/Hive"
+      # run : dotnet nuget push "bin/nupkgs/Hive.SeedWorks.0.0.1.nupkg" --source "github"

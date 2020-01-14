@@ -11,6 +11,8 @@ namespace Hive.SeedWorks.TacticalPatterns
     {
         private readonly IAnemicModel<TBoundedContext> _anemicModel;
         private readonly IBoundedContextScope<TBoundedContext> _scope;
+        private string _commandName;
+        private string _subjectName;
 
         private Aggregate(
             IAnemicModel<TBoundedContext> anemicModel,
@@ -38,17 +40,27 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Словарь объект значений.
         /// </summary>
-        public IDictionary<string, IValueObject> ValueObjects => _anemicModel.ValueObjects;
+        public IDictionary<string, IValueObject> Invariants => _anemicModel.Invariants;
 
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        public IReadOnlyDictionary<string, IAggregateBusinessOperationFactory<TBoundedContext>> Operations => _scope.Operations;
+        public IReadOnlyDictionary<string, IAggregateBusinessOperation<TBoundedContext>> Operations => _scope.Operations;
 
         /// <summary>
         /// Валидаторы модели бизнес-объекта.
         /// </summary>
-        public IReadOnlyList<IBusinessValidator<TBoundedContext>> Validators => _scope.Validators;
+        public IReadOnlyList<IBusinessEntityValidator<TBoundedContext>> Validators => _scope.Validators;
+
+        /// <summary>
+        /// Имя метода агрегата, который вызывает команда.
+        /// </summary>
+        public string CommandName => _commandName;
+
+        /// <summary>
+        /// Имя субъекта бизнес-операции.
+        /// </summary>
+        public string SubjectName => _subjectName;
 
         public static IAggregate<TBoundedContext> CreateInstance(
             IAnemicModel<TBoundedContext> anemicModel, 
