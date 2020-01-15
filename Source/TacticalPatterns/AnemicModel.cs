@@ -52,15 +52,9 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// </summary>
         public IDictionary<string, IValueObject> Invariants => GetInvariants();
 
-		private IDictionary<string, IValueObject> GetInvariants()
+        private IDictionary<string, IValueObject> GetInvariants()
 		{
-			if (_invariants != null)
-			{
-				return _invariants;
-			}
-
-			_invariants = this.GetFields();
-			return _invariants;
+			return _invariants ?? (_invariants = this.GetFields());
 		}
 	}
 }
