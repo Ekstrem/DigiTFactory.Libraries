@@ -7,20 +7,22 @@ namespace Hive.SeedWorks.TacticalPatterns.Repository
 	/// Единица работы.
 	/// </summary>
 	/// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-	public interface IUnitOfWork<TBoundedContext>
+	public interface IUnitOfWork<TBoundedContext, TModel>
         where TBoundedContext : IBoundedContext
-    {
+		where TModel : AnemicModel<TBoundedContext>
+
+	{
 		/// <summary>
 		/// Получение репозитория команд.
 		/// </summary>
 		/// <returns>Репозиторий интересующего типа.</returns>
-		ICommandRepository<TBoundedContext> CommandRepository { get; }
+		ICommandRepository<TBoundedContext, TModel> CommandRepository { get; }
 
 		/// <summary>
 		/// Получение репозитория запросов.
 		/// </summary>
 		/// <returns>Репозиторий интересующего типа.</returns>
-		IQueryRepository<TBoundedContext> QueryRepository { get; }
+		IQueryRepository<TBoundedContext, TModel> QueryRepository { get; }
 
         /// <summary>
         /// Сохранение результатов.

@@ -10,22 +10,23 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Провайдер получения экземпляра агрегата.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    public class AggregateProvider<TBoundedContext> :
+    public class AggregateProvider<TBoundedContext, TModel> :
         IAggregateProvider<TBoundedContext>
         where TBoundedContext : IBoundedContext
+		where TModel : AnemicModel<TBoundedContext>
     {
-        private readonly IUnitOfWork<TBoundedContext> _unitOfWork;
+        private readonly IUnitOfWork<TBoundedContext, TModel> _unitOfWork;
         private readonly IBoundedContextScope<TBoundedContext> _scope;
 
         public AggregateProvider(
-            IUnitOfWork<TBoundedContext> unitOfWork,
+            IUnitOfWork<TBoundedContext, TModel> unitOfWork,
             IBoundedContextScope<TBoundedContext> scope)
         {
             _unitOfWork = unitOfWork;
             _scope = scope;
         }
 
-        public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command) 
+        public IAggregate<TBoundedContext> GetAggregateByIdAndVersion(Guid id, CommandToAggregate command)
             => _unitOfWork.QueryRepository.GetQueryable()
                 .Where(f => f.Id == id)
                 .Max(f => f.Version)
