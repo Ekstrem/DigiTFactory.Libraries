@@ -4,11 +4,12 @@
 	/// Интерфейс репозитория команд.
 	/// </summary>
 	/// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
-	public interface ICommandRepository<TBoundedContext> :
-		IRepositoryCreate<TBoundedContext>,
-		IRepositoryDelete<TBoundedContext>,
-		IRepositoryUpdate<TBoundedContext>
+	public interface ICommandRepository<TBoundedContext, TModel> :
+		IRepositoryCreate<TBoundedContext, TModel>,
+		IRepositoryUpdate<TBoundedContext, TModel>,
+		IRepositoryDelete<TBoundedContext, TModel>
 		where TBoundedContext : IBoundedContext
+		where TModel : AnemicModel<TBoundedContext>
 	{
 	}
 }
