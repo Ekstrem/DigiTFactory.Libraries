@@ -20,7 +20,7 @@ namespace Hive.Employee.Tests
             IDepartment department,
             IUser user,
             INtId ntId)
-            : base(complexKey, MakeValueObjects(root, department, user, ntId))
+            : base(Guid.NewGuid(), 1, Guid.NewGuid())
         {
             _root = root;
             _department = department;
