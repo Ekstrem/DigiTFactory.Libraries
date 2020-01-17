@@ -4,14 +4,13 @@
 	/// Интерфейс репозитория обновления.
 	/// </summary>
 	/// <typeparam name="TBoundedContext">Ограниченный контекст предметной области.</typeparam>
-	public interface IRepositoryUpdate<TBoundedContext, TModel>
+	public interface IRepositoryUpdate<TBoundedContext>
 		where TBoundedContext : IBoundedContext
-		where TModel : AnemicModel<TBoundedContext>
 	{
 		/// <summary>
 		/// Обновление сущностей в базе данных.
 		/// </summary>
 		/// <param name="entity">Сущность для обновления в базе данных.</param>
-		void Update(TModel entity);
+		void Update(IAnemicModel<TBoundedContext> entity);
 	}
 }

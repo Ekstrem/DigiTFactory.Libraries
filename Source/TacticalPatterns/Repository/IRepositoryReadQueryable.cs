@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.TacticalPatterns.Repository
 {
@@ -10,21 +11,20 @@ namespace Hive.SeedWorks.TacticalPatterns.Repository
     /// Интерфейс репозитория. Функциональность чтения.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    public interface IQueryRepository<TBoundedContext, TModel>
+    public interface IQueryRepository<TBoundedContext>
 		where TBoundedContext : IBoundedContext
-		where TModel : AnemicModel<TBoundedContext>
-	{
+    {
         /// <summary>
         /// Получение записей без спецификации.
         /// </summary>
         /// <returns>Коллекция записей.</returns>
-        IQueryable<TModel> GetQueryable();
+        IQueryable<IAnemicModel<TBoundedContext>> GetQueryable();
 
         /// <summary>
         /// Получение всего набора записей.
         /// </summary>
         /// <returns>Набор записей.</returns>
-        IEnumerable<TModel> Get(IPaging page);
+        IEnumerable<IEntity> Get(IPaging page);
 
         /// <summary>
         /// Получить общее количество элементов.
