@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Hive.SeedWorks.csproj" />
+    <ProjectReference Include="..\..\Source\Hive.SeedWorks\Hive.SeedWorks.csproj" />
   </ItemGroup>
 
 </Project>
