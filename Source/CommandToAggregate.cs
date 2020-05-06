@@ -1,12 +1,11 @@
 using System;
-using Hive.SeedWorks.Characteristics;
 
-namespace Hive.SeedWorks.Events
+namespace Hive.SeedWorks
 {
     /// <summary>
     /// Сведения о команде к агрегату.
     /// </summary>
-    public class CommandToAggregate : IHasVersion, ICommandSubject
+    public class CommandToAggregate : ICommandMetadata
     {
         private readonly Guid _correlationToken;
         private readonly string _commandName;
@@ -17,20 +16,13 @@ namespace Hive.SeedWorks.Events
             Guid correlationToken,
             string commandName,
             string subjectName,
-            DateTimeOffset dateTimeOffset)
+            long version)
         {
             _correlationToken = correlationToken;
             _commandName = commandName;
             _subjectName = subjectName;
-            _version = dateTimeOffset.ToUnixTimeMilliseconds();
+            _version = version;
         }
-
-        private CommandToAggregate(
-            Guid correlationToken,
-            string commandName,
-            string subjectName)
-            : this(correlationToken,commandName,subjectName, DateTimeOffset.UtcNow)
-        { }
 
         /// <summary>
         /// Маркер корреляции.
@@ -64,10 +56,11 @@ namespace Hive.SeedWorks.Events
         /// </summary>
         /// <param name="correlationToken">Маркер корреляции.</param>
         /// <param name="commandName">Имя команды инициатора доменного события.</param>
-        /// <param name="nameLastModification">Имя инициировавшего событие.</param>
+        /// <param name="subjectName">Имя инициировавшего событие.</param>
+        /// <param name="version">Версия команды.</param>
         /// <returns></returns>
         public static CommandToAggregate Commit(
-            Guid correlationToken, string commandName, string nameLastModification)
-            => new CommandToAggregate(correlationToken, commandName, nameLastModification);
+            Guid correlationToken, string commandName, string subjectName, long version)
+            => new CommandToAggregate(correlationToken, commandName, subjectName, version);
     }
 }

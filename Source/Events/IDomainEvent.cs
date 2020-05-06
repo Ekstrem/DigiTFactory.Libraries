@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.SeedWorks.Events
 {
     /// <summary>
     /// Доменное событие предметной области.
     /// </summary>
-    /// <typeparam name="TKey">Ключевое поле агрегата.</typeparam>
-    /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
-    public interface IDomainEvent<TBoundedContext, out TKey> :
-        IDomainEvent<TBoundedContext>
-        where TBoundedContext : IBoundedContext
-    {
-        /// <summary>
-        /// Экземпляр агрегата.
-        /// </summary>
-        TKey AggregateId { get; }
-    }
-
-    /// <summary>
-    /// Доменное событие предметной области.
-    /// </summary>
-    public interface IDomainEvent<TBoundedContext>
+    public interface IDomainEvent<TBoundedContext> :
+        IComplexKey
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
@@ -41,8 +29,13 @@ namespace Hive.SeedWorks.Events
         string BoundedContext { get; }
 
         /// <summary>
-        /// Время доменного события над аггрегатом.
+        /// Результат выполнения операции.
         /// </summary>
-        DateTime TimeStamp { get; }
+        DomainOperationResult Result { get; }
+        
+        /// <summary>
+        /// Причина в случае неуспеха выполнения операции.
+        /// </summary>
+        string Reason { get; }
     }
 }

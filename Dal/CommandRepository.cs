@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 using Hive.SeedWorks.TacticalPatterns.Repository;
 
 namespace Hive.Dal

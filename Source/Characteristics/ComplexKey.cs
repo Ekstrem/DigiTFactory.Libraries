@@ -3,25 +3,19 @@ using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.Characteristics
 {
+    /// <summary>
+    /// Состовной ключ.
+    /// </summary>
     public sealed class ComplexKey : IComplexKey
     {
         private Guid _id;
         private long _version;
-        private Guid _correlationToken;
 
-        private ComplexKey()
-        {
-        }
-
-        private ComplexKey(Guid id, long version, Guid correlationToken)
+        private ComplexKey(Guid id, long version)
         {
             _id = id;
             _version = version;
-            _correlationToken = correlationToken;
         }
-
-        private ComplexKey(Guid id, CommandToAggregate command)
-            : this(id, command.Version, command.CorrelationToken) { }
 
         /// <summary>
         /// Идентификатор сущности.
@@ -36,36 +30,14 @@ namespace Hive.SeedWorks.Characteristics
         public long Version => _version;
 
         /// <summary>
-        /// Идентификатор комманды, создавшей новую версию.
-        /// </summary>
-        public Guid CorrelationToken => _correlationToken;
-
-        /// <summary>
         /// Создание экземляра комплексного ключа.
         /// </summary>
         /// <param name="id">Идентификатор агрегата.</param>
         /// <param name="version">Версия агрегата.</param>
         /// <param name="correlationToken">Токен корреляции.</param>
         /// <returns></returns>
-        public static ComplexKey Create(Guid id, long version, Guid correlationToken)
-            => new ComplexKey(id, version, correlationToken);
-
-        /// <summary>
-        /// Создание экземляра комплексного ключа.
-        /// </summary>
-        /// <param name="id">Идентификатор агрегата.</param>
-        /// <param name="command">Комманда к агрегату.</param>
-        /// <returns></returns>
-        public static ComplexKey Create(Guid id, CommandToAggregate command)
-            => new ComplexKey(id, command);
-
-        /// <summary>
-        /// Создание экземпляра комплексного ключа полностью из данных о команде к агрегату,
-        /// т.е. с использованием маркера корреляции.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        public static ComplexKey CreateWithUsingCorrelationToken(CommandToAggregate command)
-            => new ComplexKey(command.CorrelationToken, command.Version, command.CorrelationToken);
+        public static ComplexKey Create(Guid id, long version)
+            => new ComplexKey(id, version);
     }
 }
+

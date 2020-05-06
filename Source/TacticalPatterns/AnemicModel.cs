@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {

@@ -1,8 +1,9 @@
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.Employee
 {
-    public sealed class ChangeSecondName : AggregateBusinessOperation<ChangeSecondName, IEmployee>
+    public sealed class ChangeSecondName : DomainCommandExecutor<ChangeSecondName, IEmployee>
     {
         public ChangeSecondName()
             : base(new ChangeSecondNameValidator())

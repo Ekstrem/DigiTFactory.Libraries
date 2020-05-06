@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hive.SeedWorks;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 using Xunit;
 
 namespace Hive.Employee.Tests
@@ -14,7 +16,7 @@ namespace Hive.Employee.Tests
         public void Test1()
         {
             var anemicModel = Employee.CreateTest(NewComplexKey());
-            var operations = new List<IAggregateBusinessOperation<IEmployee>>
+            var operations = new List<IDomainCommandExecutor<IEmployee>>
             {
                 new Create(),
                 new ChangeSecondName(),

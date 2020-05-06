@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.SeedWorks.Events
 {

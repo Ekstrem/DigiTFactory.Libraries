@@ -1,6 +1,6 @@
 ﻿using Hive.SeedWorks.Characteristics;
 
-namespace Hive.SeedWorks.TacticalPatterns
+namespace Hive.SeedWorks.TacticalPatterns.Abstracts
 {
 
     /// <summary>
@@ -8,10 +8,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контест.</typeparam>
     public interface IAggregate<TBoundedContext> :
-        IComplexKey,
-        ICommandSubject,
-        IAnemicModel<TBoundedContext>,
-        IBoundedContextScope<TBoundedContext>
+        IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
     }

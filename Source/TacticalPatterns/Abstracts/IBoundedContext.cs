@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.TacticalPatterns
+﻿namespace Hive.SeedWorks.TacticalPatterns.Abstracts
 {
     /// <summary>
     /// Базовый интерфейс, указывающий на принадлежность

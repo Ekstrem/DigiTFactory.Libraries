@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Hive.SeedWorks.TacticalPatterns;
 using Hive.SeedWorks.TacticalPatterns.Repository;
 using Hive.Dal.RawSql;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.Dal
 {

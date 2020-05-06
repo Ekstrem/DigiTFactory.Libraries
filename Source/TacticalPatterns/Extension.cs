@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Hive.SeedWorks.Monads;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {

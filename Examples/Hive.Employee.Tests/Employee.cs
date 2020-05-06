@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.TacticalPatterns;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.Employee.Tests
 {

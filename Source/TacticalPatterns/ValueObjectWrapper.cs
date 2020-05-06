@@ -1,4 +1,6 @@
-﻿namespace Hive.SeedWorks.TacticalPatterns
+﻿using Hive.SeedWorks.TacticalPatterns.Abstracts;
+
+namespace Hive.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Обёртка над простыми системными типами.

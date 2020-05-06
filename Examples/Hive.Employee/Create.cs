@@ -2,7 +2,7 @@
 
 namespace Hive.Employee
 {
-    public sealed class Create : AggregateBusinessOperation<Create, IEmployee>
+    public sealed class Create : DomainCommandExecutor<Create, IEmployee>
     {
         public Create() : base(null) { }        
     }

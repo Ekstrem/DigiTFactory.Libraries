@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.TacticalPatterns
+﻿namespace Hive.SeedWorks.TacticalPatterns.Abstracts
 {
     public interface IValidator<TBoundedContext>
         where TBoundedContext : IBoundedContext

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.Events;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -45,7 +46,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <summary>
         /// Бизнес-операции - фабрики.
         /// </summary>
-        public IReadOnlyDictionary<string, IAggregateBusinessOperation<TBoundedContext>> Operations => _scope.Operations;
+        public IReadOnlyDictionary<string, IDomainCommandExecutor<TBoundedContext>> Operations => _scope.Operations;
 
         /// <summary>
         /// Валидаторы модели бизнес-объекта.
