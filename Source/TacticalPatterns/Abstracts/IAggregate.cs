@@ -1,4 +1,5 @@
 ﻿using Hive.SeedWorks.Characteristics;
+using System.Collections.Generic;
 
 namespace Hive.SeedWorks.TacticalPatterns.Abstracts
 {

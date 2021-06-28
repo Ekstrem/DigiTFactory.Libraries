@@ -9,5 +9,11 @@
         /// <param name="obj">Объект проверки.</param>
         /// <returns>Результат проверки.</returns>
         bool IsSatisfiedBy(IAnemicModel<TBoundedContext> obj);
+
+        /// <summary>
+        /// Причина, по которой объект не проходит проверку данной спецификацией,
+        /// которая отражается в шине доменных сообщений.
+        /// </summary>
+        string Reason { get; }
     }
 }

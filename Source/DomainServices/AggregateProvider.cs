@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
+using Hive.SeedWorks.DomainModel;
 using Hive.SeedWorks.Events;
 using Hive.SeedWorks.Monads;
 using Hive.SeedWorks.Result;
 using Hive.SeedWorks.TacticalPatterns.Abstracts;
-using Hive.SeedWorks.TacticalPatterns.Repository;
 
 namespace Hive.SeedWorks.TacticalPatterns
 {
@@ -12,10 +12,11 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Провайдер получения экземпляра агрегата.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    public class AggregateProvider<TBoundedContext, TAggregate> :
+    public class AggregateProvider<TBoundedContext, TAggregate, TModel> :
         IAggregateProvider<TBoundedContext, TAggregate>
         where TBoundedContext : IBoundedContext
 		where TAggregate : IAggregate<TBoundedContext>
+        where TModel : IAnemicModel<TBoundedContext>
     {
         private readonly IRepository<TBoundedContext, TAggregate> _repository;
         private readonly IObserver<AggregateResultDiff<TBoundedContext, TAggregate>>[] _observers;
@@ -39,20 +40,10 @@ namespace Hive.SeedWorks.TacticalPatterns
         {
             throw new NotImplementedException();
         }
-    }
 
-    public class DefaultAnemicModel<TBoundedContext> : 
-        IAnemicModel<TBoundedContext>
-        where TBoundedContext : IBoundedContext
-    {
-        private DefaultAnemicModel(Guid id)
-        {
-            
-        }
-
-        public ICommandMetadata PreviousOperation => null;
-
-        public static DefaultAnemicModel<TBoundedContext> Create(Guid id)
-            => new DefaultAnemicModel<TBoundedContext>(id);
+        private TAggregate DecorateModel(TModel model)
+        => model
+            .PipeTo(anemicModel = Aggregate<TBoundedContext>
+                .CreateInstance(model));
     }
 }

@@ -6,7 +6,7 @@ using Hive.SeedWorks.TacticalPatterns.Abstracts;
 namespace Hive.SeedWorks
 {
     public class SlobEntry<TAnemicModel, TBoundedContext> :
-        IComplexKey
+        IHasComplexKey
         where TAnemicModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {

@@ -9,14 +9,12 @@ namespace Hive.SeedWorks.Events
     /// <summary>
     /// Доменное событие предметной области.
     /// </summary>
-    public interface IDomainEvent<TBoundedContext> :
-        IComplexKey
-        where TBoundedContext : IBoundedContext
+    public interface IDomainEvent : IHasComplexKey
     {
         /// <summary>
         /// Имя бизнес-операции - доменное событие.
         /// </summary>
-        CommandToAggregate Command { get; }
+        ICommandMetadata Command { get; }
 
         /// <summary>
         /// Словарь изменившихся объект значений.
@@ -27,6 +25,21 @@ namespace Hive.SeedWorks.Events
         /// Имя ограниченного контекста в котором произошло событие.
         /// </summary>
         string BoundedContext { get; }
+
+        /// <summary>
+        /// Идентификатор экземпляра.
+        /// </summary>
+        Guid InstanceId { get; }
+
+        /// <summary>
+        /// Мажорная версия микросервиса.
+        /// </summary>
+        byte MicroserviceMajorVersion { get; }
+
+        /// <summary>
+        /// Минорная версия микросервиса.
+        /// </summary>
+        byte MicroserviceMinorVersion { get; }
 
         /// <summary>
         /// Результат выполнения операции.

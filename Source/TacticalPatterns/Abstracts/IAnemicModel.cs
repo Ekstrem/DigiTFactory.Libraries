@@ -3,21 +3,28 @@ using Hive.SeedWorks.Characteristics;
 
 namespace Hive.SeedWorks.TacticalPatterns.Abstracts
 {
-    public interface IHasCommandMetadata
+    public interface IAnemicModel :
+        IHasComplexKey,
+        IHasCommandMetadata
     {
         /// <summary>
-        /// Метаданные о предыдущей операции,
-        /// породившей данную версию.
+        /// Имя ограниченного контекста.
         /// </summary>
-        ICommandMetadata PreviousOperation { get; }
+        string BoundedContextName { get; }
+        
+        /// <summary>
+        /// Объекты значения.
+        /// </summary>
+        IDictionary<string, IValueObject> ValueObjects { get; }
     }
-
+    
+    
     /// <summary>
     /// Анемичная модель ограниченного контекста для Фабрики создания агрегата.
     /// Анемичная модель должна содержать объект-значения, реализующие интерфейс <see cref="IValueObject"/>.
     /// </summary>
-    public interface IAnemicModel<TBoundedContext> : 
-        IHasCommandMetadata
+    public interface IAnemicModel<TBoundedContext> :
+        IAnemicModel
         where TBoundedContext : IBoundedContext
     {
     }

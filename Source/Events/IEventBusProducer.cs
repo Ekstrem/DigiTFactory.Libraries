@@ -13,14 +13,12 @@ namespace Hive.SeedWorks.Events
         /// Опубликовать доменное событие.
         /// </summary>
         /// <param name="domainEvent">Доменное событие.</param>
-        void Publish<TBoundedContext>(IDomainEvent<TBoundedContext> domainEvent)
+        void Publish(IDomainEvent domainEvent);
 
-            where TBoundedContext : IBoundedContext;
         /// <summary>
         /// Опубликовать доменное событие.
         /// </summary>
         /// <param name="domainEvent">Доменное событие.</param>
-        Task PublishAsync<TBoundedContext>(IDomainEvent<TBoundedContext> domainEvent)
-            where TBoundedContext : IBoundedContext;
+        Task PublishAsync(IDomainEvent domainEvent);
     }
 }

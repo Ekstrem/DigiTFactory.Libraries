@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
 using Hive.SeedWorks.TacticalPatterns;
 using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
@@ -9,35 +10,43 @@ namespace Hive.SeedWorks.Events
     /// Доменное событие предметной области.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст события.</typeparam>
-    public class DomainEvent<TBoundedContext> :
-        IDomainEvent<TBoundedContext> 
-        where TBoundedContext : IBoundedContext
+    public class DomainEvent : IDomainEvent
     {
         private readonly IDictionary<string, IValueObject> _changedValueObjects;
-        private readonly Guid _id;
-        private readonly CommandToAggregate _command;
-        private readonly DateTime _timeStamp;
+        private readonly string _boundedContextName;
+        private readonly IHasComplexKey _key; 
+        private readonly ICommandMetadata _command;
+        private DomainOperationResult _result;
+        private string _reason;
+        private Guid _instanceId;
+        private byte _microserviceMajorVersion;
+        private byte _microserviceMinorVersion;
 
         public DomainEvent(
-            Guid id,
-            CommandToAggregate command,
-            IDictionary<string, IValueObject> changedValueObjects)
+            string boundedContextName,
+            IHasComplexKey key,
+            ICommandMetadata command,
+            IDictionary<string, IValueObject> changedValueObjects,
+            DomainOperationResult result,
+            string reason)
         {
-            _id = id;
+            _boundedContextName = boundedContextName;
+            _key = key;
             _command = command;
             _changedValueObjects = changedValueObjects;
-            _timeStamp = DateTime.Now;
         }
 
         /// <summary>
         /// Экземпляр агрегата.
         /// </summary>
-        public Guid Id => _id;
+        public Guid Id => _key.Id;
+        
+        public long Version => _key.Version;
 
         /// <summary>
         /// Имя бизнес-операции - доменное событие.
         /// </summary>
-        public CommandToAggregate Command => _command;
+        public ICommandMetadata Command => _command;
 
         /// <summary>
         /// Словарь изменившихся объект значений.
@@ -47,11 +56,16 @@ namespace Hive.SeedWorks.Events
         /// <summary>
         /// Имя ограниченного контекста в котором произошло событие.
         /// </summary>
-        public string BoundedContext => typeof(TBoundedContext).Name;
+        public string BoundedContext => _boundedContextName;
 
-        /// <summary>
-        /// Версия аггрегата.
-        /// </summary>
-        public DateTime TimeStamp => _timeStamp;
+        public Guid InstanceId => _instanceId;
+
+        public byte MicroserviceMajorVersion => _microserviceMajorVersion;
+
+        public byte MicroserviceMinorVersion => _microserviceMinorVersion;
+
+        public DomainOperationResult Result => _result;
+
+        public string Reason => _reason;
     }
 }

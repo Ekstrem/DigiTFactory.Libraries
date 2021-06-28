@@ -6,7 +6,7 @@ namespace Hive.SeedWorks.Characteristics
     /// <summary>
     /// Состовной ключ.
     /// </summary>
-    public sealed class ComplexKey : IComplexKey
+    public sealed class ComplexKey : IHasComplexKey
     {
         private Guid _id;
         private long _version;

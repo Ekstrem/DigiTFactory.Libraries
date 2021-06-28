@@ -12,12 +12,12 @@ namespace Hive.SeedWorks
     public class DomainCommand : ICommand
     {
         private readonly CommandToAggregate _metadata;
-        private readonly IComplexKey _key;
+        private readonly IHasComplexKey _key;
         private readonly IValueObject[] _valueObjects;
 
         public DomainCommand(
             CommandToAggregate metadata,
-            IComplexKey key,
+            IHasComplexKey key,
             params IValueObject[] valueObjects)
         {
             _metadata = metadata;
@@ -44,7 +44,7 @@ namespace Hive.SeedWorks
         /// <summary>
         /// Состовной ключ бизнес сущности.
         /// </summary>
-        public IComplexKey Key => _key;
+        public IHasComplexKey Key => _key;
         
         /// <summary>
         /// Объекты значения.

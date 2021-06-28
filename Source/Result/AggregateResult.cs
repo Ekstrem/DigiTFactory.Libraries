@@ -11,7 +11,7 @@ namespace Hive.SeedWorks.Result
     public sealed class AggregateResult<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IDomainEvent<TBoundedContext> _domainEvent;
+        private readonly IDomainEvent _domainEvent;
         private readonly IAggregate<TBoundedContext> _aggregate;
 
         internal AggregateResult(
@@ -20,8 +20,8 @@ namespace Hive.SeedWorks.Result
             IDictionary<string, IValueObject> changedValueObjects)
         {
             _aggregate = aggregate;
-            _domainEvent = new DomainEvent<TBoundedContext>(
-                aggregate.Id, command, changedValueObjects);
+            _domainEvent = new DomainEvent(typeof(TBoundedContext).Name,
+                aggregate, command, changedValueObjects);
         }
 
         /// <summary>

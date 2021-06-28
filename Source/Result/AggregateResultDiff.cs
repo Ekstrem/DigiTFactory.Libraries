@@ -1,30 +1,38 @@
 ﻿using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
+using Hive.SeedWorks.DomainModel;
 using Hive.SeedWorks.Events;
+using Hive.SeedWorks.TacticalPatterns.Abstracts;
 
-namespace Hive.SeedWorks.TacticalPatterns.Abstracts
+namespace Hive.SeedWorks.Result
 {
-    public abstract class AggregateResultDiff<TBoundedContext, TAggregate>
-        where TAggregate : IAggregate<TBoundedContext>
-        where TBoundedContext : IBoundedContext
+    public abstract class AggregateResultDiff
     {
-        private readonly TAggregate _aggregate;
-        private readonly CommandToAggregate _command;
+        private readonly IAnemicModel _aggregate;
+        private readonly ICommandMetadata _commandMetadata;
         private readonly IDictionary<string, IValueObject> _changedValueObjects;
 
-        protected AggregateResultDiff(
-            TAggregate aggregate,
-            CommandToAggregate command,
-            IDictionary<string, IValueObject> changedValueObjects)
+        protected AggregateResultDiff(BusinessOperationData businessOperationData)
         {
-            _aggregate = aggregate;
-            _command = command;
-            _changedValueObjects = changedValueObjects;
+            _aggregate = businessOperationData.Aggregate;
+            _commandMetadata = businessOperationData.Metadata;
+            _changedValueObjects = businessOperationData.GetChangedValueObjects();
         }
 
-        private TAggregate Aggregate => _aggregate;
+        public IAnemicModel Aggregate => _aggregate;
 
-        private CommandToAggregate Command => _command;
+        public IDomainEvent Event
+            => new DomainEvent(
+                _aggregate.BoundedContextName, _aggregate,
+                _commandMetadata, _changedValueObjects,
+                Result, Reason);
 
-        private IDictionary<string, IValueObject> ChangedValueObjects => _changedValueObjects;
+        public ICommandMetadata CommandMetadata => _commandMetadata;
+
+        public IDictionary<string, IValueObject> ChangedValueObjects => _changedValueObjects;
+        
+        public abstract DomainOperationResult Result { get; }
+        
+        public abstract string Reason { get; }
     }
 }
