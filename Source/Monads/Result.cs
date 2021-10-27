@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Hive.SeedWorks.Result
+namespace Hive.SeedWorks.Monads
 {
 	/// <summary>
 	/// Результат обработки.

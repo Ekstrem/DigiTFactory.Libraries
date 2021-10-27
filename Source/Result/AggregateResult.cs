@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+using Hive.SeedWorks.Definition;
 using Hive.SeedWorks.Events;
+using Hive.SeedWorks.Invariants;
 using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.SeedWorks.Result
@@ -7,30 +10,52 @@ namespace Hive.SeedWorks.Result
     /// <summary>
     /// Результат выполнения бизнес-операции в агрегате.
     /// </summary>
-    public sealed class AggregateResult<TBoundedContext>
+    public abstract class AggregateResult<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly IDomainEvent<TBoundedContext> _domainEvent;
-        private readonly IAggregate<TBoundedContext> _aggregate;
+        private readonly BusinessOperationData<TBoundedContext> _businessOperationData;
+        private readonly IBoundedContextDescription _boundedContext;
 
-        internal AggregateResult(
-            IAggregate<TBoundedContext> aggregate,
-            CommandToAggregate command,
-            IDictionary<string, IValueObject> changedValueObjects)
+        internal AggregateResult(BusinessOperationData<TBoundedContext> businessOperationData)
         {
-            _aggregate = aggregate;
-            _domainEvent = new DomainEvent<TBoundedContext>(
-                aggregate.Id, command, changedValueObjects);
+            _businessOperationData = businessOperationData;
+            _boundedContext = BoundedContext<TBoundedContext>.GetInfo();
         }
 
         /// <summary>
         /// Событие предметной области.
         /// </summary>
-        public IDomainEvent<TBoundedContext> Event => _domainEvent;
+        public IDomainEvent<TBoundedContext> Event => new DomainEvent<TBoundedContext>(
+            _businessOperationData.Aggregate.Id,
+            _businessOperationData.Aggregate.Version,
+            CommandToAggregate.Commit(
+                _businessOperationData.Model.CorrelationToken,
+                _businessOperationData.Model.CommandName,
+                _businessOperationData.Model.SubjectName,
+                _businessOperationData.Model.Version),
+            ChangeValueObjects,
+            _boundedContext,
+            Result,
+            Reason.First());
 
         /// <summary>
-        /// Агрегат - источник события.
+        /// Данные бизнес операции.
         /// </summary>
-        public IAggregate<TBoundedContext> Aggregate => _aggregate;
+        public BusinessOperationData<TBoundedContext> BusinessOperationData => _businessOperationData;
+
+        /// <summary>
+        /// Изменившиеся объект значения.
+        /// </summary>
+        public virtual IDictionary<string, IValueObject> ChangeValueObjects => _businessOperationData.GetValueObjects();
+        
+        /// <summary>
+        /// Результат выполнения операции.
+        /// </summary>
+        public abstract DomainOperationResultEnum Result {get;}
+        
+        /// <summary>
+        /// Причина в случае неуспеха выполнения операции.
+        /// </summary>
+        public abstract IEnumerable<string> Reason { get; }
     }
 }

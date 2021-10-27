@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Hive.SeedWorks.Definition;
 using Hive.SeedWorks.Events;
 
 namespace Hive.SeedWorks.TacticalPatterns
@@ -9,7 +11,7 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
     public interface IAggregateProvider<TBoundedContext> :
-        IAggregateProvider<TBoundedContext, Aggregate<TBoundedContext>, IAggregate<TBoundedContext>>
+        IAggregateProvider<TBoundedContext, IAggregate<TBoundedContext>>
         where TBoundedContext : IBoundedContext
     {
     }
@@ -19,55 +21,41 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
     /// <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
-    public interface IAggregateProvider<TBoundedContext, TAggregate> :
-        IAggregateProvider<TBoundedContext, TAggregate, TAggregate>
-        where TAggregate : class, IAggregate<TBoundedContext>
-        where TBoundedContext : IBoundedContext
-    {
-    }
-
-    /// <summary>
-    /// Провайдер получения экземпляра агрегата.
-    /// </summary>
-    /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    /// <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
-    /// <typeparam name="TModel">Тип модели.</typeparam>
-    public interface IAggregateProvider<TBoundedContext, TModel, TAggregate>
+    public interface IAggregateProvider<TBoundedContext, TAggregate> 
         where TAggregate : IAggregate<TBoundedContext>
         where TBoundedContext : IBoundedContext
-        where TModel : class, TAggregate
     {
         /// <summary>
         /// Получение агрегата(ов) по идентификатору и версии.
         /// </summary>
         /// <param name="id">Идентификатор агрегата.</param>
-        /// <param name="command">Команда иницировавшая операцию.</param>
-        /// <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
-        TAggregate GetAggregateByIdAndVersion(Guid id, CommandToAggregate command);
+        /// <param name="version">Версия агрегата.</param>
+        /// <returns>Аггрегат.</returns>
+        TAggregate GetAggregate(Guid id, long version);
+
 
         /// <summary>
         /// Получение агрегата(ов) по идентификатору и версии.
         /// </summary>
         /// <param name="id">Идентификатор агрегата.</param>
-        /// <param name="version">Версия аргрегата.</param>
-        /// <param name="command">Команда иницировавшая операцию.</param>
-        /// <returns>Коллекция агрегатов удовлетворяющая условию.</returns>
-        TAggregate GetAggregateByIdAndVersion(Guid id, int version, CommandToAggregate command);
-        
-        /// <summary>
-        /// Создание экземпляра агрегата по соответствующей dto.
-        /// </summary>
-        /// <typeparam name="TIn">Тип dto команды.</typeparam>
-        /// <param name="anemicModel">Анемичная модель.</param>
-        /// <param name="command">Команда иницировавшая операцию.</param>
-        /// <returns>Новый экземпляр команды КА.</returns>
-        TAggregate NewAggregate(IAnemicModel<TBoundedContext> anemicModel, CommandToAggregate command);
+        /// <param name="version">Версия агрегата.</param>
+        /// <param name="cancellationToken">Маркер отмены.</param>
+        /// <returns>Задача на извлечение агрегата.</returns>
+        Task<TAggregate> GetAggregateAsync(Guid id, long version, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Сохранение изменений.
+        /// Получение агрегата(ов) по идентификатору.
         /// </summary>
-        /// <param name="aggregate">Агрегат изменине в котором нужно сохранить.</param>
-        /// <returns>Агрегат с сохраненными изменениями.</returns>
-        void SaveChanges(TAggregate aggregate);
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <returns>Агрегат.</returns>
+        TAggregate GetAggregate(Guid id);
+        
+        /// <summary>
+        /// Получение агрегата(ов) по идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор агрегата.</param>
+        /// <param name="cancellationToken">Маркер отмены.</param>
+        /// <returns>Задача на извлечение агрегата.</returns>
+        TAggregate GetAggregateAsync(Guid id, CancellationToken cancellationToken);
     }
 }
