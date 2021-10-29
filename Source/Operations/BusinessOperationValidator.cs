@@ -13,14 +13,16 @@ namespace Hive.SeedWorks.Operations
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
     /// <typeparam name="TResults">Результат выполнения бизнес-операции.</typeparam>
-    public class BusinessOperationValidator<TBoundedContext, TResults>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public class BusinessOperationValidator<TBoundedContext, TModel, TResults>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext: IBoundedContext
     {
-        private readonly Dictionary<IBusinessOperationSpecification<TBoundedContext, TResults>, bool> _validators;
+        private readonly Dictionary<IBusinessOperationSpecification<TBoundedContext, TModel, TResults>, bool> _validators;
 
         internal protected BusinessOperationValidator(
-            BusinessOperationData<TBoundedContext> businessOperationData,
-            params IBusinessOperationSpecification<TBoundedContext, TResults>[] specifications)
+            BusinessOperationData<TBoundedContext, TModel> businessOperationData,
+            params IBusinessOperationSpecification<TBoundedContext, TModel, TResults>[] specifications)
         {
             _validators = specifications
                 .ToDictionary(
@@ -44,13 +46,15 @@ namespace Hive.SeedWorks.Operations
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
     /// <typeparam name="TResults">Результат выполнения бизнес-операции.</typeparam>
-    public class BusinessOperationValidator<TBoundedContext> :
-        BusinessOperationValidator<TBoundedContext, DomainOperationResultEnum>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public class BusinessOperationValidator<TBoundedContext, TModel> :
+        BusinessOperationValidator<TBoundedContext, TModel, DomainOperationResultEnum>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
         internal BusinessOperationValidator(
-            BusinessOperationData<TBoundedContext> businessOperationData,
-            params IBusinessOperationSpecification<TBoundedContext, DomainOperationResultEnum>[] specifications)
+            BusinessOperationData<TBoundedContext, TModel> businessOperationData,
+            params IBusinessOperationSpecification<TBoundedContext, TModel, DomainOperationResultEnum>[] specifications)
             : base(businessOperationData, specifications)
         { }
     }

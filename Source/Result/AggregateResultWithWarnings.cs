@@ -3,6 +3,7 @@ using System.Linq;
 using Hive.SeedWorks.Definition;
 using Hive.SeedWorks.Invariants;
 using Hive.SeedWorks.Operations;
+using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.SeedWorks.Result
 {
@@ -12,18 +13,20 @@ namespace Hive.SeedWorks.Result
     /// Следует отразить изменившиеся объекты значения, заполнить причину нарушения инварианта.
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
-    public class AggregateResultWithWarnings<TBoundedContext> :
-        AggregateResult<TBoundedContext>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public class AggregateResultWithWarnings<TBoundedContext, TModel> :
+        AggregateResult<TBoundedContext, TModel>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly BusinessOperationValidator<TBoundedContext> _assertions;
+        private readonly BusinessOperationValidator<TBoundedContext, TModel> _assertions;
 
         public AggregateResultWithWarnings(
-            BusinessOperationData<TBoundedContext> businessOperationData,
-            params IBusinessOperationSpecification<TBoundedContext>[] specifications)
+            BusinessOperationData<TBoundedContext, TModel> businessOperationData,
+            params IBusinessOperationSpecification<TBoundedContext, TModel>[] specifications)
             : base(businessOperationData)
         {
-            _assertions = new BusinessOperationValidator<TBoundedContext>(
+            _assertions = new BusinessOperationValidator<TBoundedContext, TModel>(
                 businessOperationData, specifications);
         }
 

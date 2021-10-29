@@ -1,5 +1,6 @@
 ﻿using Hive.SeedWorks.Definition;
 using Hive.SeedWorks.Result;
+using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.SeedWorks.Invariants
 {
@@ -10,7 +11,9 @@ namespace Hive.SeedWorks.Invariants
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
     /// <typeparam name="TResults">Результат выполнения бизнес-операции.</typeparam>
-    public interface IBusinessOperationSpecification<TBoundedContext, out TResults>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public interface IBusinessOperationSpecification<TBoundedContext, TModel, out TResults>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
@@ -18,7 +21,7 @@ namespace Hive.SeedWorks.Invariants
         /// </summary>
         /// <param name="obj">Объект проверки.</param>
         /// <returns>Результат проверки.</returns>
-        bool IsSatisfiedBy(BusinessOperationData<TBoundedContext> obj);
+        bool IsSatisfiedBy(BusinessOperationData<TBoundedContext, TModel> obj);
         
         /// <summary>
         /// Причина, по которой объект не проходит проверку данной спецификацией.
@@ -37,8 +40,10 @@ namespace Hive.SeedWorks.Invariants
     /// а результат можно пременить.
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
-    public interface IBusinessOperationSpecification<TBoundedContext> :
-        IBusinessOperationSpecification<TBoundedContext, DomainOperationResultEnum>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public interface IBusinessOperationSpecification<TBoundedContext, TModel> :
+        IBusinessOperationSpecification<TBoundedContext, TModel, DomainOperationResultEnum>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     { }
 }

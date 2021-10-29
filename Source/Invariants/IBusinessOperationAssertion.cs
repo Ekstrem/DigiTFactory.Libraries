@@ -1,4 +1,5 @@
 ﻿using Hive.SeedWorks.Definition;
+using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.SeedWorks.Invariants
 {
@@ -8,8 +9,10 @@ namespace Hive.SeedWorks.Invariants
     /// </summary>
     /// <typeparam name="TBoundedContext"></typeparam>
     /// <typeparam name="TResults">Результат выполнения бизнес-операции.</typeparam>
-    public interface IBusinessOperationAssertion<TBoundedContext, out TResults> :
-        IBusinessOperationSpecification<TBoundedContext, TResults>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public interface IBusinessOperationAssertion<TBoundedContext, TModel, out TResults> :
+        IBusinessOperationSpecification<TBoundedContext, TModel, TResults>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     { }
     
@@ -18,8 +21,10 @@ namespace Hive.SeedWorks.Invariants
     /// а результат нельзя применить.
     /// </summary>
     /// <typeparam name="TBoundedContext"></typeparam>
-    public interface IBusinessOperationAssertion<TBoundedContext> :
-        IBusinessOperationSpecification<TBoundedContext>
+    /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
+    public interface IBusinessOperationAssertion<TBoundedContext, TModel> :
+        IBusinessOperationSpecification<TBoundedContext, TModel>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     { }
 }

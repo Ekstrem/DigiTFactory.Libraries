@@ -10,13 +10,14 @@ namespace Hive.SeedWorks.Result
     /// <summary>
     /// Результат выполнения бизнес-операции в агрегате.
     /// </summary>
-    public abstract class AggregateResult<TBoundedContext>
+    public abstract class AggregateResult<TBoundedContext, TModel>
+        where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
-        private readonly BusinessOperationData<TBoundedContext> _businessOperationData;
+        private readonly BusinessOperationData<TBoundedContext, TModel> _businessOperationData;
         private readonly IBoundedContextDescription _boundedContext;
 
-        internal AggregateResult(BusinessOperationData<TBoundedContext> businessOperationData)
+        protected AggregateResult(BusinessOperationData<TBoundedContext, TModel> businessOperationData)
         {
             _businessOperationData = businessOperationData;
             _boundedContext = BoundedContext<TBoundedContext>.GetInfo();
@@ -41,7 +42,7 @@ namespace Hive.SeedWorks.Result
         /// <summary>
         /// Данные бизнес операции.
         /// </summary>
-        public BusinessOperationData<TBoundedContext> BusinessOperationData => _businessOperationData;
+        public BusinessOperationData<TBoundedContext, TModel> BusinessOperationData => _businessOperationData;
 
         /// <summary>
         /// Изменившиеся объект значения.
