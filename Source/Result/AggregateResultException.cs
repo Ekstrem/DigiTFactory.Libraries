@@ -28,7 +28,10 @@ namespace Hive.SeedWorks.Result
             => _assertions = new BusinessOperationValidator<TBoundedContext, TModel>(
                 businessOperationData, specifications);
 
-        public sealed override DomainOperationResultEnum Result => DomainOperationResultEnum.Exception;
+        public sealed override DomainOperationResultEnum Result
+            => _assertions.Result
+                ? DomainOperationResultEnum.Success
+                : DomainOperationResultEnum.Exception;
 
         public sealed override IEnumerable<string> Reason
             => _assertions

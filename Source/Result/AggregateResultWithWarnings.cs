@@ -25,12 +25,12 @@ namespace Hive.SeedWorks.Result
             BusinessOperationData<TBoundedContext, TModel> businessOperationData,
             params IBusinessOperationSpecification<TBoundedContext, TModel>[] specifications)
             : base(businessOperationData)
-        {
-            _assertions = new BusinessOperationValidator<TBoundedContext, TModel>(
-                businessOperationData, specifications);
-        }
+            => _assertions = new BusinessOperationValidator<TBoundedContext, TModel>(businessOperationData, specifications);
 
-        public sealed override DomainOperationResultEnum Result => DomainOperationResultEnum.WithWarnings;
+        public sealed override DomainOperationResultEnum Result
+            => _assertions.Result
+                ? DomainOperationResultEnum.Success
+                : DomainOperationResultEnum.WithWarnings;
 
         public sealed override IEnumerable<string> Reason
             => _assertions

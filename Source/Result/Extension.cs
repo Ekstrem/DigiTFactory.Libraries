@@ -17,10 +17,9 @@ namespace Hive.SeedWorks.Result
             var invalid = specifications
                 .Where(f => f.GetType().GetInterfaces()
                     .Contains(typeof(IBusinessOperationAssertion<TBoundedContext, TModel>)))
-                .Cast<IBusinessOperationAssertion<TBoundedContext, TModel>>()
                 .ToArray()
                 .PipeTo(asserts =>
-                    new AggregateResultWithWarnings<TBoundedContext, TModel>(businessOperationData, asserts));
+                    new AggregateResultException<TBoundedContext, TModel>(businessOperationData, asserts));
             if (invalid.Result == DomainOperationResultEnum.Exception)
             {
                 return invalid;
