@@ -20,9 +20,9 @@ namespace Hive.SeedWorks.TacticalPatterns
     /// Провайдер получения экземпляра агрегата.
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
-    /// <typeparam name="TAggregate">Корневой агрегат контекста.</typeparam>
-    public interface IAggregateProvider<TBoundedContext, TAggregate> 
-        where TAggregate : IAggregate<TBoundedContext>
+    /// <typeparam name="TAnemicModel">Корневой агрегат контекста.</typeparam>
+    public interface IAggregateProvider<TBoundedContext, TAnemicModel> 
+        where TAnemicModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <param name="id">Идентификатор агрегата.</param>
         /// <param name="version">Версия агрегата.</param>
         /// <returns>Аггрегат.</returns>
-        TAggregate GetAggregate(Guid id, long version);
+        TAnemicModel GetAggregate(Guid id, long version);
 
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <param name="version">Версия агрегата.</param>
         /// <param name="cancellationToken">Маркер отмены.</param>
         /// <returns>Задача на извлечение агрегата.</returns>
-        Task<TAggregate> GetAggregateAsync(Guid id, long version, CancellationToken cancellationToken);
+        Task<TAnemicModel> GetAggregateAsync(Guid id, long version, CancellationToken cancellationToken);
 
         /// <summary>
         /// Получение агрегата(ов) по идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор агрегата.</param>
         /// <returns>Агрегат.</returns>
-        TAggregate GetAggregate(Guid id);
+        TAnemicModel GetAggregate(Guid id);
         
         /// <summary>
         /// Получение агрегата(ов) по идентификатору.
@@ -56,6 +56,6 @@ namespace Hive.SeedWorks.TacticalPatterns
         /// <param name="id">Идентификатор агрегата.</param>
         /// <param name="cancellationToken">Маркер отмены.</param>
         /// <returns>Задача на извлечение агрегата.</returns>
-        TAggregate GetAggregateAsync(Guid id, CancellationToken cancellationToken);
+        TAnemicModel GetAggregateAsync(Guid id, CancellationToken cancellationToken);
     }
 }
