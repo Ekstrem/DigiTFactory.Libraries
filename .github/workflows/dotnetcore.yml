@@ -29,5 +29,5 @@ jobs:
       run : dotnet pack Source/Hive.SeedWorks.csproj --configuration Release --output bin/nupkgs
       
     - name: Nuget push
-      run : dotnet nuget push "bin/nupkgs/*.nupkg" -k ${NUGET_AUTH_TOKEN} --skip-duplicate --no-symbols true
+      run : dotnet nuget push "bin/nupkgs/*.nupkg" --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate --no-symbols true
       #--source "https://github.com/Ekstrem/Hive"
