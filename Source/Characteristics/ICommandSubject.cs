@@ -15,4 +15,4 @@ namespace Hive.SeedWorks.Characteristics
         /// </summary>
         string SubjectName { get; }
     }
-}
+} 

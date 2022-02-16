@@ -14,11 +14,6 @@ namespace Hive.SeedWorks.Characteristics
         /// Unix в милисекундах.
         /// </summary>
         T Version { get; }
-
-        /// <summary>
-        /// Идентификатор комманды, создавшей новую версию.
-        /// </summary>
-        Guid CorrelationToken { get; }
     }
 
     /// <summary>

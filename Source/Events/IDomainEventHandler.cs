@@ -1,4 +1,4 @@
-﻿using Hive.SeedWorks.TacticalPatterns;
+﻿using Hive.SeedWorks.Definition;
 
 namespace Hive.SeedWorks.Events
 {

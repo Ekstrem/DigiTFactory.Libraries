@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hive.SeedWorks.Characteristics;
+using Hive.SeedWorks.Definition;
+using Hive.SeedWorks.Result;
 using Hive.SeedWorks.TacticalPatterns;
 
 namespace Hive.SeedWorks.Events
@@ -22,27 +25,20 @@ namespace Hive.SeedWorks.Events
     /// <summary>
     /// Доменное событие предметной области.
     /// </summary>
-    public interface IDomainEvent<TBoundedContext>
+    public interface IDomainEvent<TBoundedContext> :
+        IComplexKey,
+        IBoundedContextDescription,
+        IDomainOperationResult
         where TBoundedContext : IBoundedContext
     {
         /// <summary>
         /// Имя бизнес-операции - доменное событие.
         /// </summary>
-        CommandToAggregate Command { get; }
+        ICommandToAggregate Command { get; }
 
         /// <summary>
         /// Словарь изменившихся объект значений.
         /// </summary>
         IDictionary<string, IValueObject> ChangedValueObjects { get; }
-
-        /// <summary>
-        /// Имя ограниченного контекста в котором произошло событие.
-        /// </summary>
-        string BoundedContext { get; }
-
-        /// <summary>
-        /// Время доменного события над аггрегатом.
-        /// </summary>
-        DateTime TimeStamp { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.TacticalPatterns
+﻿namespace Hive.SeedWorks.Definition
 {
     /// <summary>
     /// Базовый интерфейс, указывающий на принадлежность

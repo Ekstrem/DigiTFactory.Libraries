@@ -1,15 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using Hive.SeedWorks.Monads;
 
 namespace Hive.SeedWorks.Result
 {
     /// <summary>
-    /// Класс помошник для работы над конечным автоматом.
+    /// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     /// </summary>
     public static class TaskResult
     {
         /// <summary>
-        /// Приведение к конечному виду результата обработки обещания.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         /// </summary>
         /// <param name="task"></param>
         /// <param name="success"></param>
@@ -25,9 +26,9 @@ namespace Hive.SeedWorks.Result
 
 
         /// <summary>
-        /// Приведение к конечному виду результата обработки обещания.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         /// </summary>
-        /// <param name="task">Задача общение.</param>
+        /// <param name="task">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</param>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <param name="cancel"></param>
@@ -57,11 +58,11 @@ namespace Hive.SeedWorks.Result
         }
 
         /// <summary>
-        /// Привести задачу TPL к Result-монаде, с Exception отрицательным результатом.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TPL пїЅ Result-пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ Exception пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         /// </summary>
-        /// <param name="task">Промис задача.</param>
-        /// <typeparam name="TSuccess">Успешный результат.</typeparam>
-        /// <returns>Result-монада.</returns>
+        /// <param name="task">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</param>
+        /// <typeparam name="TSuccess">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</typeparam>
+        /// <returns>Result-пїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
         /// <exception cref="ApplicationException"></exception>
         public static async Task<Result<TSuccess, Exception>> ToResult<TSuccess>(this Task<TSuccess> task)
         {
@@ -86,20 +87,20 @@ namespace Hive.SeedWorks.Result
         }
 
         /// <summary>
-        /// Преобразование Result-монады к задаче TPL.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Result-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TPL.
         /// </summary>
-        /// <param name="resultMonad">Result-монада.</param>
-        /// <typeparam name="TSuccess">Успешный результат.</typeparam>
-        /// <returns>Промис задача.</returns>
+        /// <param name="resultMonad">Result-пїЅпїЅпїЅпїЅпїЅпїЅ.</param>
+        /// <typeparam name="TSuccess">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</typeparam>
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
         public static Task<TSuccess> ToTask<TSuccess>(this Result<TSuccess, Exception> resultMonad)
             => resultMonad.Match(Task.FromResult, Task.FromException<TSuccess>);
 
         /// <summary>
-        /// Преобразование Result-монады к задаче TPL.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Result-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TPL.
         /// </summary>
-        /// <param name="resultMonadTask">Result-монада.</param>
-        /// <typeparam name="TSuccess">Успешный результат.</typeparam>
-        /// <returns>Промис задача.</returns>
+        /// <param name="resultMonadTask">Result-пїЅпїЅпїЅпїЅпїЅпїЅ.</param>
+        /// <typeparam name="TSuccess">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</typeparam>
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
         public static Task<TSuccess> ToTask<TSuccess>(this Task<Result<TSuccess, Exception>> resultMonadTask)
             => resultMonadTask.ContinueWith(t => t.Result.ToTask().Result);
 
