@@ -23,6 +23,12 @@ namespace Hive.SeedWorks.Monads
             Func<TSource, TResult> ifFalse)
             => condition(o) ? ifTrue(o) : ifFalse(o);
 
+        public static TOutput Either<TInput, TOutput>(
+            this TInput o,
+            Func<TInput, TOutput> ifTrue,
+            Func<TInput, TOutput> ifFalse)
+            => o.Either(x => x != null, ifTrue, ifFalse);
+
         /// <summary>
         /// Применение функции к результирующему значению.
         /// Для написания FluentApi-style code.

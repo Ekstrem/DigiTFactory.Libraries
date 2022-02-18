@@ -37,7 +37,7 @@ namespace Hive.SeedWorks.Result
             ChangeValueObjects,
             _boundedContext,
             Result,
-            Reason.First());
+            Reason?.FirstOrDefault() ?? string.Empty);
 
         /// <summary>
         /// Данные бизнес операции.
