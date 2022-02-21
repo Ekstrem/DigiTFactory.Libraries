@@ -18,9 +18,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1
-        source-url: https://nuget.pkg.github.com/Ekstrem/index.json
       env:
-          NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
+          GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
     
     - name: Build with dotnet
       run: dotnet build Source/Hive.SeedWorks.csproj --configuration Release
@@ -29,7 +28,7 @@ jobs:
       run : dotnet pack Source/Hive.SeedWorks.csproj --configuration Release --output bin/nupkgs
       
     - name: Nuget push to GitHub
-      run : dotnet nuget push "bin/nupkgs/*.nupkg" --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate --no-symbols true
+      run : dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate --no-symbols true
       
     - name: Nuget push NugetOrg
-      run : dotnet nuget push "bin/nupkgs/*.nupkg" --api-key ${{secrets.NUORG}} --skip-duplicate --no-symbols true
+      run : dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate --no-symbols true
