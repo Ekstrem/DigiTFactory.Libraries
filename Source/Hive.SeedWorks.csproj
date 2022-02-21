@@ -2,21 +2,20 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.0.1</Version>
+    <Version>0.1</Version>
     <Authors>Войтов Евгений</Authors>
-    <Company></Company>
-    <Product>Hive</Product>
+    <Product>MicroservicesHive</Product>
     <Copyright>Evgeniy Voitov 2019</Copyright>
     <RepositoryUrl>https://github.com/Ekstrem/Hive</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>0.0.1.2</FileVersion>
-    <AssemblyVersion>0.0.1.2</AssemblyVersion>
+    <FileVersion>0.1.0.3</FileVersion>
+    <AssemblyVersion>0.1.0.3</AssemblyVersion>
     <PackageIconUrl></PackageIconUrl>
     <Description>Базовые интерфейсы для реализации Domain Driven Design.</Description>
     <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
-    <AssemblyName>Hive.SeedWorks</AssemblyName>
-    <RootNamespace>Hive.SeedWorks</RootNamespace>
+    <AssemblyName>MHive.SeedWorks</AssemblyName>
+    <RootNamespace>MHive.SeedWorks</RootNamespace>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <TargetFramework>netstandard2.1</TargetFramework>
