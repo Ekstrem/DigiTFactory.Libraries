@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.1</Version>
+    <Version>0.2</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>MicroservicesHive</Product>
     <Copyright>Evgeniy Voitov 2019</Copyright>
