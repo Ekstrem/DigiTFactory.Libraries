@@ -26,18 +26,19 @@ namespace Hive.SeedWorks.Result
         /// <summary>
         /// Событие предметной области.
         /// </summary>
-        public IDomainEvent<TBoundedContext> Event => new DomainEvent<TBoundedContext>(
-            _businessOperationData.Aggregate.Id,
-            _businessOperationData.Aggregate.Version,
-            CommandToAggregate.Commit(
-                _businessOperationData.Model.CorrelationToken,
-                _businessOperationData.Model.CommandName,
-                _businessOperationData.Model.SubjectName,
-                _businessOperationData.Model.Version),
-            ChangeValueObjects,
-            _boundedContext,
-            Result,
-            Reason?.FirstOrDefault() ?? string.Empty);
+        public IDomainEvent<TBoundedContext> Event 
+            => new DomainEvent<TBoundedContext>(
+                _businessOperationData.Aggregate.Id,
+                _businessOperationData.Aggregate.Version,
+                CommandToAggregate.Commit(
+                    _businessOperationData.Model.CorrelationToken,
+                    _businessOperationData.Model.CommandName,
+                    _businessOperationData.Model.SubjectName,
+                    _businessOperationData.Model.Version),
+                ChangeValueObjects,
+                _boundedContext,
+                Result,
+                Reason?.FirstOrDefault() ?? string.Empty);
 
         /// <summary>
         /// Данные бизнес операции.
