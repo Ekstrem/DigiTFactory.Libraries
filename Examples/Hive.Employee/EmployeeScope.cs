@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
 namespace DigiTFactory.Libraries.Employee

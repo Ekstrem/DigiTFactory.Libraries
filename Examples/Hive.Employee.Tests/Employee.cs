@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
 namespace DigiTFactory.Libraries.Employee.Tests

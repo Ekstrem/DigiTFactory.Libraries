@@ -1,4 +1,5 @@
-﻿using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
+﻿using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
 namespace DigiTFactory.Libraries.Employee
 {
