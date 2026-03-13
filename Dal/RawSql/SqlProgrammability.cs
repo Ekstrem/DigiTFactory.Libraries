@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Hive.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
 
-namespace Hive.Dal.RawSql
+namespace DigiTFactory.Libraries.Dal.RawSql
 {
     public class SqlProgrammability : ISqlProgrammability
     {

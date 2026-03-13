@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Hive.Dal.RawSql
+namespace DigiTFactory.Libraries.Dal.RawSql
 {
     /// <summary>
     /// Компонент маппинга результата SQL выборки на сложный объект

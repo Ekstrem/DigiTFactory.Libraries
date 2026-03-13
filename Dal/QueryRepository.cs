@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Hive.SeedWorks.TacticalPatterns;
-using Hive.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
 
-namespace Hive.Dal
+namespace DigiTFactory.Libraries.Dal
 {
 	/// <summary>
 	/// Репозиторий запросов.

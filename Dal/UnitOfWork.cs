@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Hive.SeedWorks.TacticalPatterns;
-using Hive.SeedWorks.TacticalPatterns.Repository;
-using Hive.Dal.RawSql;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.Dal.RawSql;
 
-namespace Hive.Dal
+namespace DigiTFactory.Libraries.Dal
 {
     /// <summary>
     /// Единица работы.
