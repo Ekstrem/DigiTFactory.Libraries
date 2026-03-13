@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Events;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Events;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using Xunit;
 
-namespace Hive.Employee.Tests
+namespace DigiTFactory.Libraries.Employee.Tests
 {
     public class UnitTest1
     {
