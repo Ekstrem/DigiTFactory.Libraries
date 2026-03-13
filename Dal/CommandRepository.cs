@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 
 namespace DigiTFactory.Libraries.Dal
 {

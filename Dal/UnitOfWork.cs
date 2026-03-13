@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.Dal.RawSql;
 
 namespace DigiTFactory.Libraries.Dal
