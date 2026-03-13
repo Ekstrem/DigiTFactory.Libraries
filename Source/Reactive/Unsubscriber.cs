@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Hive.SeedWorks.Reactive
+namespace DigiTFactory.Libraries.SeedWorks.Reactive
 {
     public class Unsubscriber<T> : IDisposable
     {

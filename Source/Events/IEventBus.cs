@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.Events
+﻿namespace DigiTFactory.Libraries.SeedWorks.Events
 {
     /// <summary>
     /// Шина событий.

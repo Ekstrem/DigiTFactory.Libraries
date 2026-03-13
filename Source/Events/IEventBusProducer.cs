@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Events
+namespace DigiTFactory.Libraries.SeedWorks.Events
 {
     /// <summary>
     /// Поставшик в шину событий.

@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.Definition
+﻿namespace DigiTFactory.Libraries.SeedWorks.Definition
 {
     /// <summary>
     /// Описание ограниченного контекста.

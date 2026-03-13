@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.Events;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Events;
 
-namespace Hive.SeedWorks.TacticalPatterns
+namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Провайдер получения экземпляра агрегата.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Characteristics
+namespace DigiTFactory.Libraries.SeedWorks.Characteristics
 {
     /// <summary>
     /// Имеет объект-значения.

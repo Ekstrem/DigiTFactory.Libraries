@@ -1,6 +1,6 @@
-﻿using Hive.SeedWorks.Definition;
+﻿using DigiTFactory.Libraries.SeedWorks.Definition;
 
-namespace Hive.SeedWorks.Events
+namespace DigiTFactory.Libraries.SeedWorks.Events
 {
     /// <summary>
     /// Обработчик доменных событий.

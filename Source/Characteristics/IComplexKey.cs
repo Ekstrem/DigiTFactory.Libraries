@@ -1,6 +1,6 @@
 using System;
 
-namespace Hive.SeedWorks.Characteristics
+namespace DigiTFactory.Libraries.SeedWorks.Characteristics
 {
     //public interface IComplexKey : IHasKey<Guid>, IHasVersion { }
 

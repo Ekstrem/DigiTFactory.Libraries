@@ -1,12 +1,12 @@
 ﻿using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.Invariants;
-using Hive.SeedWorks.Result;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Invariants;
+using DigiTFactory.Libraries.SeedWorks.Result;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Operations
+namespace DigiTFactory.Libraries.SeedWorks.Operations
 {
     /// <summary>
     /// Служебный класс валидирования операций.

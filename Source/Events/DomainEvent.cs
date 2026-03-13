@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.Result;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Result;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Events
+namespace DigiTFactory.Libraries.SeedWorks.Events
 {
     /// <summary>
     /// Доменное событие предметной области.

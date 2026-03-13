@@ -1,7 +1,7 @@
 using System;
-using Hive.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
 
-namespace Hive.SeedWorks.Events
+namespace DigiTFactory.Libraries.SeedWorks.Events
 {
     /// <summary>
     /// Сведения о команде к агрегату.

@@ -1,8 +1,8 @@
 using System;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 
-namespace Hive.SeedWorks.TacticalPatterns
+namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Анемичная модель ограниченного контекста для Фабрики создания агрегата.

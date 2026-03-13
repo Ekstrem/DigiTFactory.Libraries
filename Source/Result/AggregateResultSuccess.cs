@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.Invariants;
-using Hive.SeedWorks.TacticalPatterns;
+using System.Linq;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Invariants;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Result
+namespace DigiTFactory.Libraries.SeedWorks.Result
 {
-    public class AggregateResultSuccess<TBoundedContext, TModel> :
+    public sealed class AggregateResultSuccess<TBoundedContext, TModel> :
         AggregateResult<TBoundedContext, TModel>
         where TModel : IAnemicModel<TBoundedContext>
         where TBoundedContext : IBoundedContext
@@ -17,6 +18,6 @@ namespace Hive.SeedWorks.Result
 
         public override DomainOperationResultEnum Result => DomainOperationResultEnum.Success;
 
-        public override IEnumerable<string> Reason => null;
+        public override IEnumerable<string> Reason => Enumerable.Empty<string>();
     }
 }
