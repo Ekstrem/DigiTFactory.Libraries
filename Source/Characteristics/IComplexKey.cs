@@ -9,8 +9,9 @@ namespace DigiTFactory.Libraries.SeedWorks.Characteristics
     /// </summary>
     public interface IComplexKey :
         IComplexKey<Guid, long>,
-        IHasKey, 
-        IHasVersion
+        IHasKey,
+        IHasVersion,
+        IHasCorrelationToken
     {
     }
 

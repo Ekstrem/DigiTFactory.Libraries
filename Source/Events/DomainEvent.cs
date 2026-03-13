@@ -44,7 +44,12 @@ namespace DigiTFactory.Libraries.SeedWorks.Events
         /// Экземпляр агрегата.
         /// </summary>
         public Guid Id => _id;
-        
+
+        /// <summary>
+        /// Маркер корреляции команды.
+        /// </summary>
+        public Guid CorrelationToken => _command.CorrelationToken;
+
         /// <summary>
         /// Версия агрегата, над которой выполнялась команда.
         /// </summary>

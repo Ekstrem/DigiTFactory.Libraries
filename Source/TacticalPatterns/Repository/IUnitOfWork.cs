@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
 namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository
