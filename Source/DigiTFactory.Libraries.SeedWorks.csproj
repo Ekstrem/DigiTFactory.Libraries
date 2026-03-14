@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
