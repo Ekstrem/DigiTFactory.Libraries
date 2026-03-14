@@ -2,18 +2,18 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.2</Version>
+    <Version>0.2.0</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
-    <Copyright>Evgeniy Voitov 2019</Copyright>
-    <RepositoryUrl>https://github.com/Ekstrem/Hive</RepositoryUrl>
+    <Copyright>Evgeniy Voitov 2019-2026</Copyright>
+    <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>0.1.0.3</FileVersion>
-    <AssemblyVersion>0.1.0.3</AssemblyVersion>
-    <PackageIconUrl></PackageIconUrl>
-    <Description>Базовые интерфейсы для реализации Domain Driven Design.</Description>
-    <DocumentationFile>Fida.Common.Primitives.xml</DocumentationFile>
+    <FileVersion>0.2.0.0</FileVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <PackageId>DigiTFactory.Libraries.SeedWorks</PackageId>
+    <Description>Базовые интерфейсы и паттерны для реализации Domain Driven Design (DDD). Включает тактические паттерны, Event Sourcing, CQRS.</Description>
     <AssemblyName>DigiTFactory.Libraries.SeedWorks</AssemblyName>
     <RootNamespace>DigiTFactory.Libraries.SeedWorks</RootNamespace>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
