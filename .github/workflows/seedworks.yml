@@ -5,30 +5,30 @@ on:
     branches:
       - master
     paths:
-      - Source/*
-      - .github/workflows/*
+      - Source/**
+      - .github/workflows/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 3.1
+        dotnet-version: 8.0.x
       env:
           GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
-    
+
     - name: Build with dotnet
-      run: dotnet build Source/Hive.SeedWorks.csproj --configuration Release
-      
+      run: dotnet build Source/DigiTFactory.Libraries.SeedWorks.csproj --configuration Release
+
     - name: Project pack
-      run : dotnet pack Source/Hive.SeedWorks.csproj --configuration Release --output bin/nupkgs
-      
+      run: dotnet pack Source/DigiTFactory.Libraries.SeedWorks.csproj --configuration Release --no-build --output bin/nupkgs
+
     - name: Nuget push to GitHub
-      run : dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate --no-symbols true
-      
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate
+
     - name: Nuget push NugetOrg
-      run : dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate --no-symbols true
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate
