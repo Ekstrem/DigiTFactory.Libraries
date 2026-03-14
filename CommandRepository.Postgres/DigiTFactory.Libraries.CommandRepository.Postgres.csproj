@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>DigiTFactory.Libraries.CommandRepository.Postgres</RootNamespace>
+    <AssemblyName>DigiTFactory.Libraries.CommandRepository.Postgres</AssemblyName>
+    <PackageId>DigiTFactory.Libraries.CommandRepository.Postgres</PackageId>
+    <Version>0.1.0</Version>
+    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <Authors>Войтов Евгений</Authors>
+    <Product>DigiTFactory.Libraries</Product>
+    <Copyright>Evgeniy Voitov 2019-2026</Copyright>
+    <Description>Event Store / Command Repository для PostgreSQL с тремя стратегиями хранения: Full Event Sourcing, Snapshot + Events, State Only.</Description>
+    <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
