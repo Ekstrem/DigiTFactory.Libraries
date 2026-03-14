@@ -1,0 +1,34 @@
+name: Build and push ReadRepository.Scylla
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ReadRepository.Scylla/**
+      - .github/workflows/readrepository-scylla.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+      env:
+          GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
+
+    - name: Build with dotnet
+      run: dotnet build ReadRepository.Scylla/DigiTFactory.Libraries.ReadRepository.Scylla.csproj --configuration Release
+
+    - name: Project pack
+      run: dotnet pack ReadRepository.Scylla/DigiTFactory.Libraries.ReadRepository.Scylla.csproj --configuration Release --no-build --output bin/nupkgs
+
+    - name: Nuget push to GitHub
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate
+
+    - name: Nuget push NugetOrg
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate
