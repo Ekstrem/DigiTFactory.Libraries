@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiTFactory.Libraries.Empl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiTFactory.Libraries.Dal", "..\Dal\DigiTFactory.Libraries.Dal.csproj", "{50F645DF-58F1-495E-ACFB-AC2F6912E89E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiTFactory.Libraries.CommandRepository.Postgres", "..\CommandRepository.Postgres\DigiTFactory.Libraries.CommandRepository.Postgres.csproj", "{829287F9-60FB-4F98-B481-5649BF93358F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{50F645DF-58F1-495E-ACFB-AC2F6912E89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F645DF-58F1-495E-ACFB-AC2F6912E89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F645DF-58F1-495E-ACFB-AC2F6912E89E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829287F9-60FB-4F98-B481-5649BF93358F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829287F9-60FB-4F98-B481-5649BF93358F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829287F9-60FB-4F98-B481-5649BF93358F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829287F9-60FB-4F98-B481-5649BF93358F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
