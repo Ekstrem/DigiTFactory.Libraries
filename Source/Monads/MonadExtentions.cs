@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hive.SeedWorks.Monads
+namespace DigiTFactory.Libraries.SeedWorks.Monads
 {
     public static class MonadExtentions
     {

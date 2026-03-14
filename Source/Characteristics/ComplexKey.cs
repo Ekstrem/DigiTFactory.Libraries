@@ -1,7 +1,7 @@
 using System;
-using Hive.SeedWorks.Events;
+using DigiTFactory.Libraries.SeedWorks.Events;
 
-namespace Hive.SeedWorks.Characteristics
+namespace DigiTFactory.Libraries.SeedWorks.Characteristics
 {
     public sealed class ComplexKey : IComplexKey
     {

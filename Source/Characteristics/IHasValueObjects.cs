@@ -1,13 +1,18 @@
 ﻿using System.Collections.Generic;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Characteristics
+namespace DigiTFactory.Libraries.SeedWorks.Characteristics
 {
     /// <summary>
     /// Имеет объект-значения.
     /// </summary>
     public interface IHasValueObjects
     {
+        /// <summary>
+        /// Словарь объект-значений (инвариантов).
+        /// </summary>
+        IDictionary<string, IValueObject> Invariants { get; }
+
         /// <summary>
         /// Получить объекты значения.
         /// </summary>

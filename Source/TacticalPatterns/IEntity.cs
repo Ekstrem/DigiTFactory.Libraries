@@ -1,6 +1,6 @@
-﻿using Hive.SeedWorks.Characteristics;
+﻿using DigiTFactory.Libraries.SeedWorks.Characteristics;
 
-namespace Hive.SeedWorks.TacticalPatterns
+namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Сущность.

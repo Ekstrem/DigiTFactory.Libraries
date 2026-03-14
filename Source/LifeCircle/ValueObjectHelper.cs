@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Hive.SeedWorks.Monads;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Monads;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.LifeCircle
+namespace DigiTFactory.Libraries.SeedWorks.LifeCircle
 {
     public static class ValueObjectHelper
     {

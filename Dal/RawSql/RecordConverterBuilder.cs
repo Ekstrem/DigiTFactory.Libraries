@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Hive.Dal.RawSql
+namespace DigiTFactory.Libraries.Dal.RawSql
 {
     /// <summary>
     /// Компонент построения функции чтения записи из результата выборки SQL

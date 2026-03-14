@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>DigiTFactory.Libraries.Employee</RootNamespace>
+    <AssemblyName>DigiTFactory.Libraries.Employee</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigiTFactory.Libraries.SeedWorks.csproj" />
+  </ItemGroup>
+
+</Project>

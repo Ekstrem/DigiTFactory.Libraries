@@ -1,4 +1,4 @@
-namespace Hive.Employee.Tests
+namespace DigiTFactory.Libraries.Employee.Tests
 {
     public class Department : IDepartment
     {

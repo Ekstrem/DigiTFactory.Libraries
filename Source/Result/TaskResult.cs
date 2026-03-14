@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Hive.SeedWorks.Monads;
+using DigiTFactory.Libraries.SeedWorks.Monads;
 
-namespace Hive.SeedWorks.Result
+namespace DigiTFactory.Libraries.SeedWorks.Result
 {
     /// <summary>
     /// ����� �������� ��� ������ ��� �������� ���������.
@@ -35,25 +35,28 @@ namespace Hive.SeedWorks.Result
         /// <typeparam name="TResult"></typeparam>
         /// <typeparam name="TSuccess"></typeparam>
         /// <returns></returns>
-        public static Task<TResult> Match<TResult, TSuccess>(
+        public static async Task<TResult> Match<TResult, TSuccess>(
             this Task<TSuccess> task,
             Func<TSuccess, TResult> success,
             Func<AggregateException, TResult> failure,
             Func<TResult> cancel)
         {
-            switch (task.Status)
+            try
             {
-                case TaskStatus.WaitingToRun:
-                case TaskStatus.Running:
-                    return task.ContinueWith(t => t.Match(success, failure, cancel).Result);
-                case TaskStatus.RanToCompletion:
-                    return task.ContinueWith(t => success(t.Result));
-                case TaskStatus.Faulted:
-                    return task.ContinueWith(t => failure(t.Exception));
-                case TaskStatus.Canceled:
-                    return task.ContinueWith(t => cancel());
-                default:
-                    return default;
+                var result = await task.ConfigureAwait(false);
+                return success(result);
+            }
+            catch (OperationCanceledException)
+            {
+                return cancel();
+            }
+            catch (AggregateException ex)
+            {
+                return failure(ex);
+            }
+            catch (Exception ex)
+            {
+                return failure(new AggregateException(ex));
             }
         }
 
@@ -101,8 +104,11 @@ namespace Hive.SeedWorks.Result
         /// <param name="resultMonadTask">Result-������.</param>
         /// <typeparam name="TSuccess">�������� ���������.</typeparam>
         /// <returns>������ ������.</returns>
-        public static Task<TSuccess> ToTask<TSuccess>(this Task<Result<TSuccess, Exception>> resultMonadTask)
-            => resultMonadTask.ContinueWith(t => t.Result.ToTask().Result);
+        public static async Task<TSuccess> ToTask<TSuccess>(this Task<Result<TSuccess, Exception>> resultMonadTask)
+        {
+            var result = await resultMonadTask.ConfigureAwait(false);
+            return await result.ToTask().ConfigureAwait(false);
+        }
 
     }
 }

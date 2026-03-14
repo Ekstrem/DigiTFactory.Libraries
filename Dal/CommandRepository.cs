@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Hive.SeedWorks.TacticalPatterns;
-using Hive.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 
-namespace Hive.Dal
+namespace DigiTFactory.Libraries.Dal
 {
 	/// <summary>
 	/// Базовый репозиторий всех команд.

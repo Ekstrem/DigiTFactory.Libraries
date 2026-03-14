@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Hive.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Definition;
 
-namespace Hive.SeedWorks.TacticalPatterns
+namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Репозиторий получения из хранилища анемичной модели агрегата.

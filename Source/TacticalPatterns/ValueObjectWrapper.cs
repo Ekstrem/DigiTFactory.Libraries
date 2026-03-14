@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.TacticalPatterns
+﻿namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
 {
     /// <summary>
     /// Обёртка над простыми системными типами.

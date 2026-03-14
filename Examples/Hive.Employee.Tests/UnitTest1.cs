@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Events;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.Events;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using Xunit;
 
-namespace Hive.Employee.Tests
+namespace DigiTFactory.Libraries.Employee.Tests
 {
     public class UnitTest1
     {
@@ -28,8 +29,7 @@ namespace Hive.Employee.Tests
             var aggregateCreateResult = create.Handle(anemicModel, NewCommand(), scope);
             Assert.NotNull(aggregateCreateResult);
 
-            var aggregateResult = aggregateCreateResult.Aggregate
-                .Operations[nameof(ChangeSecondName)]
+            var aggregateResult = aggregate.Operations[nameof(ChangeSecondName)]
                 .Handle(Employee.CreateChangeNameTest(NewComplexKey()), NewCommand(), scope);
             Assert.NotNull(aggregateResult);
         }

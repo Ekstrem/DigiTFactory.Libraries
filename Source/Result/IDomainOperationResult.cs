@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hive.SeedWorks.Result
+namespace DigiTFactory.Libraries.SeedWorks.Result
 {
     /// <summary>
     /// Результат выполнения доменной операции.

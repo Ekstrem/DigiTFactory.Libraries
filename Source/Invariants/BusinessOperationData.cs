@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Hive.SeedWorks.Characteristics;
-using Hive.SeedWorks.Definition;
-using Hive.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.Characteristics;
+using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.SeedWorks.Invariants
+namespace DigiTFactory.Libraries.SeedWorks.Invariants
 {
     public class BusinessOperationData<TBoundedContext, TModel> : IHasValueObjects
         where TModel : IAnemicModel<TBoundedContext>
@@ -22,7 +22,9 @@ namespace Hive.SeedWorks.Invariants
         public TModel Aggregate => _aggregate;
 
         public TModel Model => _model;
-        
+
+        public IDictionary<string, IValueObject> Invariants => GetValueObjects();
+
         public IDictionary<string, IValueObject> GetValueObjects()
         {
             var aggregateValueObjects = _aggregate.GetValueObjects();
@@ -32,7 +34,8 @@ namespace Hive.SeedWorks.Invariants
                 .Where(key => !Equals(
                     aggregateValueObjects.TryGetValue(key, out var bufA) ? bufA : null,
                     dtoValueObjects.TryGetValue(key, out var bufD) ? bufD : null))
-                .ToDictionary(k => k, v => dtoValueObjects.ContainsKey(v) ? dtoValueObjects[v] : null);
+                .Where(k => dtoValueObjects.ContainsKey(k))
+                .ToDictionary(k => k, v => dtoValueObjects[v]);
             return changedValueObjects;
         }
 

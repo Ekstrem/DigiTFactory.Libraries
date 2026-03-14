@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.Characteristics
+﻿namespace DigiTFactory.Libraries.SeedWorks.Characteristics
 {
     /// <summary>
     /// Объект имеет предыдущий.

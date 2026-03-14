@@ -1,6 +1,6 @@
-﻿using Hive.SeedWorks.TacticalPatterns.Repository;
+﻿using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
 
-namespace Hive.Dal
+namespace DigiTFactory.Libraries.Dal
 {
     /// <summary>
     /// Постраничная навигация

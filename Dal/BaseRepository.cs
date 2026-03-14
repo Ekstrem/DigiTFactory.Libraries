@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hive.Dal
+namespace DigiTFactory.Libraries.Dal
 {
 	/// <summary>
 	/// Базовый репозиторий.

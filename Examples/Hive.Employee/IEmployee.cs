@@ -1,6 +1,7 @@
-﻿using Hive.SeedWorks.TacticalPatterns;
+﻿using DigiTFactory.Libraries.SeedWorks.Definition;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 
-namespace Hive.Employee
+namespace DigiTFactory.Libraries.Employee
 {
     public interface IEmployee : IBoundedContext { }
 }

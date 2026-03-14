@@ -1,4 +1,4 @@
-﻿namespace Hive.SeedWorks.Result
+﻿namespace DigiTFactory.Libraries.SeedWorks.Result
 {
     /// <summary>
     /// Результат доменной операции.
