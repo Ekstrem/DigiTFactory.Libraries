@@ -29,8 +29,7 @@ namespace DigiTFactory.Libraries.Employee.Tests
             var aggregateCreateResult = create.Handle(anemicModel, NewCommand(), scope);
             Assert.NotNull(aggregateCreateResult);
 
-            var aggregateResult = aggregateCreateResult.Aggregate
-                .Operations[nameof(ChangeSecondName)]
+            var aggregateResult = aggregate.Operations[nameof(ChangeSecondName)]
                 .Handle(Employee.CreateChangeNameTest(NewComplexKey()), NewCommand(), scope);
             Assert.NotNull(aggregateResult);
         }

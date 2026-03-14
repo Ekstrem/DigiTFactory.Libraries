@@ -9,6 +9,11 @@ namespace DigiTFactory.Libraries.SeedWorks.Characteristics
     public interface IHasValueObjects
     {
         /// <summary>
+        /// Словарь объект-значений (инвариантов).
+        /// </summary>
+        IDictionary<string, IValueObject> Invariants { get; }
+
+        /// <summary>
         /// Получить объекты значения.
         /// </summary>
         /// <returns>Словарь объект-значений.</returns>

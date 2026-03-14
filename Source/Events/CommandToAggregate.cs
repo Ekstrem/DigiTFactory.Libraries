@@ -62,5 +62,12 @@ namespace DigiTFactory.Libraries.SeedWorks.Events
         public static CommandToAggregate Commit(
             Guid correlationToken, string commandName, string subjectName, long version)
             => new CommandToAggregate(correlationToken, commandName, subjectName, version);
+
+        /// <summary>
+        /// Создаст структуру <see cref="CommandToAggregate"/> с версией по умолчанию (текущее время).
+        /// </summary>
+        public static CommandToAggregate Commit(
+            Guid correlationToken, string commandName, string subjectName)
+            => new CommandToAggregate(correlationToken, commandName, subjectName, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
     }
 }

@@ -22,7 +22,9 @@ namespace DigiTFactory.Libraries.SeedWorks.Invariants
         public TModel Aggregate => _aggregate;
 
         public TModel Model => _model;
-        
+
+        public IDictionary<string, IValueObject> Invariants => GetValueObjects();
+
         public IDictionary<string, IValueObject> GetValueObjects()
         {
             var aggregateValueObjects = _aggregate.GetValueObjects();
