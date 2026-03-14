@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>DigiTFactory.Libraries.EventBus.Postgres</RootNamespace>
+    <AssemblyName>DigiTFactory.Libraries.EventBus.Postgres</AssemblyName>
+    <PackageId>DigiTFactory.Libraries.EventBus.Postgres</PackageId>
+    <Version>0.1.0</Version>
+    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <Authors>Войтов Евгений</Authors>
+    <Product>DigiTFactory.Libraries</Product>
+    <Copyright>Evgeniy Voitov 2019-2026</Copyright>
+    <Description>PostgreSQL (outbox/polling) реализация IEventBus для доменных событий.</Description>
+    <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="8.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

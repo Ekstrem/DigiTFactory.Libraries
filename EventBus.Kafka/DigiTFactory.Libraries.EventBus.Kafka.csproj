@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>DigiTFactory.Libraries.EventBus.Kafka</RootNamespace>
+    <AssemblyName>DigiTFactory.Libraries.EventBus.Kafka</AssemblyName>
+    <PackageId>DigiTFactory.Libraries.EventBus.Kafka</PackageId>
+    <Version>0.1.0</Version>
+    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <Authors>Войтов Евгений</Authors>
+    <Product>DigiTFactory.Libraries</Product>
+    <Copyright>Evgeniy Voitov 2019-2026</Copyright>
+    <Description>Apache Kafka реализация IEventBus для распределённого обмена доменными событиями.</Description>
+    <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.6.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
