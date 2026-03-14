@@ -8,11 +8,6 @@ on:
       - Source/**
       - .github/workflows/**
 
-permissions:
-  id-token: write   # Нужно для NuGet.org (OIDC)
-  contents: read    # Нужно для checkout
-  packages: write   # Нужно для GitHub Packages (если захотите использовать GITHUB_TOKEN)
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,4 +31,4 @@ jobs:
       run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate
 
     - name: Nuget push NugetOrg
-      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate
