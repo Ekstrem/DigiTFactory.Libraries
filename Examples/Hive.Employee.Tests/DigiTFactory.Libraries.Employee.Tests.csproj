@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Hive.SeedWorks.csproj" />
-    <ProjectReference Include="..\Hive.Employee\Hive.Employee.csproj" />
+    <ProjectReference Include="..\..\Source\DigiTFactory.Libraries.SeedWorks.csproj" />
+    <ProjectReference Include="..\Hive.Employee\DigiTFactory.Libraries.Employee.csproj" />
   </ItemGroup>
 
 </Project>
