@@ -1,6 +1,7 @@
 name: Build and push ReadRepository.Scylla
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master

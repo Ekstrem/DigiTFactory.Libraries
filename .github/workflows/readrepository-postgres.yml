@@ -1,6 +1,7 @@
 name: Build and push ReadRepository.Postgres
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
