@@ -50,7 +50,7 @@ namespace DigiTFactory.Libraries.ReadRepository.Redis
             if (value.IsNullOrEmpty)
                 return default;
 
-            return JsonSerializer.Deserialize<TReadModel>(value!);
+            return JsonSerializer.Deserialize<TReadModel>((string)value!);
         }
 
         /// <inheritdoc />
@@ -72,7 +72,7 @@ namespace DigiTFactory.Libraries.ReadRepository.Redis
 
             return values
                 .Where(v => v.HasValue)
-                .Select(v => JsonSerializer.Deserialize<TReadModel>(v!))
+                .Select(v => JsonSerializer.Deserialize<TReadModel>((string)v!))
                 .ToList();
         }
 
