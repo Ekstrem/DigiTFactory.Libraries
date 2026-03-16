@@ -22,6 +22,7 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants
         /// - IsNotNewEntity — агрегат существует (Version > 0)
         /// - VOExists:Name — Value Object существует и не null
         /// - PropertyEquals:VO.Prop:Value — свойство VO равно значению
+        /// - PropertyNotEquals:VO.Prop:Value — свойство VO НЕ равно значению (null-safe)
         /// - PropertyNotNull:VO.Prop — свойство VO не null
         /// - CollectionNotEmpty:Name — коллекция VO не пуста
         /// - StateIs:State — текущее состояние агрегата
@@ -56,6 +57,11 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants
                 ("PropertyEquals", InvariantType.Validator) =>
                     ParsePropertyEquals<TBoundedContext>(metadata, parts, isAssertion: false),
 
+                ("PropertyNotEquals", InvariantType.Assertion) =>
+                    ParsePropertyNotEquals<TBoundedContext>(metadata, parts, isAssertion: true),
+                ("PropertyNotEquals", InvariantType.Validator) =>
+                    ParsePropertyNotEquals<TBoundedContext>(metadata, parts, isAssertion: false),
+
                 ("PropertyNotNull", InvariantType.Assertion) =>
                     ParsePropertyNotNull<TBoundedContext>(metadata, parts, isAssertion: true),
                 ("PropertyNotNull", InvariantType.Validator) =>
@@ -74,7 +80,7 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants
                 _ => throw new ArgumentException(
                     $"Unknown rule expression: '{expression}'. " +
                     $"Supported rules: IsNewEntity, IsNotNewEntity, VOExists, PropertyEquals, " +
-                    $"PropertyNotNull, CollectionNotEmpty, StateIs")
+                    $"PropertyNotEquals, PropertyNotNull, CollectionNotEmpty, StateIs")
             };
         }
 
@@ -91,6 +97,21 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants
             return isAssertion
                 ? new PropertyEqualsAssertion<TBoundedContext>(metadata, voName, propName, expectedValue)
                 : new PropertyEqualsValidator<TBoundedContext>(metadata, voName, propName, expectedValue);
+        }
+
+        /// <summary>
+        /// Разбор "PropertyNotEquals:VO.Prop:ForbiddenValue"
+        /// </summary>
+        private static IBusinessOperationSpecification<TBoundedContext, IAnemicModel<TBoundedContext>>
+            ParsePropertyNotEquals<TBoundedContext>(InvariantMetadata metadata, string[] parts, bool isAssertion)
+            where TBoundedContext : IBoundedContext
+        {
+            var (voName, propName) = ParseVoProp(GetParam(parts, 1));
+            var forbiddenValue = GetParam(parts, 2);
+
+            return isAssertion
+                ? new PropertyNotEqualsAssertion<TBoundedContext>(metadata, voName, propName, forbiddenValue)
+                : new PropertyNotEqualsValidator<TBoundedContext>(metadata, voName, propName, forbiddenValue);
         }
 
         /// <summary>

@@ -40,7 +40,7 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Factory
             CancellationToken ct = default)
         {
             var metadata = await _cache.GetOrLoadAsync(aggregateName, ct);
-            var scope = BuildScope(metadata);
+            var scope = BuildScope(metadata, model);
             return Aggregate<TBoundedContext>.CreateInstance(model, scope);
         }
 
@@ -56,7 +56,12 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Factory
         /// <summary>
         /// Построить IBoundedContextScope из метаданных.
         /// </summary>
-        private DynamicBoundedContextScope<TBoundedContext> BuildScope(AggregateMetadata metadata)
+        /// <summary>
+        /// Построить IBoundedContextScope из метаданных + текущая модель.
+        /// </summary>
+        public DynamicBoundedContextScope<TBoundedContext> BuildScope(
+            AggregateMetadata metadata,
+            IAnemicModel<TBoundedContext>? currentModel = null)
         {
             var operations = metadata.Operations.ToDictionary(
                 op => op.CommandName,
@@ -64,7 +69,8 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Factory
 
             return new DynamicBoundedContextScope<TBoundedContext>(
                 operations,
-                Array.Empty<IBusinessEntityValidator<TBoundedContext>>());
+                Array.Empty<IBusinessEntityValidator<TBoundedContext>>(),
+                currentModel);
         }
 
         /// <summary>

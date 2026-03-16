@@ -40,28 +40,33 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Operations
         public string CommandName => _metadata.CommandName;
 
         /// <inheritdoc />
+        /// <remarks>
+        /// model — incoming данные (новые VO от команды).
+        /// Текущее состояние агрегата берётся из scope.CurrentModel (DynamicBoundedContextScope).
+        /// Если CurrentModel не задан (legacy), model используется как current state.
+        /// </remarks>
         public AggregateResult<TBoundedContext, IAnemicModel<TBoundedContext>> Handle(
             IAnemicModel<TBoundedContext> model,
             CommandToAggregate command,
             IBoundedContextScope<TBoundedContext> scope)
         {
-            // Извлекаем incoming VO из команды
-            // Модель должна быть DynamicAnemicModel с новыми значениями VO
-            var incomingVOs = model.GetValueObjects();
+            // Текущее состояние из scope (если задано), иначе fallback на model
+            var currentModel = (scope is DynamicBoundedContextScope<TBoundedContext> dynamicScope
+                && dynamicScope.CurrentModel != null)
+                ? dynamicScope.CurrentModel
+                : model;
 
-            // Загружаем текущее состояние из scope (агрегат хранит старую модель)
-            // В SeedWorks паттерне: model = новое состояние, а агрегат (через scope) = старое
-            // Здесь model уже содержит incoming данные от вызывающего кода
+            // Incoming VO — из переданной модели
+            var incomingVOs = model.GetValueObjects();
 
             // Строим объединённую модель согласно merge strategy
             var mergedModel = ModelMerger.Merge(
-                GetCurrentState(scope, model),
+                currentModel,
                 incomingVOs,
                 command,
                 _metadata);
 
             // Создаём BusinessOperationData (diff старого и нового)
-            var currentModel = GetCurrentState(scope, model);
             var opData = BusinessOperationData<TBoundedContext, IAnemicModel<TBoundedContext>>
                 .Commit<TBoundedContext, IAnemicModel<TBoundedContext>>(currentModel, mergedModel);
 
@@ -73,18 +78,6 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Operations
 
             // Без спецификаций — успех
             return new AggregateResultSuccess<TBoundedContext, IAnemicModel<TBoundedContext>>(opData);
-        }
-
-        /// <summary>
-        /// Получить текущее состояние. Если модель содержит пустую версию (Version == 0),
-        /// значит это новый агрегат — используем пустую модель.
-        /// </summary>
-        private static IAnemicModel<TBoundedContext> GetCurrentState(
-            IBoundedContextScope<TBoundedContext> scope,
-            IAnemicModel<TBoundedContext> model)
-        {
-            // В данном контексте model уже передан как "текущее состояние" из AggregateProvider
-            return model;
         }
     }
 }

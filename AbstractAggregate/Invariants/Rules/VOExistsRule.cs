@@ -22,7 +22,8 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants.Rules
         public override bool IsSatisfiedBy(
             BusinessOperationData<TBoundedContext, IAnemicModel<TBoundedContext>> obj)
         {
-            var vos = obj.Model.GetValueObjects();
+            // Проверяем текущее состояние (pre-condition): VO должен существовать ДО операции
+            var vos = obj.Aggregate.GetValueObjects();
             return vos.TryGetValue(_voName, out var vo) && vo != null;
         }
     }
@@ -40,7 +41,7 @@ namespace DigiTFactory.Libraries.AbstractAggregate.Invariants.Rules
         public override bool IsSatisfiedBy(
             BusinessOperationData<TBoundedContext, IAnemicModel<TBoundedContext>> obj)
         {
-            var vos = obj.Model.GetValueObjects();
+            var vos = obj.Aggregate.GetValueObjects();
             return vos.TryGetValue(_voName, out var vo) && vo != null;
         }
     }
