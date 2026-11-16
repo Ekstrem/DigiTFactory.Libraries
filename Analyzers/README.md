@@ -31,3 +31,9 @@ dotnet run --project DigiTFactory.Libraries.Analyzers.Runner -- <путь-к-6-m
 
 Severity каждого `QG-NNN` правится в `.editorconfig` — это точка, где «gap» объявляется
 явно, а не молча отключается.
+
+## Публикация
+
+Пакет `DigiTFactory.Libraries.Analyzers` публикуется в GitHub Packages и NuGet.org через
+**Trusted Publishing** (OIDC, без долгоживущего ключа `NUORG`). Для NuGet.org нужна политика
+Trusted Publishing: `Ekstrem / DigiTFactory.Libraries / analyzers.yml`.
