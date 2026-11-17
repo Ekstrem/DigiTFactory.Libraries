@@ -15,7 +15,7 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
     /// Стратегия 1: Full Event Sourcing.
     /// Все события сохраняются, агрегат восстанавливается из полного стрима.
     /// </summary>
-    internal sealed class FullEventSourcingRepository<TBoundedContext, TAnemicModel>
+    public class FullEventSourcingRepository<TBoundedContext, TAnemicModel>
         : IEventStoreRepository<TBoundedContext, TAnemicModel>
         where TBoundedContext : IBoundedContext
         where TAnemicModel : IAnemicModel<TBoundedContext>
@@ -31,7 +31,7 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
             _logger = logger;
         }
 
-        public async Task<List<TAnemicModel>> GetById(Guid id, CancellationToken cancellationToken)
+        public virtual async Task<List<TAnemicModel>> GetById(Guid id, CancellationToken cancellationToken)
         {
             _logger.LogDebug("FullES: Getting all events for aggregate {AggregateId}", id);
 
@@ -46,7 +46,7 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
             return new List<TAnemicModel>();
         }
 
-        public async Task<TAnemicModel> GetByIdAndVersion(Guid id, long version, CancellationToken cancellationToken)
+        public virtual async Task<TAnemicModel> GetByIdAndVersion(Guid id, long version, CancellationToken cancellationToken)
         {
             _logger.LogDebug("FullES: Getting event for aggregate {AggregateId} version {Version}", id, version);
 
@@ -57,7 +57,7 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
             return default!;
         }
 
-        public async Task<TAnemicModel> GetByCorrelationToken(Guid correlationToken, CancellationToken cancellationToken)
+        public virtual async Task<TAnemicModel> GetByCorrelationToken(Guid correlationToken, CancellationToken cancellationToken)
         {
             _logger.LogDebug("FullES: Getting event by correlation token {CorrelationToken}", correlationToken);
 

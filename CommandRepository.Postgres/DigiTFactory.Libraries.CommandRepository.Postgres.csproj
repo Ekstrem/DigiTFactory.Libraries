@@ -6,14 +6,14 @@
     <RootNamespace>DigiTFactory.Libraries.CommandRepository.Postgres</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.CommandRepository.Postgres</AssemblyName>
     <PackageId>DigiTFactory.Libraries.CommandRepository.Postgres</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <FileVersion>0.1.0.0</FileVersion>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
     <Description>Event Store / Command Repository для PostgreSQL с тремя стратегиями хранения: Full Event Sourcing, Snapshot + Events, State Only.</Description>
-    <PackageReleaseNotes>0.2.0: SeedWorks 0.5.4 + bundled Storage analyzer (QG-301..306); nuget.org republish.</PackageReleaseNotes>
+    <PackageReleaseNotes>0.2.1: FullEventSourcingRepository public + virtual (domain replay override).</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
