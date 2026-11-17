@@ -55,6 +55,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Application.ActorFromAuthAnalyzer(),
                     new Application.HandlerProviderAnalyzer(),
                     new Application.HandlerNoDomainLogicAnalyzer(),
+                    new Application.CommandHandlerProviderAnalyzer(),
                 },
                 [LayerKind.Storage] = new DiagnosticAnalyzer[]
                 {
