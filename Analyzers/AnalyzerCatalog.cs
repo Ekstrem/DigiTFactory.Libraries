@@ -54,6 +54,8 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Storage.StorageReadRepoAnalyzer(),
                     new Storage.ReadModelMarkerAnalyzer(),
                     new Storage.ProjectionHandlerAnalyzer(),
+                    new Storage.ProjectionIdempotencyAnalyzer(),
+                    new Storage.ProjectionUpsertAnalyzer(),
                 },
                 [LayerKind.CrossCutting] = new DiagnosticAnalyzer[]
                 {
