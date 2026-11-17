@@ -46,6 +46,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new DomainServices.ProviderDefaultModelAnalyzer(),
                     new DomainServices.NotifierDecoratorAnalyzer(),
                     new DomainServices.BusAdapterAnalyzer(),
+                    new DomainServices.RegisterDependenciesAnalyzer(),
                 },
                 [LayerKind.CrossCutting] = new DiagnosticAnalyzer[]
                 {
