@@ -45,7 +45,6 @@ var compilation = CSharpCompilation.Create(
 
 var analyzers = new DiagnosticAnalyzer[]
 {
-    new NoPutDeleteAnalyzer(),
     new NoNotImplementedAnalyzer(),
     new NoAbstractAggregateAnalyzer(),
     new NoPublicSetterAnalyzer(),

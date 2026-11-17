@@ -4,15 +4,17 @@ Roslyn-анализаторы, превращающие Quality Gates (`QG.md`) 
 Один анализатор — один `QG-NNN`; diagnostic ID = номер правила, severity = «северность»
 (🔴 → Error, 🟠 → Warning, 🟡 → Info).
 
-## Реализовано (PoC, v0.1)
+## Реализовано (v0.3)
 
 | Diagnostic | Правило | Тип |
 |---|---|---|
-| `QG401` | мутация только через POST (`[HttpPut]`/`[HttpDelete]`/`[HttpPatch]` запрещены) | syntax |
 | `QG603` | нет `NotImplementedException` в продуктовом коде | syntax |
-| `QG602` | нет `IAggregate<T>`/`Aggregate<T>` (агрегат — обычный класс) | syntax |
+| `QG602` | нет metadata-driven `AbstractAggregate` + generic `Aggregate<TBC>` | syntax |
 | `QG006` | нет публичных сеттеров в `Implementation/` | syntax + path |
 | `QG106` | нет своих `IRepository`/`IReadRepository`/`IEventBus`/… (вне DigiTFactory) | symbol |
+| `QG005` | агрегат: приватный ctor + статическая фабрика `Create`/`CreateInstance` | symbol |
+| `QG011` | `AnemicModel` иммутабельна (без публичных сеттеров) | symbol |
+| `QG015` | Value Object иммутабелен (без публичных сеттеров) | symbol |
 
 ## Сборка и прогон по 6-msa
 
@@ -26,8 +28,8 @@ dotnet run --project DigiTFactory.Libraries.Analyzers.Runner -- <путь-к-6-m
 ## Подключение как гейта (следующий шаг)
 
 1. Запаковать пакет: `dotnet pack` (анализатор уходит в `analyzers/dotnet/cs`).
-2. В `Directory.Build.props` сервиса: `<PackageReference Include="DigiTFactory.Libraries.Analyzers" Version="0.1.0" PrivateAssets="all" />`.
-3. В CI: `TreatWarningsAsErrors` по `QG*` (или `WarningsAsErrors=QG401;QG603;…`).
+2. В `Directory.Build.props` сервиса: `<PackageReference Include="DigiTFactory.Libraries.Analyzers" Version="0.3.0" PrivateAssets="all" />`.
+3. В CI: `TreatWarningsAsErrors` по `QG*` (или `WarningsAsErrors=QG603;QG602;…`).
 
 Severity каждого `QG-NNN` правится в `.editorconfig` — это точка, где «gap» объявляется
 явно, а не молча отключается.
