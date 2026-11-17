@@ -7,15 +7,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>DigiTFactory.Libraries.Analyzers</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.Analyzers</AssemblyName>
-    <PackageId>DigiTFactory.Libraries.Analyzers</PackageId>
-    <Version>0.3.1</Version>
-    <Description>Roslyn analyzers enforcing the DigiTFactory EDM quality gates (QG-*).</Description>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <IsPackable>true</IsPackable>
-    <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-    <!-- RS2008 = release-tracking (AnalyzerReleases.*.md) — добавим позже; не блокирует -->
+    <!-- Каталог — не пакет: это рантайм-помощник DtfScan (реестр + фильтр по слою). -->
     <NoWarn>$(NoWarn);RS2008</NoWarn>
   </PropertyGroup>
 
@@ -23,11 +15,10 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" PrivateAssets="all" />
   </ItemGroup>
 
-  <!-- DLL анализатора → analyzers/dotnet/cs внутри .nupkg -->
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true"
-          PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="README.md" Pack="true" PackagePath="\" />
+    <ProjectReference Include="..\Analyzers.Domain\DigiTFactory.Libraries.Analyzers.Domain.csproj" />
+    <ProjectReference Include="..\Analyzers.DomainServices\DigiTFactory.Libraries.Analyzers.DomainServices.csproj" />
+    <ProjectReference Include="..\Analyzers.CrossCutting\DigiTFactory.Libraries.Analyzers.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,10 @@ on:
     branches:
       - master
     paths:
-      - Analyzers/**
+      - 'Analyzers/**'
+      - 'Analyzers.Domain/**'
+      - 'Analyzers.DomainServices/**'
+      - 'Analyzers.CrossCutting/**'
       - .github/workflows/analyzers.yml
   workflow_dispatch:
 
@@ -13,10 +16,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # OIDC-токен для NuGet Trusted Publishing (короткоживущий ключ вместо NUORG)
     permissions:
       id-token: write
       contents: read
+
+    strategy:
+      matrix:
+        project:
+          - Analyzers.Domain/DigiTFactory.Libraries.Analyzers.Domain.csproj
+          - Analyzers.DomainServices/DigiTFactory.Libraries.Analyzers.DomainServices.csproj
+          - Analyzers.CrossCutting/DigiTFactory.Libraries.Analyzers.CrossCutting.csproj
 
     steps:
     - uses: actions/checkout@v4
@@ -28,10 +37,10 @@ jobs:
           GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
 
     - name: Build with dotnet
-      run: dotnet build Analyzers/DigiTFactory.Libraries.Analyzers.csproj --configuration Release
+      run: dotnet build ${{ matrix.project }} --configuration Release
 
     - name: Project pack
-      run: dotnet pack Analyzers/DigiTFactory.Libraries.Analyzers.csproj --configuration Release --no-build --output bin/nupkgs
+      run: dotnet pack ${{ matrix.project }} --configuration Release --no-build --output bin/nupkgs
 
     - name: Nuget push to GitHub
       run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate
