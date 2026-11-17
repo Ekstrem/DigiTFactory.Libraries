@@ -47,6 +47,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new DomainServices.NotifierDecoratorAnalyzer(),
                     new DomainServices.BusAdapterAnalyzer(),
                     new DomainServices.RegisterDependenciesAnalyzer(),
+                    new DomainServices.ProviderDiAnalyzer(),
                 },
                 [LayerKind.Storage] = new DiagnosticAnalyzer[]
                 {
