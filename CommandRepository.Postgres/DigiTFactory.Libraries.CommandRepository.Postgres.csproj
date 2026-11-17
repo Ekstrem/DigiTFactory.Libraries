@@ -6,7 +6,7 @@
     <RootNamespace>DigiTFactory.Libraries.CommandRepository.Postgres</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.CommandRepository.Postgres</AssemblyName>
     <PackageId>DigiTFactory.Libraries.CommandRepository.Postgres</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <FileVersion>0.1.0.0</FileVersion>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Authors>Войтов Евгений</Authors>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.2.0" />
+    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.5.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +30,14 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Вложить DLL анализатора Storage (QG-3xx) -->
+    <None Include="..\Analyzers.Storage\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.Storage.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
   </ItemGroup>
 
   <ItemGroup>

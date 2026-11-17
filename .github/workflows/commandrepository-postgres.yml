@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - CommandRepository.Postgres/**
+      - Analyzers.Storage/**
       - .github/workflows/commandrepository-postgres.yml
 
 jobs:
@@ -20,6 +21,9 @@ jobs:
         dotnet-version: 8.0.x
       env:
           GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
+
+    - name: Build analyzers (Storage)
+      run: dotnet build Analyzers.Storage/DigiTFactory.Libraries.Analyzers.Storage.csproj --configuration Release
 
     - name: Build with dotnet
       run: dotnet build CommandRepository.Postgres/DigiTFactory.Libraries.CommandRepository.Postgres.csproj --configuration Release
