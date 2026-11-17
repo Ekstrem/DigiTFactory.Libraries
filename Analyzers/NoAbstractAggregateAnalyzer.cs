@@ -64,7 +64,7 @@ namespace DigiTFactory.Libraries.Analyzers
             }
 
             // Generic-оболочка SeedWorks Aggregate<TBC>. Голый 'Aggregate' (обычный класс) не трогаем.
-            return root == "Aggregate" && typeText.Contains('<');
+            return root == "Aggregate" && typeText.Contains("<");
         }
 
         private static void AnalyzeBaseType(SyntaxNodeAnalysisContext ctx)
