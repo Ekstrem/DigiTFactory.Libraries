@@ -58,6 +58,8 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Application.CommandHandlerProviderAnalyzer(),
                     new Application.QueryHandlerReadRepoAnalyzer(),
                     new Application.RequestDtoFlatAnalyzer(),
+                    new Application.AggregateProviderScopingAnalyzer(),
+                    new Application.QueryRepositoryScopingAnalyzer(),
                 },
                 [LayerKind.Storage] = new DiagnosticAnalyzer[]
                 {
