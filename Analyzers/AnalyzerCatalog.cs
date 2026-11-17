@@ -53,6 +53,8 @@ namespace DigiTFactory.Libraries.Analyzers
                 {
                     new Application.CommandInterfaceAnalyzer(),
                     new Application.ActorFromAuthAnalyzer(),
+                    new Application.HandlerProviderAnalyzer(),
+                    new Application.HandlerNoDomainLogicAnalyzer(),
                 },
                 [LayerKind.Storage] = new DiagnosticAnalyzer[]
                 {
