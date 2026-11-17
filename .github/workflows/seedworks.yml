@@ -9,6 +9,7 @@ on:
       - .github/workflows/**
       - Analyzers.Domain/**
       - Analyzers.DomainServices/**
+      - Analyzers.Storage/**
 
 jobs:
   build:
@@ -33,6 +34,9 @@ jobs:
 
     - name: Build analyzers (DomainServices)
       run: dotnet build Analyzers.DomainServices/DigiTFactory.Libraries.Analyzers.DomainServices.csproj --configuration Release
+
+    - name: Build analyzers (Storage)
+      run: dotnet build Analyzers.Storage/DigiTFactory.Libraries.Analyzers.Storage.csproj --configuration Release
 
     - name: Build with dotnet
       run: dotnet build Source/DigiTFactory.Libraries.SeedWorks.csproj --configuration Release

@@ -40,7 +40,7 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
 
             var ids = cls.DescendantNodes().OfType<IdentifierNameSyntax>()
                 .Select(id => id.Identifier.ValueText)
-                .ToHashSet();
+                .Distinct().ToList();
 
             var saves = ids.Contains("SaveEventAsync");
             var publishes = ids.Contains("Publish") || ids.Contains("IEventBus");

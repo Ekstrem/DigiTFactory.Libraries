@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.5.3</Version>
+    <Version>0.5.4</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
@@ -47,6 +47,11 @@
           Visible="false" />
     <!-- Вложить DLL анализатора доменных сервисов (Provider/Notifier/BusAdapter) -->
     <None Include="..\Analyzers.DomainServices\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.DomainServices.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
+    <!-- Вложить DLL анализатора Storage (QG-3xx) -->
+    <None Include="..\Analyzers.Storage\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.Storage.dll"
           Pack="true"
           PackagePath="analyzers/dotnet/cs"
           Visible="false" />

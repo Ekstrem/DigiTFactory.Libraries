@@ -40,7 +40,7 @@ namespace DigiTFactory.Libraries.Analyzers.Storage
 
             var ids = cls.DescendantNodes().OfType<IdentifierNameSyntax>()
                 .Select(id => id.Identifier.ValueText)
-                .ToHashSet();
+                .Distinct().ToList();
 
             if (!ids.Contains("UpsertAsync"))
             {

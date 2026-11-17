@@ -40,7 +40,7 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
 
             var ids = cls.DescendantNodes().OfType<IdentifierNameSyntax>()
                 .Select(id => id.Identifier.ValueText)
-                .ToHashSet();
+                .Distinct().ToList();
 
             var hasProvider = ids.Any(i => i.EndsWith("Provider"));
             var hasObserver = ids.Contains("IObserver");
