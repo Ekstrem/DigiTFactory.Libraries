@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
@@ -37,6 +37,19 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Собрать анализатор перед упаковкой (не как runtime-ссылку) -->
+    <ProjectReference Include="..\Analyzers\DigiTFactory.Libraries.Analyzers.csproj"
+                      ReferenceOutputAssembly="false"
+                      SkipGetTargetFrameworkProperties="true"
+                      PrivateAssets="all" />
+    <!-- Вложить DLL анализатора в пакет SeedWorks: NuGet авто-применяет analyzers/dotnet/cs у потребителя -->
+    <None Include="..\Analyzers\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
   </ItemGroup>
 
 </Project>
