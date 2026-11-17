@@ -47,7 +47,7 @@ namespace DigiTFactory.Libraries.Analyzers.Application
                 return;
             }
 
-            if (!type.Name.EndsWith("CommandHandler"))
+            if (!type.Implements("ICommandHandler"))
             {
                 return;
             }
