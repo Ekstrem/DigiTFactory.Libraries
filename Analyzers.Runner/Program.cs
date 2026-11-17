@@ -3,6 +3,7 @@ using DigiTFactory.Libraries.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Text.RegularExpressions;
 
 // DtfScan — прогон Quality Gates (Roslyn-анализаторы) по дереву исходников.
 //   usage: DtfScan [root] [refDir]
@@ -106,4 +107,61 @@ foreach (var group in diagnostics.GroupBy(d => d.Id))
     Console.WriteLine();
 }
 
-return diagnostics.Count > 0 ? 1 : 0;
+var graphViolations = RunGraphChecks(root);
+Console.WriteLine("== Graph checks (QG-001/QG-107) ==");
+Console.WriteLine($"graph violations: {graphViolations.Count}");
+foreach (var g in graphViolations.GroupBy(v => v.Item1))
+{
+    Console.WriteLine($"[{g.Key}]  {g.Count()}");
+    foreach (var v in g)
+    {
+        Console.WriteLine($"  {v.Item2}  {v.Item3}");
+    }
+    Console.WriteLine();
+}
+
+return (diagnostics.Count + graphViolations.Count) > 0 ? 1 : 0;
+
+static List<(string, string, string)> RunGraphChecks(string root)
+{
+    var result = new List<(string, string, string)>();
+    var csprojs = Directory.EnumerateFiles(root, "*.csproj", SearchOption.AllDirectories)
+        .Where(f => !f.Replace('\\', '/').Contains("/obj/") && !f.Replace('\\', '/').Contains("/bin/"))
+        .ToList();
+
+    foreach (var csproj in csprojs)
+    {
+        var name = Path.GetFileName(csproj);
+        var text = File.ReadAllText(csproj);
+        var projectRefs = Regex.Matches(text, @"<ProjectReference\s+Include=""([^""]+)""")
+            .Cast<Match>().Select(m => m.Groups[1].Value).ToList();
+        var packageRefs = Regex.Matches(text, @"<PackageReference\s+Include=""([^""]+)""")
+            .Cast<Match>().Select(m => m.Groups[1].Value).ToList();
+
+        if (name.EndsWith(".Domain.csproj"))
+        {
+            foreach (var r in projectRefs)
+            {
+                result.Add(("QG001", name, $"ProjectReference '{r}' — Domain зависит только от SeedWorks"));
+            }
+            foreach (var p in packageRefs.Where(p => p != "DigiTFactory.Libraries.SeedWorks"))
+            {
+                result.Add(("QG001", name, $"PackageReference '{p}' — Domain зависит только от SeedWorks"));
+            }
+        }
+
+        if (name.EndsWith(".DomainServices.csproj"))
+        {
+            foreach (var r in projectRefs)
+            {
+                var target = Path.GetFileNameWithoutExtension(r);
+                if (target.EndsWith(".Application") || target.EndsWith(".Storage") || target.EndsWith(".Api"))
+                {
+                    result.Add(("QG107", name, $"ProjectReference '{r}' — DomainServices не зависит от Application/Storage/Api"));
+                }
+            }
+        }
+    }
+
+    return result;
+}
