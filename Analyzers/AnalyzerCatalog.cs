@@ -35,6 +35,8 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Domain.AggregateResultReturnAnalyzer(),
                     new Domain.AnemicModelMarkerAnalyzer(),
                     new Domain.AggregateRootMarkerAnalyzer(),
+                    new Domain.InternalImplementationAnalyzer(),
+                    new Domain.ValidatorInterfaceAnalyzer(),
                 },
                 [LayerKind.DomainServices] = new DiagnosticAnalyzer[]
                 {
