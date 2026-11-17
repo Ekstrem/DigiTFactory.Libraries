@@ -13,6 +13,7 @@
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
     <Description>Event Store / Command Repository для PostgreSQL с тремя стратегиями хранения: Full Event Sourcing, Snapshot + Events, State Only.</Description>
+    <PackageReleaseNotes>0.2.0: SeedWorks 0.5.4 + bundled Storage analyzer (QG-301..306).</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Ekstrem/DigiTFactory.Libraries</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
