@@ -44,7 +44,7 @@ namespace DigiTFactory.Libraries.Analyzers
 
             foreach (var prop in type.GetMembers().OfType<IPropertySymbol>())
             {
-                if (prop.SetMethod != null && prop.SetMethod.DeclaredAccessibility == Accessibility.Public)
+                if (prop.SetMethod != null && !prop.SetMethod.IsInitOnly && prop.SetMethod.DeclaredAccessibility == Accessibility.Public)
                 {
                     var location = prop.Locations.FirstOrDefault();
                     ctx.ReportDiagnostic(Diagnostic.Create(Rule, location, type.Name, prop.Name));
