@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.5.2</Version>
+    <Version>0.5.3</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
@@ -42,6 +42,11 @@
   <ItemGroup>
     <!-- Вложить DLL доменного анализатора в пакет SeedWorks: NuGet авто-применяет analyzers/dotnet/cs -->
     <None Include="..\Analyzers.Domain\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.Domain.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
+    <!-- Вложить DLL анализатора доменных сервисов (Provider/Notifier/BusAdapter) -->
+    <None Include="..\Analyzers.DomainServices\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.DomainServices.dll"
           Pack="true"
           PackagePath="analyzers/dotnet/cs"
           Visible="false" />

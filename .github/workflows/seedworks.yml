@@ -7,6 +7,8 @@ on:
     paths:
       - Source/**
       - .github/workflows/**
+      - Analyzers.Domain/**
+      - Analyzers.DomainServices/**
 
 jobs:
   build:
@@ -28,6 +30,9 @@ jobs:
 
     - name: Build analyzers (Domain)
       run: dotnet build Analyzers.Domain/DigiTFactory.Libraries.Analyzers.Domain.csproj --configuration Release
+
+    - name: Build analyzers (DomainServices)
+      run: dotnet build Analyzers.DomainServices/DigiTFactory.Libraries.Analyzers.DomainServices.csproj --configuration Release
 
     - name: Build with dotnet
       run: dotnet build Source/DigiTFactory.Libraries.SeedWorks.csproj --configuration Release
