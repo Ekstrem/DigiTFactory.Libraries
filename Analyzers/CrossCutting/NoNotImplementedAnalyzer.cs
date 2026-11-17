@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.CrossCutting
 {
     /// <summary>QG-603: в продуктовом коде нет заглушек NotImplementedException.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.DomainServices
 {
     /// <summary>QG-106/QG-301: свои инфраструктурные интерфейсы/реализации запрещены — используй библиотечный DigiTFactory.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

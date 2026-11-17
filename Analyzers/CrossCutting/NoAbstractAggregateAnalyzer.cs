@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.CrossCutting
 {
     /// <summary>
     /// QG-004/QG-602: запрещён «абстрактный агрегат» — metadata-driven подход пакета

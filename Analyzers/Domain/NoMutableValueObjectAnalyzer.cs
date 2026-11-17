@@ -4,18 +4,18 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.Domain
 {
-    /// <summary>QG-011: анемичная модель иммутабельна (readonly-поля, без публичных сеттеров).</summary>
+    /// <summary>QG-015: Value Object иммутабелен — приватный конструктор + фабрика, без публичных сеттеров.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class NoMutableAnemicModelAnalyzer : DiagnosticAnalyzer
+    public sealed class NoMutableValueObjectAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "QG011";
+        public const string DiagnosticId = "QG015";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
-            "Анемичная модель иммутабельна",
-            "AnemicModel '{0}' имеет публичный setter '{1}' — анемичная модель должна быть иммутабельной (без сеттеров)",
+            "Value Object иммутабелен",
+            "VO '{0}' имеет публичный setter '{1}' — Value Object должен быть иммутабельным (без сеттеров)",
             "DigiTFactory",
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
@@ -37,7 +37,7 @@ namespace DigiTFactory.Libraries.Analyzers
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IAnemicModel"))
+            if (!type.AllInterfaces.Any(i => i.Name == "IValueObject"))
             {
                 return;
             }

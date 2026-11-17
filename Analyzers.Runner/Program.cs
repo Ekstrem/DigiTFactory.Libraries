@@ -43,16 +43,25 @@ var compilation = CSharpCompilation.Create(
     references,
     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-var analyzers = new DiagnosticAnalyzer[]
+DiagnosticAnalyzer[] analyzers;
+var layerArg = args.FirstOrDefault(a => a.StartsWith("--layer=", StringComparison.OrdinalIgnoreCase));
+if (layerArg is not null)
 {
-    new NoNotImplementedAnalyzer(),
-    new NoAbstractAggregateAnalyzer(),
-    new NoPublicSetterAnalyzer(),
-    new NoCustomInfrastructureAnalyzer(),
-    new NoMutableAnemicModelAnalyzer(),
-    new NoMutableValueObjectAnalyzer(),
-    new AggregateFactoryAnalyzer(),
-};
+    var name = layerArg.Substring("--layer=".Length);
+    if (Enum.TryParse<LayerKind>(name, true, out var layer) && AnalyzerCatalog.ByLayer.TryGetValue(layer, out var list))
+    {
+        analyzers = list.ToArray();
+    }
+    else
+    {
+        Console.Error.WriteLine($"unknown layer: {name}");
+        return 2;
+    }
+}
+else
+{
+    analyzers = AnalyzerCatalog.All.ToArray();
+}
 
 var withAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create(analyzers));
 var diagnostics = (await withAnalyzers.GetAnalyzerDiagnosticsAsync())

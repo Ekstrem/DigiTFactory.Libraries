@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.Domain
 {
     /// <summary>QG-005: агрегат — приватный конструктор + статическая фабрика Create/CreateInstance.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

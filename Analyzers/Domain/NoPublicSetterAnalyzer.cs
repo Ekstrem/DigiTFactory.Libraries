@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace DigiTFactory.Libraries.Analyzers
+namespace DigiTFactory.Libraries.Analyzers.Domain
 {
     /// <summary>QG-006: иммутабельная реализация домена — нет публичных сеттеров в Implementation/.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
