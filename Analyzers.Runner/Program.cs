@@ -50,6 +50,9 @@ var analyzers = new DiagnosticAnalyzer[]
     new NoAbstractAggregateAnalyzer(),
     new NoPublicSetterAnalyzer(),
     new NoCustomInfrastructureAnalyzer(),
+    new NoMutableAnemicModelAnalyzer(),
+    new NoMutableValueObjectAnalyzer(),
+    new AggregateFactoryAnalyzer(),
 };
 
 var withAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create(analyzers));
