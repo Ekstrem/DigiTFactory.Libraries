@@ -48,6 +48,13 @@ namespace DigiTFactory.Libraries.Analyzers
                     new DomainServices.BusAdapterAnalyzer(),
                     new DomainServices.RegisterDependenciesAnalyzer(),
                 },
+                [LayerKind.Storage] = new DiagnosticAnalyzer[]
+                {
+                    new Storage.StorageCommandDbAnalyzer(),
+                    new Storage.StorageReadRepoAnalyzer(),
+                    new Storage.ReadModelMarkerAnalyzer(),
+                    new Storage.ProjectionHandlerAnalyzer(),
+                },
                 [LayerKind.CrossCutting] = new DiagnosticAnalyzer[]
                 {
                     new CrossCutting.NoAbstractAggregateAnalyzer(),
