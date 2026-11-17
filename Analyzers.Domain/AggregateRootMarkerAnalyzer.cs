@@ -42,7 +42,7 @@ namespace DigiTFactory.Libraries.Analyzers.Domain
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IAggregateRoot"))
+            if (!type.Implements("IAggregateRoot"))
             {
                 var location = type.Locations.FirstOrDefault();
                 ctx.ReportDiagnostic(Diagnostic.Create(Rule, location, type.Name));

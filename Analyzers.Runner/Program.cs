@@ -37,6 +37,22 @@ var references = Directory.Exists(refDir)
         .ToList()
     : new List<MetadataReference>();
 
+// DTF-маркеры (IValueObject, IAnemicModel, IAggregate, IAggregateRoot) — чтобы symbol-анализаторы их резолвили.
+var seedworksDir = Path.Combine(
+    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+    ".nuget", "packages", "digitfactory.libraries.seedworks");
+if (Directory.Exists(seedworksDir))
+{
+    var seedworksDll = Directory.EnumerateFiles(seedworksDir, "DigiTFactory.Libraries.SeedWorks.dll", SearchOption.AllDirectories)
+        .Where(f => f.Contains(Path.DirectorySeparatorChar + "net8.0" + Path.DirectorySeparatorChar))
+        .OrderByDescending(f => f, StringComparer.Ordinal)
+        .FirstOrDefault();
+    if (seedworksDll is not null)
+    {
+        references.Add(MetadataReference.CreateFromFile(seedworksDll));
+    }
+}
+
 var compilation = CSharpCompilation.Create(
     "DtfScan",
     trees,

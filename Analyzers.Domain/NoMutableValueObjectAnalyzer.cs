@@ -37,7 +37,7 @@ namespace DigiTFactory.Libraries.Analyzers.Domain
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IValueObject"))
+            if (!type.Implements("IValueObject"))
             {
                 return;
             }

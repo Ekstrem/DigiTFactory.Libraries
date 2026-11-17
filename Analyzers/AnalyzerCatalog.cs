@@ -31,6 +31,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Domain.NoPublicSetterAnalyzer(),
                     new Domain.NoMutableAnemicModelAnalyzer(),
                     new Domain.NoMutableValueObjectAnalyzer(),
+                    new Domain.ValueObjectMarkerAnalyzer(),
                     new Domain.AggregateResultReturnAnalyzer(),
                     new Domain.AnemicModelMarkerAnalyzer(),
                     new Domain.AggregateRootMarkerAnalyzer(),

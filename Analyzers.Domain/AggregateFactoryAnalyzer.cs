@@ -37,7 +37,7 @@ namespace DigiTFactory.Libraries.Analyzers.Domain
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IAggregate"))
+            if (!type.Implements("IAggregate"))
             {
                 return;
             }

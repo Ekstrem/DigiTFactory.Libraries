@@ -37,7 +37,7 @@ namespace DigiTFactory.Libraries.Analyzers.Domain
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IAnemicModel"))
+            if (!type.Implements("IAnemicModel"))
             {
                 return;
             }

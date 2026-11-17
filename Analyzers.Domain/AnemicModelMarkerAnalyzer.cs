@@ -42,7 +42,7 @@ namespace DigiTFactory.Libraries.Analyzers.Domain
                 return;
             }
 
-            if (!type.AllInterfaces.Any(i => i.Name == "IAnemicModel"))
+            if (!type.Implements("IAnemicModel"))
             {
                 var location = type.Locations.FirstOrDefault();
                 ctx.ReportDiagnostic(Diagnostic.Create(Rule, location, type.Name));
