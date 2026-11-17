@@ -10,6 +10,7 @@ on:
       - 'Analyzers.DomainServices/**'
       - 'Analyzers.CrossCutting/**'
       - 'Analyzers.Storage/**'
+      - 'Analyzers.Application/**'
       - .github/workflows/analyzers.yml
   workflow_dispatch:
 
@@ -28,6 +29,7 @@ jobs:
           - Analyzers.DomainServices/DigiTFactory.Libraries.Analyzers.DomainServices.csproj
           - Analyzers.CrossCutting/DigiTFactory.Libraries.Analyzers.CrossCutting.csproj
           - Analyzers.Storage/DigiTFactory.Libraries.Analyzers.Storage.csproj
+          - Analyzers.Application/DigiTFactory.Libraries.Analyzers.Application.csproj
 
     steps:
     - uses: actions/checkout@v4

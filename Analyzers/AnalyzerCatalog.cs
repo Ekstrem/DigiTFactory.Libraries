@@ -49,6 +49,11 @@ namespace DigiTFactory.Libraries.Analyzers
                     new DomainServices.RegisterDependenciesAnalyzer(),
                     new DomainServices.ProviderDiAnalyzer(),
                 },
+                [LayerKind.Application] = new DiagnosticAnalyzer[]
+                {
+                    new Application.CommandInterfaceAnalyzer(),
+                    new Application.ActorFromAuthAnalyzer(),
+                },
                 [LayerKind.Storage] = new DiagnosticAnalyzer[]
                 {
                     new Storage.StorageCommandDbAnalyzer(),
