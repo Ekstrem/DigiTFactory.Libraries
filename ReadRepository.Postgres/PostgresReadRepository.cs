@@ -16,7 +16,7 @@ namespace DigiTFactory.Libraries.ReadRepository.Postgres
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
     /// <typeparam name="TReadModel">Тип Read-модели.</typeparam>
     public class PostgresReadRepository<TBoundedContext, TReadModel>
-        : IReadRepository<TBoundedContext, TReadModel>
+        : IQueryableReadRepository<TBoundedContext, TReadModel>
         where TBoundedContext : IBoundedContext
         where TReadModel : class, IReadModel<TBoundedContext>
     {
@@ -48,6 +48,12 @@ namespace DigiTFactory.Libraries.ReadRepository.Postgres
         public async Task<long> CountAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<TReadModel>().LongCountAsync(cancellationToken);
+        }
+
+        /// <inheritdoc />
+        public IQueryable<TReadModel> GetQueryable()
+        {
+            return _dbContext.Set<TReadModel>().AsQueryable();
         }
     }
 }
