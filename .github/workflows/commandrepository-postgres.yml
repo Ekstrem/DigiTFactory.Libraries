@@ -13,6 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -34,5 +38,11 @@ jobs:
     - name: Nuget push to GitHub
       run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://nuget.pkg.github.com/Ekstrem/index.json --api-key ${{secrets.PACK_ACCESS}} --skip-duplicate
 
+    - name: NuGet login (OIDC -> temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: Ekstrem
+
     - name: Nuget push NugetOrg
-      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUORG}} --skip-duplicate
+      run: dotnet nuget push "bin/nupkgs/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{steps.login.outputs.NUGET_API_KEY}} --skip-duplicate
