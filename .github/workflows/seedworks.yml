@@ -26,6 +26,9 @@ jobs:
       env:
           GITHUB_NUGET_AUTH_TOKEN: ${{secrets.PACK_ACCESS}}
 
+    - name: Build analyzers (Domain)
+      run: dotnet build Analyzers.Domain/DigiTFactory.Libraries.Analyzers.Domain.csproj --configuration Release
+
     - name: Build with dotnet
       run: dotnet build Source/DigiTFactory.Libraries.SeedWorks.csproj --configuration Release
 

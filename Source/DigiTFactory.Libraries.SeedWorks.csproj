@@ -40,11 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Собрать доменный анализатор перед упаковкой (не как runtime-ссылку) -->
-    <ProjectReference Include="..\Analyzers.Domain\DigiTFactory.Libraries.Analyzers.Domain.csproj"
-                      ReferenceOutputAssembly="false"
-                      SkipGetTargetFrameworkProperties="true"
-                      PrivateAssets="all" />
     <!-- Вложить DLL доменного анализатора в пакет SeedWorks: NuGet авто-применяет analyzers/dotnet/cs -->
     <None Include="..\Analyzers.Domain\bin\$(Configuration)\netstandard2.0\DigiTFactory.Libraries.Analyzers.Domain.dll"
           Pack="true"
