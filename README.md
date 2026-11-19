@@ -1,5 +1,4 @@
 [![SeedWorks](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml/badge.svg)](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml)
-[![AbstractAggregate](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/abstractaggregate.yml/badge.svg)](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/abstractaggregate.yml)
 
 # DigiTFactory.Libraries
 
@@ -18,8 +17,6 @@
 | Пакет | Версия | Описание |
 |-------|--------|----------|
 | `DigiTFactory.Libraries.SeedWorks` | 0.6.0 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
-| `DigiTFactory.Libraries.AbstractAggregate` | 0.1.0 | Metadata-driven агрегаты из Aggregate Design Canvas |
-| `DigiTFactory.Libraries.AbstractAggregate.Postgres` | 0.1.0 | PostgreSQL-хранилище метаданных агрегатов |
 
 ### Command Side (Event Store)
 
@@ -135,40 +132,6 @@ public interface IBusinessOperationValidator<TBoundedContext>
 }
 ```
 
-## AbstractAggregate — metadata-driven домен
-
-Метаданные агрегата (Value Objects, операции, инварианты, переходы состояний) загружаются из конфигурации вместо хардкода. Основано на [Aggregate Design Canvas](https://github.com/ddd-crew/aggregate-design-canvas).
-
-```csharp
-// Метаданные агрегата
-AggregateMetadata
-├── ValueObjects        // Список VO с их свойствами
-├── Operations          // Бизнес-операции с merge-стратегиями
-│   └── Invariants      // DSL-правила: IsNewEntity, PropertyEquals, StateIs, ...
-└── StateTransitions    // Допустимые переходы состояний
-```
-
-### Динамические типы
-
-| Класс | Заменяет |
-|-------|----------|
-| `DynamicValueObject` | Типизированные Value Objects |
-| `DynamicAnemicModel<T>` | Типизированную AnemicModel |
-| `DynamicAggregateRoot<T>` | Типизированный AggregateRoot |
-
-### DSL инвариантов
-
-```
-IsNewEntity                        — новый агрегат (Version == 0)
-IsNotNewEntity                     — существующий агрегат
-VOExists:Actor                     — Value Object "Actor" существует
-PropertyEquals:Actor.Type:Operator — свойство VO равно значению
-PropertyNotEquals:Actor.Type:Bot   — свойство VO НЕ равно значению
-PropertyNotNull:Root.SessionId     — свойство не null
-CollectionNotEmpty:Messages        — коллекция не пуста
-StateIs:Active                     — текущее состояние агрегата
-```
-
 ## Профили деплоймента
 
 Микросервис собирается с разным набором адаптеров в зависимости от профиля:
@@ -187,9 +150,6 @@ StateIs:Active                     — текущее состояние агр�
 ```xml
 <!-- Domain: только SeedWorks -->
 <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.6.0" />
-
-<!-- Domain с metadata-driven агрегатами -->
-<PackageReference Include="DigiTFactory.Libraries.AbstractAggregate" Version="0.1.0" />
 
 <!-- Api: шина событий (выбрать один) -->
 <PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.1.0" />
@@ -244,14 +204,6 @@ DigiTFactory.Libraries/
 │   ├── Invariants/                  #   IBusinessOperationValidator
 │   ├── Monads/                      #   PipeTo, Do, Either, Result<T,E>
 │   └── Characteristics/             #   IHasKey, IHasVersion, ...
-├── AbstractAggregate/               # Metadata-driven агрегаты
-│   ├── DynamicTypes/                #   DynamicValueObject, DynamicAnemicModel
-│   ├── Metadata/                    #   AggregateMetadata, OperationMetadata
-│   ├── Factory/                     #   AbstractAggregateFactory
-│   ├── Operations/                  #   MetadataBusinessOperation, ModelMerger
-│   ├── Invariants/Rules/            #   IsNewEntity, PropertyEquals, StateIs, ...
-│   └── Cache/                       #   IMetadataCache, InMemoryMetadataCache
-├── AbstractAggregate.Postgres/      # PostgreSQL-хранилище метаданных
 ├── CommandRepository.Postgres/      # Event Store на PostgreSQL
 ├── CommandRepository.Mongo/         # Event Store на MongoDB
 ├── EventBus.InMemory/               # In-memory шина
@@ -274,10 +226,6 @@ DigiTFactory.Libraries/
 3. **Событие как источник истины.** Шина событий — центральный порт. БД — адаптер.
 4. **Трёхуровневая валидация.** Assertions → Validators → Success/Exception/Warnings.
 5. **Plug & Play инфраструктура.** Сменить Postgres на Mongo или Redis на Scylla — замена одного пакета.
-
-## Reference-проект
-
-[AbstactMicroservice](https://github.com/Ekstrem/AbstactMicroservice) — полноценный микросервис на базе DigiTFactory.Libraries с metadata-driven доменом.
 
 ## Лицензия
 
