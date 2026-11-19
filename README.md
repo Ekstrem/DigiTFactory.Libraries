@@ -60,7 +60,7 @@
 | Пакет | Версия | Описание |
 |-------|--------|----------|
 | `DigiTFactory.Libraries.CrossCutting` | 0.1.0 | Polly-политики (retry+jitter, circuit-breaker, timeout), resilient HttpClient, health-checks |
-| `DigiTFactory.Libraries.Testing` | 0.1.0 | Coverage-assertion: проверка покрытия бизнес-методов агрегата тестами |
+| `DigiTFactory.Libraries.Testing` | 0.2.0 | Coverage-assertion: покрытие бизнес-методов агрегата и инвариантов тестами |
 
 ## Архитектура
 
@@ -162,7 +162,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.0" />
 
 <!-- Тесты: coverage-assertion (в тест-проект) -->
-<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.1.0" />
+<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.2.0" />
 
 <!-- Качество: анализаторы QG-канона (в каждый проект, PrivateAssets=all) -->
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
