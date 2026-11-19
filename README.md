@@ -17,7 +17,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.SeedWorks` | 0.5.0 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
+| `DigiTFactory.Libraries.SeedWorks` | 0.6.0 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
 | `DigiTFactory.Libraries.AbstractAggregate` | 0.1.0 | Metadata-driven агрегаты из Aggregate Design Canvas |
 | `DigiTFactory.Libraries.AbstractAggregate.Postgres` | 0.1.0 | PostgreSQL-хранилище метаданных агрегатов |
 
@@ -25,7 +25,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.1.0 | Event Store на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.2.1 | Event Store на PostgreSQL (EF Core) |
 | `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.0 | Event Store на MongoDB |
 
 ### Event Bus
@@ -40,9 +40,29 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.1.0 | Проекции на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.1.1 | Проекции на PostgreSQL (EF Core) |
 | `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.0 | Кэш проекций на Redis |
 | `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.0 | Высокопроизводительные проекции на ScyllaDB |
+
+### Качество (Roslyn-анализаторы, QG-канон)
+
+Анализаторы превращают канон EDM в проверки компилятора. Подключать с `PrivateAssets="all"` и настраивать severity в `.editorconfig` — иначе правило «не проверить локально» не работает.
+
+| Пакет | Версия | Правила |
+|-------|--------|---------|
+| `DigiTFactory.Libraries.Analyzers.Domain` | 0.6.1 | QG-001..022 |
+| `DigiTFactory.Libraries.Analyzers.DomainServices` | 0.5.2 | QG-101..109 |
+| `DigiTFactory.Libraries.Analyzers.Application` | 0.1.6 | QG-201..212 |
+| `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.1 | QG-301..306 |
+| `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.0 | QG-602/603 |
+| `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.0 | QG-609..614 |
+
+### Отказоустойчивость и тестирование
+
+| Пакет | Версия | Описание |
+|-------|--------|----------|
+| `DigiTFactory.Libraries.CrossCutting` | 0.1.0 | Polly-политики (retry+jitter, circuit-breaker, timeout), resilient HttpClient, health-checks |
+| `DigiTFactory.Libraries.Testing` | 0.1.0 | Coverage-assertion: проверка покрытия бизнес-методов агрегата тестами |
 
 ## Архитектура
 
@@ -165,7 +185,7 @@ StateIs:Active                     — текущее состояние агр�
 
 ```xml
 <!-- Domain: только SeedWorks -->
-<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.5.0" />
+<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.6.0" />
 
 <!-- Domain с metadata-driven агрегатами -->
 <PackageReference Include="DigiTFactory.Libraries.AbstractAggregate" Version="0.1.0" />
@@ -174,8 +194,19 @@ StateIs:Active                     — текущее состояние агр�
 <PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.1.0" />
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
-<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.1.0" />
-<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.1.0" />
+<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.2.1" />
+<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.1.1" />
+
+<!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
+<PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.0" />
+
+<!-- Качество: анализаторы QG-канона (в каждый проект, PrivateAssets=all) -->
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.5.2" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Application" Version="0.1.6" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.0" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.0" PrivateAssets="all" />
 ```
 
 ### Граф зависимостей микросервиса

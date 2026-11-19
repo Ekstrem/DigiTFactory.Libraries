@@ -16,3 +16,5 @@
 | QG-612 | Нет sync-over-async (`.Result`/`.Wait()`/`.GetAwaiter().GetResult()`) | анализатор QG612 | 🔴 | статья «partial failure» | применён |
 | QG-613 | Нет самописного retry (цикл + `Sleep`/`Delay`) — только Polly | анализатор QG613 | 🟠 | статья «retry+backoff» | применён |
 | QG-614 | Health-checks: `AddHealthChecks` + `MapHealthChecks`/`UseHealthChecks` | анализатор QG614 | 🟠 | статья «monitor app health» | применён |
+| QG-701 | Имя теста — `Method_When_Should` (виден бизнес-метод и сценарий) | анализатор QG701 | 🟡 | отклонение Journal | применён |
+| QG-702 | Каждый бизнес-метод агрегата покрыт тестом (happy + инварианты) | `AggregateCoverage.Verify<T>()` | 🔴 | отклонение Journal | применён |

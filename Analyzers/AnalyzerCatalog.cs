@@ -80,6 +80,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Resilience.NoSyncOverAsyncAnalyzer(),
                     new Resilience.NoHandRolledRetryAnalyzer(),
                     new Resilience.HealthChecksAnalyzer(),
+                    new Testing.TestNamingAnalyzer(),
                 },
             };
 

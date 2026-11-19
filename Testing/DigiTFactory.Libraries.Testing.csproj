@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>DigiTFactory.Libraries.Testing</RootNamespace>
+    <AssemblyName>DigiTFactory.Libraries.Testing</AssemblyName>
+    <PackageId>DigiTFactory.Libraries.Testing</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Coverage-assertion helpers for DigiTFactory EDM microservices: verify every aggregate business method has a test (QG-702).</Description>
+  </PropertyGroup>
+
+</Project>

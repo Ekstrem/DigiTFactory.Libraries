@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Analyzers.Storage\DigiTFactory.Libraries.Analyzers.Storage.csproj" />
     <ProjectReference Include="..\Analyzers.Application\DigiTFactory.Libraries.Analyzers.Application.csproj" />
     <ProjectReference Include="..\Analyzers.Resilience\DigiTFactory.Libraries.Analyzers.Resilience.csproj" />
+    <ProjectReference Include="..\Analyzers.Testing\DigiTFactory.Libraries.Analyzers.Testing.csproj" />
   </ItemGroup>
 
 </Project>

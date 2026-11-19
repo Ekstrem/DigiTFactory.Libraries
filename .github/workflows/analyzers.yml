@@ -12,6 +12,7 @@ on:
       - 'Analyzers.Storage/**'
       - 'Analyzers.Application/**'
       - 'Analyzers.Resilience/**'
+      - 'Analyzers.Testing/**'
       - .github/workflows/analyzers.yml
   workflow_dispatch:
 
@@ -32,6 +33,7 @@ jobs:
           - Analyzers.Storage/DigiTFactory.Libraries.Analyzers.Storage.csproj
           - Analyzers.Application/DigiTFactory.Libraries.Analyzers.Application.csproj
           - Analyzers.Resilience/DigiTFactory.Libraries.Analyzers.Resilience.csproj
+          - Analyzers.Testing/DigiTFactory.Libraries.Analyzers.Testing.csproj
 
     steps:
     - uses: actions/checkout@v4
