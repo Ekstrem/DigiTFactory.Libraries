@@ -56,6 +56,7 @@
 | `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.1 | QG-301..306 |
 | `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.0 | QG-602/603 |
 | `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.0 | QG-609..614 |
+| `DigiTFactory.Libraries.Analyzers.Testing` | 0.1.0 | QG-701 |
 
 ### Отказоустойчивость и тестирование
 
@@ -200,6 +201,9 @@ StateIs:Active                     — текущее состояние агр�
 <!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
 <PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.0" />
 
+<!-- Тесты: coverage-assertion (в тест-проект) -->
+<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.1.0" />
+
 <!-- Качество: анализаторы QG-канона (в каждый проект, PrivateAssets=all) -->
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.5.2" PrivateAssets="all" />
@@ -207,6 +211,7 @@ StateIs:Active                     — текущее состояние агр�
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.0" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.0" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.1.0" PrivateAssets="all" />
 ```
 
 ### Граф зависимостей микросервиса
