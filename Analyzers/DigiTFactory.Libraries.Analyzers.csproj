@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Analyzers.CrossCutting\DigiTFactory.Libraries.Analyzers.CrossCutting.csproj" />
     <ProjectReference Include="..\Analyzers.Storage\DigiTFactory.Libraries.Analyzers.Storage.csproj" />
     <ProjectReference Include="..\Analyzers.Application\DigiTFactory.Libraries.Analyzers.Application.csproj" />
+    <ProjectReference Include="..\Analyzers.Resilience\DigiTFactory.Libraries.Analyzers.Resilience.csproj" />
   </ItemGroup>
 
 </Project>

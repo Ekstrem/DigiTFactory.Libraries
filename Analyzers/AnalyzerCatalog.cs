@@ -74,6 +74,12 @@ namespace DigiTFactory.Libraries.Analyzers
                 {
                     new CrossCutting.NoAbstractAggregateAnalyzer(),
                     new CrossCutting.NoNotImplementedAnalyzer(),
+                    new Resilience.NoNewHttpClientAnalyzer(),
+                    new Resilience.EfEnableRetryOnFailureAnalyzer(),
+                    new Resilience.HttpClientResiliencePolicyAnalyzer(),
+                    new Resilience.NoSyncOverAsyncAnalyzer(),
+                    new Resilience.NoHandRolledRetryAnalyzer(),
+                    new Resilience.HealthChecksAnalyzer(),
                 },
             };
 

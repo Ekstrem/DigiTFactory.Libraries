@@ -10,3 +10,9 @@
 | QG-606 | Событие — источник истины: состояние восстанавливается из событий (ES), а не mutable-таблица | наличие event store + `GetById` replay | 🟠 | статья 10 |  |
 | QG-607 | Агрегат — точка согласованности: инварианты только в агрегате, не в контроллере/хендлере | grep валидации вне Domain → fail | 🔴 | статья 10 |  |
 | QG-608 | Нет дублей инфраструктурных интерфейсов (один `I{Context}AggregateProvider`, без `IRepository`+`IChatAggregateRepository`+…) | grep дублей интерфейсов | 🟡 | отклонение Chat |  |
+| QG-609 | `HttpClient` создаётся только через `IHttpClientFactory`/`AddHttpClient`, не `new HttpClient()` | анализатор QG609 | 🔴 | статья «IHttpClientFactory» | применён |
+| QG-610 | EF-подключение устойчиво: `UseNpgsql`/`UseSqlServer` с `EnableRetryOnFailure` | анализатор QG610 | 🔴 | статья «EF SQL connections» | применён |
+| QG-611 | `AddHttpClient` несёт политику отказоустойчивости (retry/circuit-breaker) | анализатор QG611 | 🟠 | статья «Polly» | применён |
+| QG-612 | Нет sync-over-async (`.Result`/`.Wait()`/`.GetAwaiter().GetResult()`) | анализатор QG612 | 🔴 | статья «partial failure» | применён |
+| QG-613 | Нет самописного retry (цикл + `Sleep`/`Delay`) — только Polly | анализатор QG613 | 🟠 | статья «retry+backoff» | применён |
+| QG-614 | Health-checks: `AddHealthChecks` + `MapHealthChecks`/`UseHealthChecks` | анализатор QG614 | 🟠 | статья «monitor app health» | применён |
