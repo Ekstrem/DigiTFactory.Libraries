@@ -41,3 +41,5 @@ namespace DigiTFactory.Libraries.CrossCutting.Resilience
             => new TimeoutStrategyOptions { Timeout = timeout };
     }
 }
+
+// 0.1.0 — retry+jitter, circuit-breaker, timeout (QG-609..614, публикуется через crosscutting.yml)

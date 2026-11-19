@@ -50,3 +50,5 @@ namespace DigiTFactory.Libraries.Testing
         }
     }
 }
+
+// 0.1.0 — coverage-assertion (QG-702, публикуется через testing.yml)
