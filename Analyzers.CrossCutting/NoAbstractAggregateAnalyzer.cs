@@ -11,7 +11,7 @@ namespace DigiTFactory.Libraries.Analyzers.CrossCutting
     /// QG-004/QG-602: запрещён «абстрактный агрегат» — metadata-driven подход пакета
     /// AbstractAggregate (DynamicAggregateRoot, AbstractAggregateFactory, DynamicAnemicModel и т.п.)
     /// и generic-оболочка SeedWorks <c>Aggregate&lt;TBC&gt;</c>.
-    /// НЕ запрещает SeedWorks <c>IAggregate&lt;T&gt;</c> — это каноничный интерфейс микросервисного агрегата.
+    /// НЕ запрещает SeedWorks <c>IAggregate&lt;T&gt;</c> — это штатный интерфейс микросервисного агрегата.
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NoAbstractAggregateAnalyzer : DiagnosticAnalyzer

@@ -7,7 +7,7 @@ using Polly.Timeout;
 namespace DigiTFactory.Libraries.CrossCutting.Resilience
 {
     /// <summary>
-    /// Готовые Polly-политики отказоустойчивости (реализация паттернов из канона EDM, QG-6xx).
+    /// Готовые Polly-политики отказоустойчивости (реализация паттернов из метода EDM, QG-6xx).
     /// retry + экспоненциальная задержка + jitter, circuit breaker, timeout.
     /// </summary>
     public static class ResiliencePolicies
