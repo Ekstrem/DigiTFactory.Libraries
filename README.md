@@ -48,7 +48,7 @@
 | Пакет | Версия | Правила |
 |-------|--------|---------|
 | `DigiTFactory.Libraries.Analyzers.Domain` | 0.6.1 | QG-001..022 |
-| `DigiTFactory.Libraries.Analyzers.DomainServices` | 0.5.2 | QG-101..109 |
+| `DigiTFactory.Libraries.Analyzers.DomainServices` | 0.6.0 | QG-101..109 |
 | `DigiTFactory.Libraries.Analyzers.Application` | 0.1.6 | QG-201..212 |
 | `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.1 | QG-301..306 |
 | `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.0 | QG-602/603 |
@@ -177,7 +177,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 
 <!-- Качество: анализаторы QG-канона (в каждый проект, PrivateAssets=all) -->
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.5.2" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.6.0" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Application" Version="0.1.6" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.0" PrivateAssets="all" />

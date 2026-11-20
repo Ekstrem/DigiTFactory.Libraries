@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace DigiTFactory.Libraries.Analyzers.DomainServices
 {
-    /// <summary>QG-104: BusAdapter и сохраняет событие (SaveEventAsync), и публикует (IEventBus.Publish).</summary>
+    /// <summary>QG-104: BusAdapter только публикует (IEventBus.Publish); сохранение события — в отдельном подписчике шины (*EventStoreHandler), не в BusAdapter.</summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class BusAdapterAnalyzer : DiagnosticAnalyzer
     {
@@ -15,8 +15,8 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
-            "BusAdapter сохраняет и публикует",
-            "BusAdapter должен и сохранять событие (SaveEventAsync), и публиковать его (IEventBus.Publish)",
+            "BusAdapter только публикует",
+            "BusAdapter должен только публиковать событие (IEventBus.Publish); сохранение (SaveEventAsync) — в отдельном подписчике шины (*EventStoreHandler), а не в BusAdapter",
             "DigiTFactory",
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
@@ -45,7 +45,8 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
             var saves = ids.Contains("SaveEventAsync");
             var publishes = ids.Contains("Publish") || ids.Contains("IEventBus");
 
-            if (!(saves && publishes))
+            // save не должен жить в нотификаторе; публикация — обязательна.
+            if (saves || !publishes)
             {
                 ctx.ReportDiagnostic(Diagnostic.Create(Rule, cls.Identifier.GetLocation()));
             }
