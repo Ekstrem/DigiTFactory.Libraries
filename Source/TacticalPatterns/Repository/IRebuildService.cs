@@ -7,7 +7,7 @@ namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository
     /// <summary>
     /// Сервис перестроения Read-модели (проекций) из Event Store.
     /// Читает все события в хронологическом порядке и прогоняет через Projection Handler.
-    /// Идемпотентен: повторный вызов безопасен (события с Version <= текущей пропускаются).
+    /// Идемпотентен: повторный вызов безопасен (события с Version &lt;= текущей пропускаются).
     /// </summary>
     /// <typeparam name="TBoundedContext">Ограниченный контекст.</typeparam>
     public interface IRebuildService<TBoundedContext>

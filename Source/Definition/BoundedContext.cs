@@ -1,7 +1,7 @@
-﻿namespace DigiTFactory.Libraries.SeedWorks.Definition
+namespace DigiTFactory.Libraries.SeedWorks.Definition
 {
     /// <summary>
-    /// Описание ограниченного контекста <see cref="T"/>
+    /// Описание ограниченного контекста <typeparamref name="T"/>
     /// </summary>
     /// <typeparam name="T">Тип ограниченного контекста.</typeparam>
     public class BoundedContext<T> : IBoundedContextDescription

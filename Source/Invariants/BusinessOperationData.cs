@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using DigiTFactory.Libraries.SeedWorks.Characteristics;
 using DigiTFactory.Libraries.SeedWorks.Definition;
@@ -39,10 +39,10 @@ namespace DigiTFactory.Libraries.SeedWorks.Invariants
             return changedValueObjects;
         }
 
-        public static BusinessOperationData<TBoundedContext, TModel> Commit<TBoundedContext, TModel>(
-            TModel aggregate, TModel model)
-            where TModel : IAnemicModel<TBoundedContext>
-            where TBoundedContext : IBoundedContext 
-            => new BusinessOperationData<TBoundedContext, TModel>(aggregate, model);
+        public static BusinessOperationData<TBC, TAnemicModel> Commit<TBC, TAnemicModel>(
+            TAnemicModel aggregate, TAnemicModel model)
+            where TAnemicModel : IAnemicModel<TBC>
+            where TBC : IBoundedContext 
+            => new BusinessOperationData<TBC, TAnemicModel>(aggregate, model);
     }
 }

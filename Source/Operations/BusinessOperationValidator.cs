@@ -1,4 +1,4 @@
-﻿using System.Buffers.Text;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using DigiTFactory.Libraries.SeedWorks.Definition;
@@ -45,7 +45,6 @@ namespace DigiTFactory.Libraries.SeedWorks.Operations
     /// Служебный класс валидирования операций.
     /// </summary>
     /// <typeparam name="TBoundedContext">Тип ограниченного контекста.</typeparam>
-    /// <typeparam name="TResults">Результат выполнения бизнес-операции.</typeparam>
     /// <typeparam name="TModel">Тип анемичной модели.</typeparam>
     public class BusinessOperationValidator<TBoundedContext, TModel> :
         BusinessOperationValidator<TBoundedContext, TModel, DomainOperationResultEnum>

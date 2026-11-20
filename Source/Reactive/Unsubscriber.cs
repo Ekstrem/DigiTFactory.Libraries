@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DigiTFactory.Libraries.SeedWorks.Reactive
@@ -18,14 +18,14 @@ namespace DigiTFactory.Libraries.SeedWorks.Reactive
 
         public void Dispose() => _observers?.Remove(_observer);
 
-        public static IDisposable Subscribe<T>(List<IObserver<T>> observers, IObserver<T> observer)
+        public static IDisposable Subscribe<TItem>(List<IObserver<TItem>> observers, IObserver<TItem> observer)
         {
             if (!observers.Contains(observer))
             {
                 observers.Add(observer);
             }
 
-            return new Unsubscriber<T>(observers, observer);
+            return new Unsubscriber<TItem>(observers, observer);
         }
     }
 }

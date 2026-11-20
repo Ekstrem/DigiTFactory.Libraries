@@ -58,6 +58,7 @@ namespace DigiTFactory.Libraries.SeedWorks.Events
         /// <param name="correlationToken">Маркер корреляции.</param>
         /// <param name="commandName">Имя команды инициатора доменного события.</param>
         /// <param name="subjectName">Имя инициировавшего событие.</param>
+        /// <param name="version">Версия агрегата.</param>
         /// <returns></returns>
         public static CommandToAggregate Commit(
             Guid correlationToken, string commandName, string subjectName, long version)
