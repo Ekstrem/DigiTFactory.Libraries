@@ -1,11 +1,11 @@
-# Quality Gates — канон EDM (DigiTFactory)
+# Quality Gates — метод EDM (DigiTFactory)
 
-> Набор проверяемых правил канона событийно-управляемого микросервиса на `.NET / DigiTFactory.Libraries`.
+> Набор проверяемых правил метода событийно-управляемого микросервиса на `.NET / DigiTFactory.Libraries`.
 > Сформулировано из сравнения реализаций: `Chat`, `Cart` (EShop), `Catalog`, `BC-Journal`, `Journal` —
 > против статей «Тактические паттерны» (7) и «От моделей до EDM» (10), принципов skill `edm-net`
 > и фактического API `SeedWorks` (актуальная версия с nuget.org).
 >
-> **Назначение QG** — превратить «канон» из описания в автоматически проверяемое условие:
+> **Назначение QG** — превратить «метод» из описания в автоматически проверяемое условие:
 > каждая проверка должна выражаться grep-паттерном / правилом csproj / тестом / AST-правилом и
 > висеть в CI как гейт. Нарушение = блок сборки.
 
@@ -74,7 +74,7 @@ dotnet build {Context}.sln && dotnet test {Context}.sln
 - **QG-302** — репозиторий материализованных представлений — **платформенный** (`IReadModelStore`/`AddReadStorePostgres`) с точками расширения, не своя реализация.
 - **QG-307/308/309 — «ожидает библиотеку»** (владелец 2026-11-17): интерфейс `IRebuildService` есть, но нет реализации; `ProjectFromEntryAsync` (JSON-replay) и `$type`-дискриминатор для полиморфной сериализации `IValueObject` в библиотеках DTF отсутствуют. Внедрять гейт раньше инструмента — значит гнать BE на нереализованное.
 - **IAnemicModelRepository vs IEventStoreRepository** (владелец 2026-11-17): первый хранит **агрегат** (снапшот/стрим — экономия диска), второй — **доменные события**. Выбор от домена: снапшот / события / комбинация (снапшот раз в N событий + replay свежих до актуального состояния). Нужны оба интерфейса; стратегия «снапшот + события» — техдолг библиотеки CommandRepository.Postgres.
-- **Notifier → IEventBus; IEventStoreRepository — подписчик (профиль BudgetCqrs)** (владелец 2026-11-17): нотифаер **только публикует** `IDomainEvent` в `IEventBus`; дальше — реакция подписчиков (как в Kafka: продюсер → брокер → консьюмеры). `IEventStoreRepository` — подписчик, который **сохраняет состояние события** (`SaveEventAsync`, persistence), а не параллельный шаг; проекция MV — другой подписчик (`UpsertAsync`). Это вариант **BudgetCqrs**: `EventBus.InMemory` эмулирует приём из Kafka в процессе (чистая диспетчеризация `Publish → OnNext`, сам не сохраняет); на профиле **Cqrs** вместо InMemory регистрируется `EventBus.Kafka`. Уточняет QG-104 (формулировку «и сохраняет, и публикует» — правьте в каноне).
+- **Notifier → IEventBus; IEventStoreRepository — подписчик (профиль BudgetCqrs)** (владелец 2026-11-17): нотифаер **только публикует** `IDomainEvent` в `IEventBus`; дальше — реакция подписчиков (как в Kafka: продюсер → брокер → консьюмеры). `IEventStoreRepository` — подписчик, который **сохраняет состояние события** (`SaveEventAsync`, persistence), а не параллельный шаг; проекция MV — другой подписчик (`UpsertAsync`). Это вариант **BudgetCqrs**: `EventBus.InMemory` эмулирует приём из Kafka в процессе (чистая диспетчеризация `Publish → OnNext`, сам не сохраняет); на профиле **Cqrs** вместо InMemory регистрируется `EventBus.Kafka`. Уточняет QG-104 (формулировку «и сохраняет, и публикует» — правьте в методе).
 - **ICommandHandler/IQueryHandler — маркеры** (владелец 2026-11-17): в SeedWorks добавлены маркер-интерфейсы `ICommandHandler` (мутация через агрегат; QG-210 требует `IAggregateProvider` в ctor) и `IQueryHandler` (чтение из Read Store; QG-204). Исключение для командного хендлера без агрегата — `[CommandHandlerNoAggregate]` → QG-210W warning.
 - **IQueryableReadRepository** (владелец 2026-11-17): SeedWorks — `IQueryableReadRepository<TBC, TReadModel> : IReadRepository<TBC, TReadModel>` добавляет `GetQueryable()` для хранилищ с IQueryable (Postgres/EF Core); Redis/Scylla реализуют только `IReadRepository`. Специфичный поиск (`GetByPhone`) = `GetQueryable().Where(l => l.Phone == value).FirstOrDefault()`, без кастомных `I{Context}QueryRepository`.
 - **QG-205/207/208 — конвенции** (владелец 2026-11-17): не внедрены как Roslyn-анализаторы — это дисциплина (сверка полей DTO↔ReadModel, идемпотентность через CorrelationToken, оптимистичная блокировка ExpectedVersion), а не синтаксис. Фиксируются ревью/канвасом.

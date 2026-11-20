@@ -41,9 +41,9 @@
 | `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.0 | Кэш проекций на Redis |
 | `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.0 | Высокопроизводительные проекции на ScyllaDB |
 
-### Качество (Roslyn-анализаторы, QG-канон)
+### Качество (Roslyn-анализаторы, QG-метод)
 
-Анализаторы превращают канон EDM в проверки компилятора. Подключать с `PrivateAssets="all"` и настраивать severity в `.editorconfig` — иначе правило «не проверить локально» не работает.
+Анализаторы превращают метод EDM в проверки компилятора. Подключать с `PrivateAssets="all"` и настраивать severity в `.editorconfig` — иначе правило «не проверить локально» не работает.
 
 | Пакет | Версия | Правила |
 |-------|--------|---------|
@@ -175,7 +175,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <!-- Тесты: coverage-assertion (в тест-проект) -->
 <PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.2.0" />
 
-<!-- Качество: анализаторы QG-канона (в каждый проект, PrivateAssets=all) -->
+<!-- Качество: анализаторы QG-метода (в каждый проект, PrivateAssets=all) -->
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.6.0" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Application" Version="0.1.6" PrivateAssets="all" />
