@@ -8,8 +8,10 @@
     <RootNamespace>DigiTFactory.Libraries.Testing</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.Testing</AssemblyName>
     <PackageId>DigiTFactory.Libraries.Testing</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Description>Coverage-assertion helpers for DigiTFactory EDM microservices: verify every aggregate business method has a test (QG-702).</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
 </Project>

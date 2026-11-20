@@ -1,4 +1,4 @@
-[![SeedWorks](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml/badge.svg)](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml)
+﻿[![SeedWorks](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml/badge.svg)](https://github.com/Ekstrem/DigiTFactory.Libraries/actions/workflows/seedworks.yml)
 
 # DigiTFactory.Libraries
 
@@ -16,30 +16,30 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.SeedWorks` | 0.6.0 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
+| `DigiTFactory.Libraries.SeedWorks` | 0.7.0 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
 
 ### Command Side (Event Store)
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.2.1 | Event Store на PostgreSQL (EF Core) |
-| `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.0 | Event Store на MongoDB |
+| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.2.2 | Event Store на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.1 | Event Store на MongoDB |
 
 ### Event Bus
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.EventBus.InMemory` | 0.1.0 | In-memory шина для dev/тестов |
-| `DigiTFactory.Libraries.EventBus.Kafka` | 0.1.0 | Apache Kafka для продакшена |
-| `DigiTFactory.Libraries.EventBus.Postgres` | 0.1.0 | Outbox-паттерн на PostgreSQL |
+| `DigiTFactory.Libraries.EventBus.InMemory` | 0.1.1 | In-memory шина для dev/тестов |
+| `DigiTFactory.Libraries.EventBus.Kafka` | 0.1.1 | Apache Kafka для продакшена |
+| `DigiTFactory.Libraries.EventBus.Postgres` | 0.1.1 | Outbox-паттерн на PostgreSQL |
 
 ### Query Side (Read Store)
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.1.1 | Проекции на PostgreSQL (EF Core) |
-| `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.0 | Кэш проекций на Redis |
-| `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.0 | Высокопроизводительные проекции на ScyllaDB |
+| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.1.2 | Проекции на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.1 | Кэш проекций на Redis |
+| `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.1 | Высокопроизводительные проекции на ScyllaDB |
 
 ### Качество (Roslyn-анализаторы, QG-метод)
 
@@ -47,20 +47,20 @@
 
 | Пакет | Версия | Правила |
 |-------|--------|---------|
-| `DigiTFactory.Libraries.Analyzers.Domain` | 0.6.1 | QG-001..022 |
-| `DigiTFactory.Libraries.Analyzers.DomainServices` | 0.6.0 | QG-101..109 |
-| `DigiTFactory.Libraries.Analyzers.Application` | 0.1.6 | QG-201..212 |
-| `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.1 | QG-301..306 |
-| `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.0 | QG-602/603 |
-| `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.0 | QG-609..614 |
-| `DigiTFactory.Libraries.Analyzers.Testing` | 0.1.0 | QG-701 |
+| `DigiTFactory.Libraries.Analyzers.Domain` | 0.6.2 | QG-001..022 |
+| `DigiTFactory.Libraries.Analyzers.DomainServices` | 0.6.1 | QG-101..109 |
+| `DigiTFactory.Libraries.Analyzers.Application` | 0.1.7 | QG-201..212 |
+| `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.2 | QG-301..306 |
+| `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.1 | QG-602/603 |
+| `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.1 | QG-609..614 |
+| `DigiTFactory.Libraries.Analyzers.Testing` | 0.1.1 | QG-701 |
 
 ### Отказоустойчивость и тестирование
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.CrossCutting` | 0.1.0 | Polly-политики (retry+jitter, circuit-breaker, timeout), resilient HttpClient, health-checks |
-| `DigiTFactory.Libraries.Testing` | 0.2.0 | Coverage-assertion: покрытие бизнес-методов агрегата и инвариантов тестами |
+| `DigiTFactory.Libraries.CrossCutting` | 0.1.1 | Polly-политики (retry+jitter, circuit-breaker, timeout), resilient HttpClient, health-checks |
+| `DigiTFactory.Libraries.Testing` | 0.2.1 | Coverage-assertion: покрытие бизнес-методов агрегата и инвариантов тестами |
 
 ## Архитектура
 
@@ -160,29 +160,29 @@ public interface IBusinessOperationValidator<TBoundedContext>
 
 ```xml
 <!-- Domain: только SeedWorks -->
-<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.6.0" />
+<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.7.0" />
 
 <!-- Api: шина событий (выбрать один) -->
-<PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.1.0" />
+<PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.1.1" />
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
-<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.2.1" />
-<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.1.1" />
+<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.2.2" />
+<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.1.2" />
 
 <!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
-<PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.0" />
+<PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.1" />
 
 <!-- Тесты: coverage-assertion (в тест-проект) -->
-<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.2.0" />
+<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.2.1" />
 
 <!-- Качество: анализаторы QG-метода (в каждый проект, PrivateAssets=all) -->
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.1" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.6.0" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Application" Version="0.1.6" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.1" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.0" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.0" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.1.0" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.2" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.DomainServices" Version="0.6.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Application" Version="0.1.7" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.2" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.1.1" PrivateAssets="all" />
 ```
 
 ### Граф зависимостей микросервиса

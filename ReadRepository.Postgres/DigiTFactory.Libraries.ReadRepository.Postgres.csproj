@@ -6,7 +6,7 @@
     <RootNamespace>DigiTFactory.Libraries.ReadRepository.Postgres</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.ReadRepository.Postgres</AssemblyName>
     <PackageId>DigiTFactory.Libraries.ReadRepository.Postgres</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <FileVersion>0.1.0.0</FileVersion>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Authors>Войтов Евгений</Authors>
@@ -19,6 +19,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

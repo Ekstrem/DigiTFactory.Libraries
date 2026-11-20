@@ -8,8 +8,10 @@
     <RootNamespace>DigiTFactory.Libraries.CrossCutting</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.CrossCutting</AssemblyName>
     <PackageId>DigiTFactory.Libraries.CrossCutting</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Description>Cross-cutting resilience and health-check helpers for DigiTFactory EDM microservices: Polly policies (retry+jitter, circuit breaker, timeout), resilient HttpClient via IHttpClientFactory, and health-check registration.</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
