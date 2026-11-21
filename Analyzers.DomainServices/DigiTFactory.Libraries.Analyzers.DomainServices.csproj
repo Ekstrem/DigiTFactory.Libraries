@@ -8,7 +8,7 @@
     <RootNamespace>DigiTFactory.Libraries.Analyzers.DomainServices</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.Analyzers.DomainServices</AssemblyName>
     <PackageId>DigiTFactory.Libraries.Analyzers.DomainServices</PackageId>
-    <Version>0.6.1</Version>
+    <Version>0.6.2</Version>
     <Description>Roslyn analyzers for the DomainServices layer (DigiTFactory EDM quality gates QG-1xx).</Description>
     <IsPackable>true</IsPackable>
     <DevelopmentDependency>true</DevelopmentDependency>

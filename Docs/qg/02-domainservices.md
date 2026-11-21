@@ -11,3 +11,4 @@
 | QG-107 | DomainServices зависит только от Domain + InternalContracts (не Api/Application/Storage) | csproj: нет этих ссылок | 🔴 | skill (граф) |  |
 | QG-108 | Нет «мёртвого» кода (невызываемые `SaveEventAsync`, `DomainCommandExecutor`, MassTransit-обёртки) | grep `NotImplementedException` / вызов не найден | 🟠 | отклонение Chat |  |
 | QG-109 | `AggregateProvider` инжектит в конструктор только библиотечные зависимости (`IAnemicModelRepository`, `IEventBus`), не кастомные (`CommandDbContext`/`*Repository`) | grep `IAnemicModelRepository` в ctor + нет `CommandDbContext` | 🔴 | статья 7 | применён |
+| QG-110 | Команда изменяет агрегат через `IAggregateProviderWithCompletion.GetAggregateWithCompletionAsync` + `await completion` (TCS-мост, долговечная доставка), а не через `GetAggregateAsync` без ожидания | анализатор QG110 (grep `GetAggregateAsync` вне Tests) | 🟠 | статья 7 + SeedWorks 0.7.0 | применён |
