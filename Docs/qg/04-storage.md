@@ -10,5 +10,5 @@
 | QG-306 | Проекция пишет через `IReadModelStore.UpsertAsync` / читает `IReadRepository.GetByIdAsync` | grep `UpsertAsync` | 🔴 | skill | применён |
 | QG-307 | Rebuild — `IRebuildService<TBC>`; integration test: incremental projection == rebuild из Full ES | `IRebuildService` + behavior test | 🔴 | статья 10 (регидротация) | порт готов |
 | QG-308 | Есть JSON-путь проекции (`ProjectFromEntryAsync`) для replay из `DomainEventEntry` | grep `ProjectFromEntryAsync` | 🟠 | статья 10 | ожидает библиотеку |
-| QG-309 | `$type`-дискриминатор (или иной полиморфный конвертер) для сериализации `IValueObject` | grep `JsonConverter`/`$type` | 🟠 | отклонение Chat/BC-Journal | ожидает библиотеку |
+| QG-309 | Типизированная сериализация `IValueObject` по runtime-типу (`$type`-дискриминатор) через `IValueObjectSerializer`; `{}` запрещён | `ValueObjectSerializerFactory` + round-trip тест | 🟠 | отклонение Chat/BC-Journal | применён |
 | QG-310 | Command DB и Read DB разделены (отдельные DbContext/схемы/БД) | наличие `CommandDbContext`/`EventStoreDbContext` + `ReadDbContext` | 🟠 | статья 10 (CQRS) |  |
