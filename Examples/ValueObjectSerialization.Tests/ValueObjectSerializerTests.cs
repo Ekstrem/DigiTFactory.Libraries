@@ -61,8 +61,8 @@ public sealed class ValueObjectSerializerTests
             .Register<StringVo>("str")
             .Register<IntVo>("int")
             .Register<BoolVo>("bool");
-
-    private sealed record StringVo(string Value) : IValueObject;
-    private sealed record IntVo(int Value) : IValueObject;
-    private sealed record BoolVo(bool Value) : IValueObject;
 }
+
+public sealed record StringVo(string Value) : IValueObject;
+public sealed record IntVo(int Value) : IValueObject;
+public sealed record BoolVo(bool Value) : IValueObject;

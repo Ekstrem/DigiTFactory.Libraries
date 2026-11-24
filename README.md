@@ -16,7 +16,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.SeedWorks` | 0.9.1 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
+| `DigiTFactory.Libraries.SeedWorks` | 0.9.2 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
 
 ### Command Side (Event Store)
 
@@ -160,7 +160,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 
 ```xml
 <!-- Domain: только SeedWorks -->
-<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.1" />
+<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.2" />
 
 <!-- Api: шина событий (выбрать один) -->
 <PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.2.0" />

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using MessagePack;
+using MessagePack.Resolvers;
 
 namespace DigiTFactory.Libraries.SeedWorks.Serialization
 {
@@ -11,7 +12,8 @@ namespace DigiTFactory.Libraries.SeedWorks.Serialization
     public sealed class MessagePackValueObjectSerializer : IValueObjectSerializer
     {
         private readonly IValueObjectTypeRegistry _registry;
-        private readonly MessagePackSerializerOptions _options;
+        private readonly MessagePackSerializerOptions _envelopeOptions;
+        private readonly MessagePackSerializerOptions _payloadOptions;
 
         public MessagePackValueObjectSerializer(IValueObjectTypeRegistry registry)
             : this(registry, MessagePackSerializerOptions.Standard)
@@ -21,49 +23,52 @@ namespace DigiTFactory.Libraries.SeedWorks.Serialization
         public MessagePackValueObjectSerializer(IValueObjectTypeRegistry registry, MessagePackSerializerOptions options)
         {
             _registry = registry;
-            _options = options;
+            _envelopeOptions = options;
+            _payloadOptions = options.WithResolver(
+                CompositeResolver.Create(StandardResolver.Instance, ContractlessStandardResolver.Instance));
         }
 
         /// <inheritdoc />
         public string Serialize(IReadOnlyDictionary<string, IValueObject> valueObjects)
         {
-            var items = new List<MpEnvelope>(valueObjects.Count);
+            var items = new List<MessagePackVoEnvelope>(valueObjects.Count);
             foreach (var kvp in valueObjects)
             {
                 var runtimeType = kvp.Value.GetType();
-                items.Add(new MpEnvelope
+                items.Add(new MessagePackVoEnvelope
                 {
+                    Key = kvp.Key,
                     SchemaVersion = 1,
                     Type = _registry.GetTypeName(runtimeType),
-                    Payload = MessagePackSerializer.Serialize(runtimeType, kvp.Value, _options)
+                    Payload = MessagePackSerializer.Serialize(runtimeType, kvp.Value, _payloadOptions)
                 });
             }
 
-            return Convert.ToBase64String(MessagePackSerializer.Serialize(items, _options));
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(items, _envelopeOptions));
         }
 
         /// <inheritdoc />
         public IReadOnlyDictionary<string, IValueObject> Deserialize(string payload)
         {
-            var items = MessagePackSerializer.Deserialize<List<MpEnvelope>>(Convert.FromBase64String(payload), _options);
+            var items = MessagePackSerializer.Deserialize<List<MessagePackVoEnvelope>>(Convert.FromBase64String(payload), _envelopeOptions);
             var result = new Dictionary<string, IValueObject>(items.Count);
 
             foreach (var item in items)
             {
                 var type = _registry.ResolveType(item.Type);
-                result[item.Key] = (IValueObject)MessagePackSerializer.Deserialize(type, item.Payload, _options);
+                result[item.Key] = (IValueObject)MessagePackSerializer.Deserialize(type, item.Payload, _payloadOptions);
             }
 
             return result;
         }
+    }
 
-        [MessagePackObject]
-        private sealed class MpEnvelope
-        {
-            [Key(0)] public string Key { get; set; } = string.Empty;
-            [Key(1)] public int SchemaVersion { get; set; }
-            [Key(2)] public string Type { get; set; } = string.Empty;
-            [Key(3)] public byte[] Payload { get; set; } = Array.Empty<byte>();
-        }
+    [MessagePackObject]
+    public sealed class MessagePackVoEnvelope
+    {
+        [Key(0)] public string Key { get; set; } = string.Empty;
+        [Key(1)] public int SchemaVersion { get; set; }
+        [Key(2)] public string Type { get; set; } = string.Empty;
+        [Key(3)] public byte[] Payload { get; set; } = Array.Empty<byte>();
     }
 }
