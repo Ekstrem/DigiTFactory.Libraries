@@ -53,7 +53,7 @@
 | `DigiTFactory.Libraries.Analyzers.Storage` | 0.1.2 | QG-301..306 |
 | `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.1 | QG-602/603 |
 | `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.1 | QG-609..614 |
-| `DigiTFactory.Libraries.Analyzers.Testing` | 0.1.1 | QG-701 |
+| `DigiTFactory.Libraries.Analyzers.Testing` | 0.2.0 | QG-701..702 |
 
 ### Отказоустойчивость и тестирование
 
@@ -182,7 +182,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.1.2" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.1" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.1.1" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.2.0" PrivateAssets="all" />
 ```
 
 ### Граф зависимостей микросервиса

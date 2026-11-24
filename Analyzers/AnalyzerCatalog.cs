@@ -82,6 +82,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Resilience.NoHandRolledRetryAnalyzer(),
                     new Resilience.HealthChecksAnalyzer(),
                     new Testing.TestNamingAnalyzer(),
+                    new Testing.AggregateCoveragePresenceAnalyzer(),
                 },
             };
 
