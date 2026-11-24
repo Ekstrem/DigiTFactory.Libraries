@@ -85,6 +85,8 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Resilience.HealthChecksAnalyzer(),
                     new Testing.TestNamingAnalyzer(),
                     new Testing.AggregateCoveragePresenceAnalyzer(),
+                    new Testing.ApiSuitePresenceAnalyzer(),
+                    new Testing.ProjectionCoveragePresenceAnalyzer(),
                 },
             };
 

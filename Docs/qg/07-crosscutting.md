@@ -20,5 +20,5 @@
 | QG-702 | Каждый бизнес-метод агрегата и каждый инвариант покрыт тестом (happy + отказ); `*.Domain.Tests` обязан содержать оба coverage-gate | `AggregateCoverage.Verify<T>()` + `VerifyInvariants()` + анализатор QG702 | 🔴 | отклонение Journal | применён |
 | QG-704 | Реально выполняемый full lifecycle: Manual + Garmin, Command → Event Store → replay → projection → Query на настоящей СУБД | CI/integration gate | 🔴 | ACO5.5 reference | шаблон |
 | QG-705 | Событие имеет ID записи и однозначную новую версию; первая фабрика не даёт `Guid.Empty`, следующий шаг увеличивает версию ровно один раз | contract test | 🔴 | ACO5.5 reference | шаблон |
-| QG-706 | Self-hosted API suite: каждый command/query endpoint — happy + негатив (401/403/405/malformed token/JSON); owner только из token; чужие записи не видны | integration gate | 🔴 | сравнение тестов BE (DS/ACO) | шаблон |
-| QG-707 | Проекции: идемпотентность (повторная доставка), rebuild == incremental, stale/version-conflict не меняет MV | integration gate | 🔴 | сравнение тестов BE (DS/ACO) | шаблон |
+| QG-706 | Self-hosted API suite: каждый command/query endpoint — happy + негатив (401/403/405/malformed token/JSON); owner только из token; чужие записи не видны | анализатор QG706 (наличие WebApplicationFactory) | 🔴 | сравнение тестов BE (DS/ACO) | применён |
+| QG-707 | Проекции: идемпотентность (повторная доставка), rebuild == incremental, stale/version-conflict не меняет MV | анализатор QG707 + `ProjectionCoverage.Verify*` | 🔴 | сравнение тестов BE (DS/ACO) | применён |

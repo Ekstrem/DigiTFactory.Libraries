@@ -53,14 +53,14 @@
 | `DigiTFactory.Libraries.Analyzers.Storage` | 0.2.0 | QG-301..311 |
 | `DigiTFactory.Libraries.Analyzers.CrossCutting` | 0.4.1 | QG-602/603 |
 | `DigiTFactory.Libraries.Analyzers.Resilience` | 0.1.1 | QG-609..614 |
-| `DigiTFactory.Libraries.Analyzers.Testing` | 0.2.0 | QG-701..702 |
+| `DigiTFactory.Libraries.Analyzers.Testing` | 0.3.0 | QG-701..707 |
 
 ### Отказоустойчивость и тестирование
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
 | `DigiTFactory.Libraries.CrossCutting` | 0.1.1 | Polly-политики (retry+jitter, circuit-breaker, timeout), resilient HttpClient, health-checks |
-| `DigiTFactory.Libraries.Testing` | 0.2.1 | Coverage-assertion: покрытие бизнес-методов агрегата и инвариантов тестами |
+| `DigiTFactory.Libraries.Testing` | 0.3.0 | Coverage + поведенческие проверки проекций (rebuild==incremental, idempotency) |
 
 ## Архитектура
 
@@ -173,7 +173,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.1" />
 
 <!-- Тесты: coverage-assertion (в тест-проект) -->
-<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.2.1" />
+<PackageReference Include="DigiTFactory.Libraries.Testing" Version="0.3.0" />
 
 <!-- Качество: анализаторы QG-метода (в каждый проект, PrivateAssets=all) -->
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Domain" Version="0.6.2" PrivateAssets="all" />
@@ -182,7 +182,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Storage" Version="0.2.0" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.CrossCutting" Version="0.4.1" PrivateAssets="all" />
 <PackageReference Include="DigiTFactory.Libraries.Analyzers.Resilience" Version="0.1.1" PrivateAssets="all" />
-<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.2.0" PrivateAssets="all" />
+<PackageReference Include="DigiTFactory.Libraries.Analyzers.Testing" Version="0.3.0" PrivateAssets="all" />
 ```
 
 ### Граф зависимостей микросервиса

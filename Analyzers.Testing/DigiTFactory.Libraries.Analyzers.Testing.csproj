@@ -8,7 +8,7 @@
     <RootNamespace>DigiTFactory.Libraries.Analyzers.Testing</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.Analyzers.Testing</AssemblyName>
     <PackageId>DigiTFactory.Libraries.Analyzers.Testing</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <Description>Roslyn analyzers for test rules (DigiTFactory EDM quality gates QG-701).</Description>
     <IsPackable>true</IsPackable>
     <DevelopmentDependency>true</DevelopmentDependency>
