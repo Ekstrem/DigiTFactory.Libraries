@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Immutable;
-using System.Threading;
 using System.Threading.Tasks;
 using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.SeedWorks.Events;
-using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
 using Microsoft.Extensions.Logging;
 
 namespace DigiTFactory.Libraries.EventBus.InMemory
 {
     /// <summary>
     /// In-Memory реализация IEventBus.
-    /// Синхронный dispatch всем подписанным хендлерам в текущем процессе.
+    /// PublishAsync сначала ожидает durable-подписчиков (<see cref="IAsyncDomainEventHandler{TBoundedContext}"/>),
+    /// затем диспатчит асинхронные IObserver-проекции. Ошибка durable-записи пробрасывается вызывающему
+    /// и останавливает проекции; ошибка async-проекции логируется и не блокирует команду.
     /// </summary>
     public sealed class InMemoryEventBus : IEventBus
     {
@@ -24,6 +24,10 @@ namespace DigiTFactory.Libraries.EventBus.InMemory
             _logger = logger;
         }
 
+        /// <summary>
+        /// Синхронная совместимость для IObserver-подписчиков. Для durable-записи используйте PublishAsync:
+        /// синхронный Publish не ожидает IAsyncDomainEventHandler.
+        /// </summary>
         public void Publish<TBoundedContext>(IDomainEvent<TBoundedContext> domainEvent)
             where TBoundedContext : IBoundedContext
         {
@@ -32,27 +36,54 @@ namespace DigiTFactory.Libraries.EventBus.InMemory
 
             foreach (var handler in handlers)
             {
-                try
-                {
-                    if (handler is IObserver<IDomainEvent<TBoundedContext>> observer)
-                    {
-                        observer.OnNext(domainEvent);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex,
-                        "Error dispatching domain event to handler {HandlerType} for {BoundedContext}",
-                        handler.GetType().Name, typeof(TBoundedContext).Name);
-                }
+                DispatchObserver(handler, domainEvent);
             }
         }
 
-        public Task PublishAsync<TBoundedContext>(IDomainEvent<TBoundedContext> domainEvent)
+        /// <summary>
+        /// Публикует событие и завершается только после durable-записи. Async-проекции запускаются после
+        /// успешного сохранения и не ожидаются. Если durable-подписчик также реализует IObserver,
+        /// событие доставляется ему только один раз — через HandleAsync.
+        /// </summary>
+        public async Task PublishAsync<TBoundedContext>(IDomainEvent<TBoundedContext> domainEvent)
             where TBoundedContext : IBoundedContext
         {
-            Publish(domainEvent);
-            return Task.CompletedTask;
+            if (!_handlers.TryGetValue(typeof(TBoundedContext), out var handlers))
+                return;
+
+            foreach (var handler in handlers)
+            {
+                if (handler is IAsyncDomainEventHandler<TBoundedContext> durableHandler)
+                {
+                    await durableHandler.HandleAsync(domainEvent).ConfigureAwait(false);
+                }
+            }
+
+            foreach (var handler in handlers)
+            {
+                if (handler is IAsyncDomainEventHandler<TBoundedContext>)
+                    continue;
+
+                DispatchObserver(handler, domainEvent);
+            }
+        }
+
+        private void DispatchObserver<TBoundedContext>(object handler, IDomainEvent<TBoundedContext> domainEvent)
+            where TBoundedContext : IBoundedContext
+        {
+            try
+            {
+                if (handler is IObserver<IDomainEvent<TBoundedContext>> observer)
+                {
+                    observer.OnNext(domainEvent);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    "Error dispatching domain event to async projection {HandlerType} for {BoundedContext}",
+                    handler.GetType().Name, typeof(TBoundedContext).Name);
+            }
         }
 
         public void Subscribe<TBoundedContext>(IDomainEventHandler<TBoundedContext> handler)

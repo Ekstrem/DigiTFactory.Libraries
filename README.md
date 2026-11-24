@@ -29,7 +29,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.EventBus.InMemory` | 0.1.1 | In-memory шина для dev/тестов |
+| `DigiTFactory.Libraries.EventBus.InMemory` | 0.2.0 | In-memory шина для dev/тестов |
 | `DigiTFactory.Libraries.EventBus.Kafka` | 0.1.1 | Apache Kafka для продакшена |
 | `DigiTFactory.Libraries.EventBus.Postgres` | 0.1.1 | Outbox-паттерн на PostgreSQL |
 
@@ -163,7 +163,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.8.0" />
 
 <!-- Api: шина событий (выбрать один) -->
-<PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.1.1" />
+<PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.2.0" />
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
 <PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.2.2" />
