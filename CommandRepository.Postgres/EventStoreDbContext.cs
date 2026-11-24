@@ -14,7 +14,7 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres
         private readonly EventStoreOptions _options;
 
         public EventStoreDbContext(
-            DbContextOptions options,
+            DbContextOptions<EventStoreDbContext> options,
             EventStoreOptions storeOptions)
             : base(options)
         {

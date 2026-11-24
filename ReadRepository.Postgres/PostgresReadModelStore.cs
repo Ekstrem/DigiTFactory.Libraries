@@ -49,6 +49,41 @@ namespace DigiTFactory.Libraries.ReadRepository.Postgres
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
+        /// <summary>
+        /// Идемпотентный upsert по версии: если модель реализует IVersionedReadModel, то
+        /// более старое или равное событие не перезаписывает проекцию. Возвращает true, если запись применена.
+        /// </summary>
+        public async Task<bool> UpsertIfNewerAsync(TReadModel model, CancellationToken cancellationToken = default)
+        {
+            if (model is not IVersionedReadModel<TBoundedContext> versioned)
+            {
+                await UpsertAsync(model, cancellationToken);
+                return true;
+            }
+
+            var id = _dbContext.Entry(model).Property("Id").CurrentValue!;
+            var existing = await _dbContext.Set<TReadModel>()
+                .FindAsync(new object[] { id }, cancellationToken);
+
+            if (existing is IVersionedReadModel<TBoundedContext> existingVersioned
+                && existingVersioned.Version >= versioned.Version)
+            {
+                return false;
+            }
+
+            if (existing != null)
+            {
+                _dbContext.Entry(existing).CurrentValues.SetValues(model);
+            }
+            else
+            {
+                await _dbContext.Set<TReadModel>().AddAsync(model, cancellationToken);
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return true;
+        }
+
         /// <inheritdoc />
         public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {

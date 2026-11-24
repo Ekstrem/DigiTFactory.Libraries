@@ -46,6 +46,11 @@ namespace DigiTFactory.Libraries.ReadRepository.Postgres.Extensions
                     new PostgresReadRepository<TBoundedContext, TReadModel>(
                         sp.GetRequiredService<TDbContext>()));
 
+            services.AddScoped<IQueryableReadRepository<TBoundedContext, TReadModel>,
+                PostgresReadRepository<TBoundedContext, TReadModel>>(sp =>
+                    new PostgresReadRepository<TBoundedContext, TReadModel>(
+                        sp.GetRequiredService<TDbContext>()));
+
             services.AddScoped<IReadModelStore<TBoundedContext, TReadModel>,
                 PostgresReadModelStore<TBoundedContext, TReadModel>>(sp =>
                     new PostgresReadModelStore<TBoundedContext, TReadModel>(
