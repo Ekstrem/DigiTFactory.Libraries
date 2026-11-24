@@ -43,9 +43,11 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Extensions
             switch (options.Strategy)
             {
                 case EventStoreStrategy.FullEventSourcing:
-                    services.AddScoped<
-                        IEventStoreRepository<TBoundedContext, TAnemicModel>,
-                        FullEventSourcingRepository<TBoundedContext, TAnemicModel>>();
+                    // Full ES требует доменный IEventStreamRehydrator<TBoundedContext, TAnemicModel>.
+                    // Без него DI явно падает вместо молчаливого пустого replay.
+                    services.AddScoped<FullEventSourcingRepository<TBoundedContext, TAnemicModel>>();
+                    services.AddScoped<IEventStoreRepository<TBoundedContext, TAnemicModel>>(sp =>
+                        sp.GetRequiredService<FullEventSourcingRepository<TBoundedContext, TAnemicModel>>());
                     break;
 
                 case EventStoreStrategy.SnapshotAfterN:

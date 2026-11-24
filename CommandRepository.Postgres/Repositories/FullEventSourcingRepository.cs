@@ -22,13 +22,16 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
     {
         private readonly EventStoreDbContext _dbContext;
         private readonly ILogger _logger;
+        private readonly IEventStreamRehydrator<TBoundedContext, TAnemicModel> _rehydrator;
 
         public FullEventSourcingRepository(
             EventStoreDbContext dbContext,
-            ILogger<FullEventSourcingRepository<TBoundedContext, TAnemicModel>> logger)
+            ILogger<FullEventSourcingRepository<TBoundedContext, TAnemicModel>> logger,
+            IEventStreamRehydrator<TBoundedContext, TAnemicModel> rehydrator)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _rehydrator = rehydrator;
         }
 
         public virtual async Task<List<TAnemicModel>> GetById(Guid id, CancellationToken cancellationToken)
@@ -42,19 +45,29 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
 
             _logger.LogDebug("FullES: Found {EventCount} events for aggregate {AggregateId}", events.Count, id);
 
-            // TODO: Десериализация событий в анемичные модели через IAggregateFactory
-            return new List<TAnemicModel>();
+            if (events.Count == 0)
+            {
+                return new List<TAnemicModel>();
+            }
+
+            return _rehydrator.Rehydrate(events).ToList();
         }
 
         public virtual async Task<TAnemicModel> GetByIdAndVersion(Guid id, long version, CancellationToken cancellationToken)
         {
             _logger.LogDebug("FullES: Getting event for aggregate {AggregateId} version {Version}", id, version);
 
-            var entry = await _dbContext.Events
-                .FirstOrDefaultAsync(e => e.Id == id && e.Version == version, cancellationToken);
+            var events = await _dbContext.Events
+                .Where(e => e.Id == id && e.Version <= version)
+                .OrderBy(e => e.Version)
+                .ToListAsync(cancellationToken);
 
-            // TODO: Десериализация события в анемичную модель
-            return default!;
+            if (events.Count == 0)
+            {
+                return default!;
+            }
+
+            return _rehydrator.Rehydrate(events).LastOrDefault()!;
         }
 
         public virtual async Task<TAnemicModel> GetByCorrelationToken(Guid correlationToken, CancellationToken cancellationToken)
@@ -64,8 +77,12 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Repositories
             var entry = await _dbContext.Events
                 .FirstOrDefaultAsync(e => e.CorrelationToken == correlationToken, cancellationToken);
 
-            // TODO: Десериализация события в анемичную модель
-            return default!;
+            if (entry == null)
+            {
+                return default!;
+            }
+
+            return await GetByIdAndVersion(entry.Id, entry.Version, cancellationToken);
         }
 
         public async Task SaveEventAsync(DomainEventEntry entry, CancellationToken cancellationToken = default)
