@@ -2,7 +2,7 @@
 
 | ID | Правило | Проверка | Север. | Источник | Статус |
 |---|---|---|---|---|---|
-| QG-601 | Корреляция имён по всей цепочке: команда → метод → событие → проекция → колонка MV → поле DTO | сверка канвасов/кода | 🔴 | принцип #4 |  |
+| QG-601 | Полная трассировка: Handled Command → endpoint → MediatR command → aggregate method → event → changed VO → MV → Query DTO | сверка канвасов/кода + solution test/source generator | 🔴 | принцип #4 | шаблон |
 | QG-602 | Нет metadata-driven `AbstractAggregate` (`DynamicAggregateRoot`/`AbstractAggregateFactory`/…) и generic `Aggregate<TBC>`; `IAggregate<TBC>` разрешён | grep `AbstractAggregateFactory\|DynamicAggregateRoot\|: Aggregate<` по всему решению → fail | 🔴 | BE-007 (без AbstractAggregate) | применён |
 | QG-603 | Нет `NotImplementedException` в продуктовом коде (нет заглушек) | grep `NotImplementedException` → fail | 🔴 | отклонение Cart | применён |
 | QG-604 | Сборка зелёная (`dotnet build`) + тесты зелёные (`dotnet test`) | CI-шаг | 🔴 | принцип #5 |  |
@@ -18,3 +18,5 @@
 | QG-614 | Health-checks: `AddHealthChecks` + `MapHealthChecks`/`UseHealthChecks` | анализатор QG614 | 🟠 | статья «monitor app health» | применён |
 | QG-701 | Имя теста — `Method_When_Should` (виден бизнес-метод и сценарий) | анализатор QG701 | 🟡 | отклонение Journal | применён |
 | QG-702 | Каждый бизнес-метод агрегата и каждый инвариант покрыт тестом (happy + отказ); `*.Domain.Tests` обязан содержать оба coverage-gate | `AggregateCoverage.Verify<T>()` + `VerifyInvariants()` + анализатор QG702 | 🔴 | отклонение Journal | применён |
+| QG-704 | Реально выполняемый full lifecycle: Manual + Garmin, Command → Event Store → replay → projection → Query на настоящей СУБД | CI/integration gate | 🔴 | ACO5.5 reference | шаблон |
+| QG-705 | Событие имеет ID записи и однозначную новую версию; первая фабрика не даёт `Guid.Empty`, следующий шаг увеличивает версию ровно один раз | contract test | 🔴 | ACO5.5 reference | шаблон |
