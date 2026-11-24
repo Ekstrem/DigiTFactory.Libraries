@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|
 | QG-101 | `AggregateProvider` загружает агрегат и **декорирует** его `Notifier` | grep `PipeTo(Aggregate.Create` + `PipeNotifierToContract` | 🔴 | статья 7 |  |
 | QG-102 | При промахе провайдер собирает агрегат из `DefaultAnemicModel` (пустой модели) | grep `?? DefaultAnemicModel.Create` | 🔴 | статья 7 |  |
-| QG-103 | `Notifier` — декоратор бизнес-методов, реактивно рассылает результат подписчикам | grep `class Notifier.*I{Context}Aggregate` | 🔴 | статья 7 |  |
+| QG-103 | `Notifier` — декоратор бизнес-методов: реализует интерфейс агрегата (`I{Context}Aggregate`/`IAggregate<T>`) и `IObservable<AggregateResult<...>>`, реактивно рассылает результат подписчикам | анализатор QG103 | 🔴 | статья 7 | применён |
 | QG-104 | `BusAdapter` **только публикует** (`IEventBus.Publish`); сохранение события — в отдельном подписчике шины (`*EventStoreHandler`), а не в `BusAdapter` | grep `SaveEventAsync` в BusAdapter (должно отсутствовать) + `Publish` (должно быть) | 🔴 | статья 7 + ceqrs-data-flows | применён |
 | QG-105 | `RegisterDependencies` (Autofac) регистрирует провайдера и наблюдателя | grep `RegisterType<.*Provider` + `IObserver<AggregateResult` | 🔴 | skill |  |
 | QG-106 | Нет **самодельных** реализаций `IEventBus`/`IAnemicModelRepository`/`IReadRepository` | grep `class .* : IEventBus` / `: IAnemicModelRepository` → fail | 🔴 | принцип #6 | применён |

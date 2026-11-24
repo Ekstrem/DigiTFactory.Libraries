@@ -1,12 +1,15 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace DigiTFactory.Libraries.Analyzers.DomainServices
 {
-    /// <summary>QG-103: Notifier — декоратор бизнес-методов, реализует I{Context}Aggregate.</summary>
+    /// <summary>
+    /// QG-103: Notifier — декоратор бизнес-методов агрегата: реализует интерфейс агрегата
+    /// (IAggregate&lt;T&gt; или конкретный I{Context}Aggregate) и реактивно рассылает результат
+    /// подписчикам через IObservable&lt;AggregateResult&lt;...&gt;&gt;.
+    /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NotifierDecoratorAnalyzer : DiagnosticAnalyzer
     {
@@ -14,8 +17,8 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
-            "Notifier реализует I{Context}Aggregate",
-            "Notifier '{0}' должен реализовать I{Context}Aggregate (быть декоратором бизнес-методов агрегата)",
+            "Notifier декорирует агрегат и рассылает результат",
+            "Notifier '{0}' должен реализовать интерфейс агрегата (I{Context}Aggregate или IAggregate<T>) и IObservable<AggregateResult<...>>, чтобы декорировать бизнес-методы и рассылать результат подписчикам",
             "DigiTFactory",
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
@@ -42,7 +45,14 @@ namespace DigiTFactory.Libraries.Analyzers.DomainServices
                 return;
             }
 
-            if (!type.Implements("IAggregate"))
+            var implementsAggregate = type.AllInterfaces.Any(i => i.Name.EndsWith("Aggregate"));
+
+            var broadcastsResult = type.AllInterfaces.Any(i =>
+                i.Name == "IObservable" &&
+                i.TypeArguments.Length == 1 &&
+                i.TypeArguments[0].Name == "AggregateResult");
+
+            if (!implementsAggregate || !broadcastsResult)
             {
                 var location = type.Locations.FirstOrDefault();
                 ctx.ReportDiagnostic(Diagnostic.Create(Rule, location, type.Name));
