@@ -12,3 +12,4 @@
 | QG-308 | Есть JSON-путь проекции (`ProjectFromEntryAsync`) для replay из `DomainEventEntry` | grep `ProjectFromEntryAsync` | 🟠 | статья 10 | ожидает библиотеку |
 | QG-309 | Типизированная сериализация `IValueObject` по runtime-типу (`$type`-дискриминатор) через `IValueObjectSerializer`; `{}` запрещён | `ValueObjectSerializerFactory` + round-trip тест | 🟠 | отклонение Chat/BC-Journal | применён |
 | QG-310 | Command DB и Read DB разделены (отдельные DbContext/схемы/БД) | наличие `CommandDbContext`/`EventStoreDbContext` + `ReadDbContext` | 🟠 | статья 10 (CQRS) |  |
+| QG-311 | Сериализация VO — через `IValueObjectSerializer` (`ValueObjectSerializerFactory.Create`), не голый `JsonSerializer.Serialize` | анализатор QG311 | 🔴 | QG-309 + SeedWorks 0.9.0 | применён |

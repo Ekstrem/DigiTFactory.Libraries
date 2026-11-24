@@ -71,6 +71,7 @@ namespace DigiTFactory.Libraries.Analyzers
                     new Storage.ProjectionHandlerAnalyzer(),
                     new Storage.ProjectionIdempotencyAnalyzer(),
                     new Storage.ProjectionUpsertAnalyzer(),
+                    new Storage.ValueObjectSerializationAnalyzer(),
                 },
                 [LayerKind.CrossCutting] = new DiagnosticAnalyzer[]
                 {
