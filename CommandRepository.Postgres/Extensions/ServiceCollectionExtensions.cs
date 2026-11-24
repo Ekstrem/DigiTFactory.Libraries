@@ -4,6 +4,7 @@ using DigiTFactory.Libraries.CommandRepository.Postgres.Configuration;
 using DigiTFactory.Libraries.CommandRepository.Postgres.Repositories;
 using DigiTFactory.Libraries.SeedWorks.Definition;
 using DigiTFactory.Libraries.SeedWorks.TacticalPatterns;
+using DigiTFactory.Libraries.SeedWorks.TacticalPatterns.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,7 +40,6 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Extensions
             services.AddDbContext<EventStoreDbContext>(dbOptions =>
                 dbOptions.UseNpgsql(connectionString, npgsql =>
                     npgsql.MigrationsAssembly(typeof(EventStoreDbContext).Assembly.GetName().Name)));
-
             switch (options.Strategy)
             {
                 case EventStoreStrategy.FullEventSourcing:
@@ -73,6 +73,17 @@ namespace DigiTFactory.Libraries.CommandRepository.Postgres.Extensions
             services.AddScoped<IAnemicModelRepository<TBoundedContext, TAnemicModel>>(sp =>
                 sp.GetRequiredService<IEventStoreRepository<TBoundedContext, TAnemicModel>>());
 
+            return services;
+        }
+
+        /// <summary>
+        /// Регистрирует библиотечный Rebuild из Event Store. Требует доменный IEventProjector
+        /// (применение одного события к проекции) в том же контейнере.
+        /// </summary>
+        public static IServiceCollection AddEventStoreRebuild<TBoundedContext>(this IServiceCollection services)
+            where TBoundedContext : IBoundedContext
+        {
+            services.AddScoped<IRebuildService<TBoundedContext>, EventStoreRebuildService<TBoundedContext>>();
             return services;
         }
     }

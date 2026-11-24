@@ -22,7 +22,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.3.1 | Event Store на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.4.0 | Event Store на PostgreSQL (EF Core) |
 | `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.1 | Event Store на MongoDB |
 
 ### Event Bus
@@ -166,7 +166,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 <PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.2.0" />
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
-<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.3.1" />
+<PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.4.0" />
 <PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.2.0" />
 
 <!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
