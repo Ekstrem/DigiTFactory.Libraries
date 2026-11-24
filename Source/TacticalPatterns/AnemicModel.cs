@@ -16,6 +16,8 @@ namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
         private readonly Guid _id;
         private readonly long _version;
         private readonly Guid _correlationToken;
+        private readonly string _commandName;
+        private readonly string _subjectName;
         private readonly IDictionary<string, IValueObject> _invariants;
 
         /// <summary>
@@ -24,10 +26,23 @@ namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
         /// <param name="key">Комплексный ключ агрегата.</param>
         /// <param name="invariants">Словарь объект-значений.</param>
         protected AnemicModel(IComplexKey key, IDictionary<string, IValueObject> invariants)
+            : this(key, null, invariants)
+        {
+        }
+
+        /// <summary>
+        /// Создание анемичной модели из ключа, метаданных команды и объект-значений.
+        /// </summary>
+        /// <param name="key">Комплексный ключ агрегата.</param>
+        /// <param name="command">Метаданные команды (CommandName/SubjectName).</param>
+        /// <param name="invariants">Словарь объект-значений.</param>
+        protected AnemicModel(IComplexKey key, ICommandToAggregate command, IDictionary<string, IValueObject> invariants)
         {
             _id = key.Id;
             _version = key.Version;
             _correlationToken = key.CorrelationToken;
+            _commandName = command?.CommandName ?? string.Empty;
+            _subjectName = command?.SubjectName ?? string.Empty;
             _invariants = invariants ?? new Dictionary<string, IValueObject>();
         }
 
@@ -41,14 +56,14 @@ namespace DigiTFactory.Libraries.SeedWorks.TacticalPatterns
         public Guid CorrelationToken => _correlationToken;
 
         /// <summary>
-        /// Имя команды (по умолчанию пустая строка).
+        /// Имя команды (из ICommandToAggregate; пустая строка, если команда не передана).
         /// </summary>
-        public virtual string CommandName => string.Empty;
+        public virtual string CommandName => _commandName;
 
         /// <summary>
-        /// Имя субъекта бизнес-операции (по умолчанию пустая строка).
+        /// Имя субъекта бизнес-операции (из ICommandToAggregate; пустая строка, если команда не передана).
         /// </summary>
-        public virtual string SubjectName => string.Empty;
+        public virtual string SubjectName => _subjectName;
 
         /// <summary>
         /// Словарь объект-значений (инвариантов) модели.
