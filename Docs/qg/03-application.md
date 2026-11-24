@@ -14,3 +14,4 @@
 | QG-210 | `ICommandHandler` инжектит `IAggregateProvider` в конструктор (DI); исключение — `[CommandHandlerNoAggregate]` → warning | grep `IAggregateProvider` в ctor `ICommandHandler`; нет и без атрибута → error, с атрибутом → warning | 🔴 | статья 7 + владелец | применён |
 | QG-211 | `IAggregateProvider` инжектится только `ICommandHandler` (кроме тестов) | grep `IAggregateProvider` в ctor вне `ICommandHandler` → fail | 🔴 | статья 7 + владелец | применён |
 | QG-212 | `IQueryRepository` инжектится только `IQueryHandler` (кроме тестов) | grep `IQueryRepository` в ctor вне `IQueryHandler` → fail | 🔴 | статья 7 + владелец | применён |
+| QG-213 | Handler не собирает AnemicModel/Root/State и не вызывает доменный builder; новое состояние создаёт бизнес-метод агрегата | анализатор QG213 | 🔴 | aggregate-first + отклонения генераций | применён |
