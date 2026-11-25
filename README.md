@@ -37,7 +37,7 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.2.1 | Проекции на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.2.2 | Проекции на PostgreSQL (EF Core) |
 | `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.1 | Кэш проекций на Redis |
 | `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.2 | Высокопроизводительные проекции на ScyllaDB |
 
@@ -167,7 +167,7 @@ public interface IBusinessOperationValidator<TBoundedContext>
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
 <PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.4.0" />
-<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.2.1" />
+<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.2.2" />
 
 <!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
 <PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.1" />
