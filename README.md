@@ -16,14 +16,14 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.SeedWorks` | 0.9.3 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
+| `DigiTFactory.Libraries.SeedWorks` | 0.9.4 | Тактические паттерны DDD: интерфейсы, монады, инварианты |
 
 ### Command Side (Event Store)
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
 | `DigiTFactory.Libraries.CommandRepository.Postgres` | 0.4.0 | Event Store на PostgreSQL (EF Core) |
-| `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.1 | Event Store на MongoDB |
+| `DigiTFactory.Libraries.CommandRepository.Mongo` | 0.1.2 | Event Store на MongoDB |
 
 ### Event Bus
 
@@ -37,9 +37,9 @@
 
 | Пакет | Версия | Описание |
 |-------|--------|----------|
-| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.2.0 | Проекции на PostgreSQL (EF Core) |
+| `DigiTFactory.Libraries.ReadRepository.Postgres` | 0.2.1 | Проекции на PostgreSQL (EF Core) |
 | `DigiTFactory.Libraries.ReadRepository.Redis` | 0.1.1 | Кэш проекций на Redis |
-| `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.1 | Высокопроизводительные проекции на ScyllaDB |
+| `DigiTFactory.Libraries.ReadRepository.Scylla` | 0.1.2 | Высокопроизводительные проекции на ScyllaDB |
 
 ### Качество (Roslyn-анализаторы, QG-метод)
 
@@ -160,14 +160,14 @@ public interface IBusinessOperationValidator<TBoundedContext>
 
 ```xml
 <!-- Domain: только SeedWorks -->
-<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.3" />
+<PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.4" />
 
 <!-- Api: шина событий (выбрать один) -->
 <PackageReference Include="DigiTFactory.Libraries.EventBus.InMemory" Version="0.2.0" />
 
 <!-- Storage: Event Store + Read Store (выбрать по профилю) -->
 <PackageReference Include="DigiTFactory.Libraries.CommandRepository.Postgres" Version="0.4.0" />
-<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.2.0" />
+<PackageReference Include="DigiTFactory.Libraries.ReadRepository.Postgres" Version="0.2.1" />
 
 <!-- Отказоустойчивость: Polly + resilient HttpClient + health-checks -->
 <PackageReference Include="DigiTFactory.Libraries.CrossCutting" Version="0.1.1" />

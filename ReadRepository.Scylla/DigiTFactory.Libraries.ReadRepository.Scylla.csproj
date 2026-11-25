@@ -6,7 +6,7 @@
     <RootNamespace>DigiTFactory.Libraries.ReadRepository.Scylla</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.ReadRepository.Scylla</AssemblyName>
     <PackageId>DigiTFactory.Libraries.ReadRepository.Scylla</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <FileVersion>0.1.0.0</FileVersion>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Authors>Войтов Евгений</Authors>
@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="CassandraCSharpDriver" Version="3.21.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
   </ItemGroup>

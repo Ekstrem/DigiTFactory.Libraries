@@ -6,7 +6,7 @@
     <RootNamespace>DigiTFactory.Libraries.ReadRepository.Postgres</RootNamespace>
     <AssemblyName>DigiTFactory.Libraries.ReadRepository.Postgres</AssemblyName>
     <PackageId>DigiTFactory.Libraries.ReadRepository.Postgres</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <FileVersion>0.1.0.0</FileVersion>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Authors>Войтов Евгений</Authors>
@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.1" />
+    <PackageReference Include="DigiTFactory.Libraries.SeedWorks" Version="0.9.4" />
   </ItemGroup>
 
   <ItemGroup>
