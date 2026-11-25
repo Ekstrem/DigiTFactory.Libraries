@@ -10,6 +10,9 @@ namespace DigiTFactory.Libraries.TestRunner;
 /// process via <see cref="XunitFrontController"/> with <see cref="AppDomainSupport.Denied"/>,
 /// which avoids spawning VSTest/testhost (and the Process.OpenProcess Win32Exception 5 that
 /// occurs in the DSH sandbox).
+/// ВНИМАНИЕ: это ФОЛБЭК, не канон. Санкционированный локальный прогон — настоящий
+/// xunit.console (xunit.runner.console) по собранным артефактам; результаты этого
+/// раннера помечать как «неофициальные» (см. library-known-issues S6).
 /// </summary>
 internal static class Program
 {
