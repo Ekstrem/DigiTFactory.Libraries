@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.9.2</Version>
+    <Version>0.9.3</Version>
     <Authors>Войтов Евгений</Authors>
     <Product>DigiTFactory.Libraries</Product>
     <Copyright>Evgeniy Voitov 2019-2026</Copyright>
@@ -33,7 +33,7 @@
     <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="System.Interactive.Async" Version="6.0.1" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
-    <PackageReference Include="MessagePack" Version="2.5.187" />
+    <PackageReference Include="MessagePack" Version="2.5.301" />
     <PackageReference Include="protobuf-net" Version="3.2.45" />
   </ItemGroup>
 
